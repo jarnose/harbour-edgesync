@@ -1,0 +1,25 @@
+module Sailfish.Silica
+singleton Theme 1.0 Theme.qml
+singleton BusyIndicatorSize 1.0 BusyIndicatorSize.qml
+singleton TruncationMode 1.0 TruncationMode.qml
+Page 1.0 Page.qml
+SilicaListView 1.0 SilicaListView.qml
+SilicaFlickable 1.0 SilicaFlickable.qml
+PullDownMenu 1.0 PullDownMenu.qml
+MenuItem 1.0 MenuItem.qml
+PageHeader 1.0 PageHeader.qml
+Label 1.0 Label.qml
+Button 1.0 Button.qml
+BusyIndicator 1.0 BusyIndicator.qml
+ProgressBar 1.0 ProgressBar.qml
+TextSwitch 1.0 TextSwitch.qml
+SectionHeader 1.0 SectionHeader.qml
+ListItem 1.0 ListItem.qml
+ViewPlaceholder 1.0 ViewPlaceholder.qml
+VerticalScrollDecorator 1.0 VerticalScrollDecorator.qml
+RemorsePopup 1.0 RemorsePopup.qml
+TextArea 1.0 TextArea.qml
+ButtonLayout 1.0 ButtonLayout.qml
+CoverBackground 1.0 CoverBackground.qml
+CoverActionList 1.0 CoverActionList.qml
+CoverAction 1.0 CoverAction.qml

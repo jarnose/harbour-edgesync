@@ -1,0 +1,101 @@
+name: build
+
+on:
+  push:
+    branches: [master]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # The same script a developer runs: both language modes, -Werror.
+      - name: Run the Qt-free test suites
+        run: tests/run.sh
+
+      # Catches what a C++ build cannot and a phone shows as a blank page:
+      # duplicate signal handlers, ES6 syntax the Qt 5.6 QML engine rejects.
+      - name: Check the QML
+        run: python3 tools/check_qml.py
+
+      # Every qsTr() must have its Finnish text, and the compiled catalogue
+      # must have no unfinished entries.
+      - name: Check the translations
+        run: |
+          sudo apt-get update && sudo apt-get install -y qttools5-dev-tools
+          export PATH=/usr/lib/x86_64-linux-gnu/qt5/bin:$PATH
+          lupdate -locations absolute -no-obsolete src qml -ts translations/harbour-edgesync.ts
+          python3 tools/fill_fi.py
+          git diff --exit-code -- translations
+          lrelease translations/harbour-edgesync-fi.ts -qm /tmp/fi.qm | grep "0 unfinished"
+
+  rpm:
+    needs: tests
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        arch: [aarch64, armv7hl]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the RPM
+        uses: coderus/github-sfos-build@sfos5
+        with:
+          release: 5.1.0.11
+          arch: ${{ matrix.arch }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rpm-${{ matrix.arch }}
+          path: RPMS/*.rpm
+          if-no-files-found: error
+
+  release:
+    # A tag v<version> publishes the RPMs. One architecture failing does not stop the other
+    # from being published, but nothing is published when both fail.
+    if: ${{ always() && startsWith(github.ref, 'refs/tags/v') && needs.tests.result == 'success' && needs.rpm.result != 'cancelled' }}
+    needs: [tests, rpm]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      # The tag, the spec's Version and the CHANGELOG have to agree.
+      - name: Check the version
+        run: tools/check_version.sh "${GITHUB_REF_NAME}"
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: rpm-*
+          merge-multiple: true
+          path: rpms
+
+      - name: Notes and checksums
+        run: |
+          ls rpms/*.rpm
+          version="${GITHUB_REF_NAME#v}"
+          awk -v v="## $version" '$0 == v { on = 1; next } /^## / { on = 0 } on' CHANGELOG.md > notes.md
+          {
+            echo
+            echo "Unsigned RPMs built by GitHub Actions for Sailfish OS 5.1.0.11 (aarch64: current phones;"
+            echo "armv7hl: older ones). Install with \`devel-su pkcon install-local <file>.rpm\`, which warns"
+            echo "that the package is untrusted. It is right: these are CI builds, not Store packages."
+            echo
+            echo "SHA-256:"
+            echo '```'
+            (cd rpms && sha256sum *.rpm)
+            echo '```'
+          } >> notes.md
+          (cd rpms && sha256sum *.rpm > SHA256SUMS)
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          name: Oura Sync ${{ github.ref_name }}
+          body_path: notes.md
+          files: |
+            rpms/*.rpm
+            rpms/SHA256SUMS

@@ -139,7 +139,7 @@ private:
     ActivityModel m_activities;
     DeviceModel m_devices;
 
-    std::unique_ptr<Gfdi::Session> m_session;
+    std::shared_ptr<Gfdi::Session> m_session;
     QTimer m_tick;
     QElapsedTimer m_clock;
     int m_newActivities = 0;
