@@ -94,7 +94,7 @@ jobs:
 
       - uses: softprops/action-gh-release@v2
         with:
-          name: Oura Sync ${{ github.ref_name }}
+          name: Edge Sync ${{ github.ref_name }}
           body_path: notes.md
           files: |
             rpms/*.rpm
