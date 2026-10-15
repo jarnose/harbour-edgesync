@@ -23,3 +23,4 @@ ButtonLayout 1.0 ButtonLayout.qml
 CoverBackground 1.0 CoverBackground.qml
 CoverActionList 1.0 CoverActionList.qml
 CoverAction 1.0 CoverAction.qml
+TextField 1.0 TextField.qml

@@ -11,6 +11,7 @@
 #include <QTranslator>
 
 #include "controller/appcontroller.h"
+#include "map/mapcanvas.h"
 
 int main(int argc, char *argv[])
 {
@@ -28,6 +29,11 @@ int main(int argc, char *argv[])
     // exactly or the app writes somewhere Sailjail never keeps.
     app->setOrganizationName(QStringLiteral("io.github.jarnose"));
     app->setApplicationName(QStringLiteral("edgesync"));
+
+    // The base map under a ride's route: a C++ item, because the vector tiles
+    // come to tens of thousands of points. See src/map/mapcanvas.h and
+    // docs/base-map.md.
+    qmlRegisterType<MapCanvas>("io.github.jarnose.edgesync", 1, 0, "MapCanvas");
 
     QScopedPointer<QQuickView> view(SailfishApp::createView());
 

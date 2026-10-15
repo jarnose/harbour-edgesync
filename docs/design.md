@@ -11,6 +11,7 @@ that is tested with plain `g++`.
 src/gfdi/      Qt-free   the protocol: crc, cobs, frames, messages, multi-link transport, sync session
 src/fit/       Qt-free   FIT container reader, and what an activity file means
 src/export/    Qt-free   GPX writer
+src/map/       both      base map: Web Mercator and the vector-tile decoder (Qt-free), tile source and MapCanvas (Qt)
 src/ble/       Qt        BlueZ: scanner, and EdgeLink (connect, GATT, writes, notifications)
 src/store/     Qt        SQLite summary rows + the FIT files themselves
 src/controller Qt        AppController and the two list models; everything QML sees
@@ -41,8 +42,11 @@ is (device, directory timestamp, size). Indexes are reused by the Edge.
 Connect also sets, and what "new" means to the Edge. Setting it from here would
 hide rides from another sync. It is a setting, off.
 
-**No Internet permission.** The rides never leave the phone, and the app says so.
-Exports go to `~/Documents/EdgeSync` (Sailjail permission *Documents*).
+**The network is for the base map and nothing else.** The rides never leave the
+phone, and the app says so. The Internet permission exists for the optional base
+map (off by default), whose tile server sees the area of a ride that is drawn on
+it. Exports go to `~/Documents/EdgeSync` (Sailjail permission *Documents*), and
+FIT files to import are read from Documents or Downloads.
 
 **Unverified protocol, so a log.** The protocol is reverse engineered and has
 never been run against an Edge by this project, so the app keeps a log of the
@@ -53,8 +57,7 @@ attached to a report. It is the main debugging tool, and the first place to look
 
 * MLR, the reliable window layer (see protocol.md).
 * The protobuf `FileSyncService` (newer watches; no Edge needs it per Gadgetbridge).
-* Map tiles under the route. The route is drawn alone; harbour-suuntosync has a
-  tile canvas that could be reused.
+* Raster map tiles, and labels on the map (see `docs/base-map.md`).
 * Background or automatic sync. A sync runs when asked.
 * Uploading to Strava, Garmin Connect and the like. That needs Internet and OAuth.
 * Laps beyond a table; zones; segments; developer fields.

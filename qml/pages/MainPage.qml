@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import Sailfish.Pickers 1.0
 import "../components/Format.js" as Format
 
 // The rides on the phone, and the way to fetch more. Nothing here talks to the
@@ -17,6 +18,19 @@ Page {
                 + (a === "now" ? qsTr("synced just now") : qsTr("synced %1 ago").arg(a))
     }
 
+    Component {
+        id: fitPicker
+
+        FilePickerPage {
+            nameFilters: ["*.fit", "*.FIT"]
+            title: qsTr("Choose a FIT file")
+            onSelectedContentPropertiesChanged: {
+                if (selectedContentProperties)
+                    AppController.importFitFile(selectedContentProperties.filePath)
+            }
+        }
+    }
+
     SilicaListView {
         id: list
         anchors.fill: parent
@@ -31,6 +45,10 @@ Page {
             MenuItem {
                 text: qsTr("Settings")
                 onClicked: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"))
+            }
+            MenuItem {
+                text: qsTr("Import a FIT file")
+                onClicked: pageStack.push(fitPicker)
             }
             MenuItem {
                 text: AppController.hasDevice ? qsTr("Change Edge") : qsTr("Set up your Edge")
@@ -127,7 +145,8 @@ Page {
                     color: Theme.secondaryColor
                     text: qsTr("Edge Sync downloads the activities from a Garmin Edge bike computer over "
                                + "Bluetooth. There is no account and no cloud: the files stay on this phone, "
-                               + "and you can export them as GPX or FIT.")
+                               + "and you can export them as GPX or FIT, or import a FIT file from "
+                               + "another device.")
                 }
                 Button {
                     anchors.horizontalCenter: parent.horizontalCenter

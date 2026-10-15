@@ -20,21 +20,21 @@
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="31"/>
-        <source>The app has no network permission. Rides are kept as the original FIT files in the app&apos;s own folder on this phone; exports go to Documents/EdgeSync.</source>
+        <source>Rides are kept as the original FIT files in the app&apos;s own folder on this phone and are never sent anywhere; exports go to Documents/EdgeSync. The app&apos;s only use of the network is the optional base map under the route, which is off by default: when it is on, the tile server you choose in Settings sees which area you look at, and nothing else.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/AboutPage.qml" line="34"/>
+        <location filename="../qml/pages/AboutPage.qml" line="37"/>
         <source>Credits</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/AboutPage.qml" line="40"/>
+        <location filename="../qml/pages/AboutPage.qml" line="43"/>
         <source>Garmin&apos;s Bluetooth protocol was reverse engineered by the Gadgetbridge project (AGPL-3.0). garmin-ble, garmin-bridge and GarminBLE showed how to speak it from Linux. This app is free software under the same licence.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/AboutPage.qml" line="44"/>
+        <location filename="../qml/pages/AboutPage.qml" line="47"/>
         <source>Data folder</source>
         <translation type="unfinished"></translation>
     </message>
@@ -145,157 +145,157 @@
 <context>
     <name>ActivityPage</name>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="36"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="37"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="37"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="38"/>
         <source>Deleting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="43"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="44"/>
         <source>Save the FIT file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="48"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="49"/>
         <source>Save as GPX</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="52"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="53"/>
         <source>Rename</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="79"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="80"/>
         <source>Saved to %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="100"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="101"/>
         <source>This file could not be read: %1. It is kept on the phone, and a later version of the app may read it.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="119"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="120"/>
         <source>Distance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="124"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="125"/>
         <source>Moving time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="130"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="131"/>
         <source>Average speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="136"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="137"/>
         <source>Top speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="143"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="144"/>
         <source>Climbed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="150"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="151"/>
         <source>Average heart rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="157"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="158"/>
         <source>Max heart rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="164"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="165"/>
         <source>Average power</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="171"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="172"/>
         <source>Normalized power</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="178"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="179"/>
         <source>Average cadence</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="185"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="186"/>
         <source>Energy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="191"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="192"/>
         <source>Elapsed time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="198"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="199"/>
         <source>Route</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="210"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="245"/>
         <source>Speed (km/h)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="225"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="260"/>
         <source>Elevation (m)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="239"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="274"/>
         <source>Heart rate (bpm)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="253"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="288"/>
         <source>Power (W)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="267"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="302"/>
         <source>Cadence (rpm)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="281"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="316"/>
         <source>Temperature (°C)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="297"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="332"/>
         <source>Laps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="335"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="370"/>
         <source>File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="344"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="379"/>
         <source>records</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="347"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="382"/>
         <source>The file&apos;s checksum does not match: it may be damaged.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="348"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="383"/>
         <source>The file ends early.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -303,127 +303,157 @@
 <context>
     <name>AppController</name>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="126"/>
+        <location filename="../src/controller/appcontroller.cpp" line="133"/>
         <source>Could not open the local database: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="215"/>
-        <location filename="../src/controller/appcontroller.cpp" line="731"/>
-        <location filename="../src/controller/appcontroller.cpp" line="763"/>
+        <location filename="../src/controller/appcontroller.cpp" line="235"/>
+        <location filename="../src/controller/appcontroller.cpp" line="848"/>
+        <location filename="../src/controller/appcontroller.cpp" line="880"/>
         <source>Could not write %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="304"/>
+        <location filename="../src/controller/appcontroller.cpp" line="351"/>
         <source>Bluetooth does not know this device any more. Scan again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="310"/>
+        <location filename="../src/controller/appcontroller.cpp" line="357"/>
         <source>Pairing…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="330"/>
+        <location filename="../src/controller/appcontroller.cpp" line="377"/>
         <source>Paired with %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="338"/>
+        <location filename="../src/controller/appcontroller.cpp" line="385"/>
         <source>Another operation is still running.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="344"/>
+        <location filename="../src/controller/appcontroller.cpp" line="391"/>
         <source>Choose an Edge first.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="349"/>
+        <location filename="../src/controller/appcontroller.cpp" line="396"/>
         <source>Bluetooth does not know this Edge any more. Choose it again and pair it.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="358"/>
+        <location filename="../src/controller/appcontroller.cpp" line="405"/>
         <source>Connecting to the Edge…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="374"/>
+        <location filename="../src/controller/appcontroller.cpp" line="421"/>
         <source>Cancelled.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="388"/>
-        <location filename="../src/controller/appcontroller.cpp" line="481"/>
+        <location filename="../src/controller/appcontroller.cpp" line="435"/>
+        <location filename="../src/controller/appcontroller.cpp" line="530"/>
         <source>Talking to the Edge…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="411"/>
+        <location filename="../src/controller/appcontroller.cpp" line="460"/>
         <source>Could not save an activity: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="485"/>
+        <location filename="../src/controller/appcontroller.cpp" line="534"/>
         <source>Reading the Edge&apos;s file list…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="492"/>
+        <location filename="../src/controller/appcontroller.cpp" line="541"/>
         <source>Downloading activity %1 of %2…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="513"/>
+        <location filename="../src/controller/appcontroller.cpp" line="562"/>
         <source>The Bluetooth link to the Edge was lost.</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/controller/appcontroller.cpp" line="533"/>
+        <location filename="../src/controller/appcontroller.cpp" line="582"/>
         <source>%n new activities</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="533"/>
+        <location filename="../src/controller/appcontroller.cpp" line="582"/>
         <source>Nothing new</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="538"/>
+        <location filename="../src/controller/appcontroller.cpp" line="587"/>
         <source>The Edge lists no activity files over Bluetooth LE. Some older models (the Edge 520 Plus, for one) send their files only over classic Bluetooth, which this app does not support yet. The log has the Edge&apos;s file list.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="544"/>
+        <location filename="../src/controller/appcontroller.cpp" line="593"/>
         <source>The sync failed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="592"/>
+        <location filename="../src/controller/appcontroller.cpp" line="641"/>
         <source>Could not delete the activity.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="620"/>
+        <location filename="../src/controller/appcontroller.cpp" line="669"/>
         <source>The file is missing.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="705"/>
+        <location filename="../src/controller/appcontroller.cpp" line="771"/>
+        <source>Could not open %1: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/controller/appcontroller.cpp" line="780"/>
+        <source>%1 is not a readable FIT activity: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/controller/appcontroller.cpp" line="786"/>
+        <source>%1 has no start time, so it cannot be filed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/controller/appcontroller.cpp" line="790"/>
+        <source>%1 is already here (a ride with the same start time).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/controller/appcontroller.cpp" line="804"/>
+        <source>Could not save %1: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/controller/appcontroller.cpp" line="811"/>
+        <source>Imported %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/controller/appcontroller.cpp" line="822"/>
         <source>Could not create %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="746"/>
+        <location filename="../src/controller/appcontroller.cpp" line="863"/>
         <source>The activity file could not be read.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="751"/>
+        <location filename="../src/controller/appcontroller.cpp" line="868"/>
         <source>This activity has no GPS track to export.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -545,52 +575,52 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ble/edgelink.cpp" line="133"/>
+        <location filename="../src/ble/edgelink.cpp" line="134"/>
         <source>The Edge refused to pair (%1). Open the pairing screen on the Edge (Settings &gt; Connectivity &gt; Phone &gt; Pair Smartphone) and try again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ble/edgelink.cpp" line="136"/>
+        <location filename="../src/ble/edgelink.cpp" line="137"/>
         <source>Pairing timed out. Put the Edge in pairing mode and keep it next to the phone.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ble/edgelink.cpp" line="138"/>
+        <location filename="../src/ble/edgelink.cpp" line="139"/>
         <source>Pairing failed: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ble/edgelink.cpp" line="175"/>
+        <location filename="../src/ble/edgelink.cpp" line="176"/>
         <source>Could not connect to the Edge: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ble/edgelink.cpp" line="216"/>
+        <location filename="../src/ble/edgelink.cpp" line="217"/>
         <source>The Edge dropped the connection.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ble/edgelink.cpp" line="232"/>
+        <location filename="../src/ble/edgelink.cpp" line="233"/>
         <source>Could not list Bluetooth services: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ble/edgelink.cpp" line="286"/>
+        <location filename="../src/ble/edgelink.cpp" line="287"/>
         <source>This device does not offer Garmin&apos;s sync service. Is it a Garmin Edge, and is it paired?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ble/edgelink.cpp" line="321"/>
+        <location filename="../src/ble/edgelink.cpp" line="322"/>
         <source>The Edge refused notifications because the link is not encrypted. Pair the Edge first.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ble/edgelink.cpp" line="323"/>
+        <location filename="../src/ble/edgelink.cpp" line="324"/>
         <source>Could not subscribe to the Edge: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ble/edgelink.cpp" line="396"/>
+        <location filename="../src/ble/edgelink.cpp" line="397"/>
         <source>Could not write to the Edge: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -630,75 +660,112 @@
 <context>
     <name>MainPage</name>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="17"/>
+        <location filename="../qml/pages/MainPage.qml" line="18"/>
         <source>synced just now</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="17"/>
+        <location filename="../qml/pages/MainPage.qml" line="18"/>
         <source>synced %1 ago</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="28"/>
-        <source>About</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/MainPage.qml" line="32"/>
-        <source>Settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/MainPage.qml" line="36"/>
-        <source>Change Edge</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/MainPage.qml" line="36"/>
-        <location filename="../qml/pages/MainPage.qml" line="134"/>
-        <source>Set up your Edge</source>
+        <location filename="../qml/pages/MainPage.qml" line="26"/>
+        <source>Choose a FIT file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/MainPage.qml" line="42"/>
-        <location filename="../qml/pages/MainPage.qml" line="142"/>
+        <source>About</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MainPage.qml" line="46"/>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MainPage.qml" line="50"/>
+        <source>Import a FIT file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MainPage.qml" line="54"/>
+        <source>Change Edge</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MainPage.qml" line="54"/>
+        <location filename="../qml/pages/MainPage.qml" line="153"/>
+        <source>Set up your Edge</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MainPage.qml" line="60"/>
+        <location filename="../qml/pages/MainPage.qml" line="161"/>
         <source>Sync now</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="52"/>
+        <location filename="../qml/pages/MainPage.qml" line="70"/>
         <source>Edge Sync</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="82"/>
+        <location filename="../qml/pages/MainPage.qml" line="100"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="121"/>
+        <location filename="../qml/pages/MainPage.qml" line="139"/>
         <source>Your rides, on your phone</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="128"/>
-        <source>Edge Sync downloads the activities from a Garmin Edge bike computer over Bluetooth. There is no account and no cloud: the files stay on this phone, and you can export them as GPX or FIT.</source>
+        <location filename="../qml/pages/MainPage.qml" line="146"/>
+        <source>Edge Sync downloads the activities from a Garmin Edge bike computer over Bluetooth. There is no account and no cloud: the files stay on this phone, and you can export them as GPX or FIT, or import a FIT file from another device.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="200"/>
+        <location filename="../qml/pages/MainPage.qml" line="219"/>
         <source>unreadable file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="208"/>
+        <location filename="../qml/pages/MainPage.qml" line="227"/>
         <source>No rides yet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="209"/>
+        <location filename="../qml/pages/MainPage.qml" line="228"/>
         <source>Pull down and choose Sync now</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MapCanvas</name>
+    <message>
+        <location filename="../src/map/mapcanvas.cpp" line="268"/>
+        <source>That address serves image tiles, which this version cannot draw yet. A vector source such as the default works.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MapTileSource</name>
+    <message>
+        <location filename="../src/map/maptilesource.cpp" line="63"/>
+        <source>No map tile address set</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/map/maptilesource.cpp" line="97"/>
+        <source>That address did not answer with TileJSON. Give a {z}/{x}/{y} template instead.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/map/maptilesource.cpp" line="104"/>
+        <location filename="../src/map/maptilesource.cpp" line="120"/>
+        <source>The map source listed no tiles</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -775,21 +842,51 @@
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="50"/>
-        <source>Help</source>
+        <source>Map</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="53"/>
-        <source>Record Bluetooth traffic in the log</source>
+        <source>Show a base map under the route</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="54"/>
+        <source>Off by default: the map tiles come from somebody else&apos;s servers, which learn the area of every ride you open. The ride itself is never sent.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="69"/>
+        <source>Tile address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="87"/>
+        <source>Either a TileJSON address or a {z}/{x}/{y} template. The default is OpenFreeMap, which needs no account and allows this use; its attribution is drawn on the map. Vector tiles only for now - an address serving images will say so.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="98"/>
+        <source>Back to the default source</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="103"/>
+        <source>Help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="106"/>
+        <source>Record Bluetooth traffic in the log</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="107"/>
         <source>Adds every byte sent to and received from the Edge to the log. Turn on to report a problem; the log can then be saved as a text file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="62"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="115"/>
         <source>Open the log</source>
         <translation type="unfinished"></translation>
     </message>

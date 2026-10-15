@@ -2,23 +2,35 @@
 
 A Sailfish OS app that downloads the activities recorded by a **Garmin Edge** bike
 computer, over Bluetooth LE, straight to the phone. No Garmin account, no cloud,
-no Internet permission.
+no cloud. The Internet permission is there only for the optional base map.
 
 * Pairs with an Edge and syncs on request (pull down, *Sync now*).
 * Keeps each ride as the original **FIT** file, and shows it: distance, moving
   time, speed, climb, heart rate, power, cadence, temperature, energy, laps, the
   route, and a chart for each thing the Edge recorded.
+* Optionally draws a **base map** under the route, from vector tiles (OpenFreeMap
+  by default, any other source in Settings). Off by default, because the tile
+  server learns the area of every ride you open; it is the only use of the network.
+* **Imports a FIT file** from any device (*Import a FIT file* in the pull-down
+  menu); a ride already here, by its start time, is not added twice.
 * Exports a ride as **GPX** (with heart rate, cadence, temperature and power) or
   as the FIT file itself, to `~/Documents/EdgeSync`.
 * Leaves the Edge's own flags alone by default, so Garmin Connect keeps working.
 * Keeps a log of the conversation with the Edge, because the protocol is
   reverse-engineered and differs between models.
 
-> **Status: written, built, and tested against a scripted Edge. Not yet run
-> against a real one.** The Bluetooth protocol is a port of what the Gadgetbridge
-> project found; `docs/protocol.md` lists what is assumed. If a sync fails, the
-> log (*Settings > Open the log*, with *Record Bluetooth traffic* on) is what to
+> **Status:** works on a real **Garmin Edge Explore 2**: pairing, the file list,
+> downloading activities (including a long ride with GPS, heart rate and power) and
+> storing and showing them. Other models are untested. The Bluetooth protocol is a
+> port of what the Gadgetbridge project found; `docs/protocol.md` lists what is
+> still assumed. If a sync fails, the log (*Settings > Open the log*, with *Record
+> Bluetooth traffic* on, also kept in `sync.log` in the app's data folder) is what to
 > send.
+>
+> **Known limits.** The Edge lists only activities that no app has marked as synced,
+> so a ride already synced with the Android app cannot be fetched here: sync with
+> this app first, or use it alone. Models that serve their files only over Classic
+> Bluetooth (the Edge 520 Plus, for one) are not supported.
 
 ## Where it comes from
 

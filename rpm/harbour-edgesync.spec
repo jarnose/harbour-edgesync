@@ -13,6 +13,7 @@ BuildRequires:  pkgconfig(Qt5Qml)
 BuildRequires:  pkgconfig(Qt5Quick)
 BuildRequires:  pkgconfig(Qt5Sql)
 BuildRequires:  pkgconfig(Qt5DBus)
+BuildRequires:  pkgconfig(Qt5Network)
 # No pkgconfig(Qt5Bluetooth): Sailfish OS's Qt5 has no QtConnectivity. The Edge
 # is reached through BlueZ's D-Bus API with Qt5DBus instead.
 # No pkgconfig(Qt5LinguistTools) virtual exists; CMake finds lrelease through
@@ -28,8 +29,11 @@ them: distance, time, speed, climb, heart rate, power, cadence, the route and a
 chart for each.
 
 The original FIT files are kept on the phone, and any ride can be exported as GPX
-or as the FIT file itself. The app has no network permission: nothing leaves the
-phone.
+or as the FIT file itself, and FIT files from other devices can be imported. The
+rides never leave the phone. The one use of the network is the optional base map
+under the route, which is off by default: when it is switched on, the map tiles for
+the area of a ride are fetched from the tile server chosen in Settings
+(OpenFreeMap by default).
 
 The Edge's Bluetooth protocol is reverse engineered (by the Gadgetbridge
 project) and differs between models and firmware; the app keeps a log of the

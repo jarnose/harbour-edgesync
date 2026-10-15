@@ -108,6 +108,16 @@ bool ActivityStore::has(const QString &device, qint64 fileTime, qint64 fileSize)
     return q.exec() && q.next();
 }
 
+bool ActivityStore::hasStart(qint64 startTime) const
+{
+    if (startTime <= 0)
+        return false;
+    QSqlQuery q(m_db);
+    q.prepare(QStringLiteral("SELECT 1 FROM activities WHERE start_time=?"));
+    q.addBindValue(startTime);
+    return q.exec() && q.next();
+}
+
 void ActivityStore::fillFromSummary(Row &r, const Fit::Summary &s) const
 {
     if (s.startTime != 0)

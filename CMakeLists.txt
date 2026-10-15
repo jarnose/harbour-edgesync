@@ -10,7 +10,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # pkgconfig(Qt5Bluetooth) at all (QtConnectivity is not part of its Qt5), so the
 # Edge is reached through BlueZ's D-Bus API (org.bluez.*) with Qt5::DBus, the way
 # harbour-suuntosync and harbour-ourasync do it.
-find_package(Qt5 COMPONENTS Core Sql DBus Qml Gui Quick LinguistTools REQUIRED)
+find_package(Qt5 COMPONENTS Core Sql DBus Network Qml Gui Quick LinguistTools REQUIRED)
 
 include(FindPkgConfig)
 pkg_search_module(SAILFISH sailfishapp REQUIRED)
@@ -31,6 +31,8 @@ set(CORE_SOURCES
     src/fit/fitdecoder.cpp
     src/fit/activity.cpp
     src/export/gpx.cpp
+    src/map/mercator.cpp
+    src/map/vectortile.cpp
 )
 
 add_executable(harbour-edgesync
@@ -41,6 +43,8 @@ add_executable(harbour-edgesync
     src/ble/edgescanner.cpp
     src/ble/edgelink.cpp
     src/store/activitystore.cpp
+    src/map/maptilesource.cpp
+    src/map/mapcanvas.cpp
     ${CORE_SOURCES}
 )
 
@@ -56,6 +60,7 @@ target_include_directories(harbour-edgesync PRIVATE
 
 target_link_libraries(harbour-edgesync
     Qt5::Quick
+    Qt5::Network
     Qt5::Sql
     Qt5::DBus
     ${SAILFISH_LDFLAGS}

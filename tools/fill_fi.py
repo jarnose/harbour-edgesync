@@ -17,8 +17,6 @@ FI = {
 "Edge Sync downloads the activities recorded by a Garmin Edge bike computer over Bluetooth LE and shows them. It is an independent project: it is not made, endorsed or supported by Garmin.":
     "Edge Sync lataa Garmin Edge -pyörätietokoneen tallentamat harjoitukset Bluetooth LE:n yli ja näyttää ne. Tämä on riippumaton projekti: Garmin ei ole tehnyt, hyväksynyt eikä tue sitä.",
 "Privacy": "Yksityisyys",
-"The app has no network permission. Rides are kept as the original FIT files in the app's own folder on this phone; exports go to Documents/EdgeSync.":
-    "Sovelluksella ei ole verkkolupaa. Harjoitukset säilytetään alkuperäisinä FIT-tiedostoina sovelluksen omassa kansiossa tässä puhelimessa; viennit menevät kansioon Documents/EdgeSync.",
 "Credits": "Tekijät ja kiitokset",
 "Garmin's Bluetooth protocol was reverse engineered by the Gadgetbridge project (AGPL-3.0). garmin-ble, garmin-bridge and GarminBLE showed how to speak it from Linux. This app is free software under the same licence.":
     "Garminin Bluetooth-protokollan on selvittänyt Gadgetbridge-projekti (AGPL-3.0). garmin-ble, garmin-bridge ja GarminBLE näyttivät, miten sitä puhutaan Linuxista. Tämä sovellus on vapaa ohjelmisto samalla lisenssillä.",
@@ -151,8 +149,6 @@ FI = {
 "Edge Sync": "Edge Sync",
 "Cancel": "Peruuta",
 "Your rides, on your phone": "Harjoituksesi puhelimessasi",
-"Edge Sync downloads the activities from a Garmin Edge bike computer over Bluetooth. There is no account and no cloud: the files stay on this phone, and you can export them as GPX or FIT.":
-    "Edge Sync lataa harjoitukset Garmin Edge -pyörätietokoneelta Bluetoothilla. Ei tiliä eikä pilveä: tiedostot pysyvät tässä puhelimessa, ja voit viedä ne GPX- tai FIT-muodossa.",
 "unreadable file": "tiedostoa ei voi lukea",
 "Pull down and choose Sync now": "Vedä alas ja valitse Synkronoi nyt",
 "Name": "Nimi",
@@ -171,6 +167,28 @@ FI = {
 "Lets go of the Edge when done, so Garmin Connect or another phone can use it.":
     "Päästää Edgestä irti valmistuttua, jotta Garmin Connect tai toinen puhelin voi käyttää sitä.",
 "Help": "Ohje",
+"Rides are kept as the original FIT files in the app's own folder on this phone and are never sent anywhere; exports go to Documents/EdgeSync. The app's only use of the network is the optional base map under the route, which is off by default: when it is on, the tile server you choose in Settings sees which area you look at, and nothing else.":
+    "Harjoitukset säilytetään alkuperäisinä FIT-tiedostoina sovelluksen omassa kansiossa tässä puhelimessa, eikä niitä lähetetä minnekään; viennit menevät kansioon Documents/EdgeSync. Sovellus käyttää verkkoa vain valinnaiseen pohjakarttaan reitin alla, joka on oletuksena pois päältä: kun se on päällä, Asetuksissa valitsemasi karttapalvelin näkee, minkä alueen katsot, eikä mitään muuta.",
+"Edge Sync downloads the activities from a Garmin Edge bike computer over Bluetooth. There is no account and no cloud: the files stay on this phone, and you can export them as GPX or FIT, or import a FIT file from another device.":
+    "Edge Sync lataa harjoitukset Garmin Edge -pyörätietokoneelta Bluetoothilla. Ei tiliä eikä pilveä: tiedostot pysyvät tässä puhelimessa, ja voit viedä ne GPX- tai FIT-muodossa tai tuoda FIT-tiedoston toiselta laitteelta.",
+"Could not open %1: %2": "Tiedostoa %1 ei voitu avata: %2",
+"%1 is not a readable FIT activity: %2": "%1 ei ole luettava FIT-harjoitus: %2",
+"%1 has no start time, so it cannot be filed.": "Tiedostolla %1 ei ole alkuaikaa, joten sitä ei voi tallentaa.",
+"%1 is already here (a ride with the same start time).": "%1 on jo täällä (harjoitus samalla alkuajalla).",
+"Could not save %1: %2": "Tiedostoa %1 ei voitu tallentaa: %2",
+"Imported %1": "Tuotu: %1",
+"Choose a FIT file": "Valitse FIT-tiedosto",
+"Import a FIT file": "Tuo FIT-tiedosto",
+"That address serves image tiles, which this version cannot draw yet. A vector source such as the default works.": "Kyseinen osoite tarjoaa kuvalaattoja, joita tämä versio ei vielä osaa piirtää. Vektorilähde, kuten oletus, toimii.",
+"No map tile address set": "Karttalaattojen osoitetta ei ole asetettu",
+"That address did not answer with TileJSON. Give a {z}/{x}/{y} template instead.": "Kyseinen osoite ei vastannut TileJSONilla. Anna sen sijaan {z}/{x}/{y}-malli.",
+"The map source listed no tiles": "Karttalähde ei luetellut yhtään laattaa",
+"Map": "Kartta",
+"Show a base map under the route": "Näytä pohjakartta reitin alla",
+"Off by default: the map tiles come from somebody else's servers, which learn the area of every ride you open. The ride itself is never sent.": "Oletuksena pois: karttalaatat tulevat jonkun toisen palvelimilta, jotka näkevät jokaisen avaamasi harjoituksen alueen. Itse harjoitusta ei lähetetä koskaan.",
+"Tile address": "Laattojen osoite",
+"Either a TileJSON address or a {z}/{x}/{y} template. The default is OpenFreeMap, which needs no account and allows this use; its attribution is drawn on the map. Vector tiles only for now - an address serving images will say so.": "Joko TileJSON-osoite tai {z}/{x}/{y}-malli. Oletus on OpenFreeMap, joka ei vaadi tiliä ja sallii tämän käytön; sen lähdemerkintä piirretään kartalle. Toistaiseksi vain vektorilaatat — kuvia tarjoava osoite kertoo siitä.",
+"Back to the default source": "Takaisin oletuslähteeseen",
 "Record Bluetooth traffic in the log": "Tallenna Bluetooth-liikenne lokiin",
 "Adds every byte sent to and received from the Edge to the log. Turn on to report a problem; the log can then be saved as a text file.":
     "Lisää lokiin jokaisen Edgelle lähetetyn ja siltä vastaanotetun tavun. Kytke päälle ongelmaa ilmoittaessa; loki voidaan sitten tallentaa tekstitiedostoksi.",

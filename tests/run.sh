@@ -26,3 +26,5 @@ run messages $GFDI ../src/gfdi/multilink.cpp
 run session $GFDI ../src/gfdi/session.cpp
 run fit $FIT
 run gpx ../src/export/gpx.cpp
+run mercator ../src/map/mercator.cpp
+run vectortile ../src/map/vectortile.cpp

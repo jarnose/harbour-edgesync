@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import io.github.jarnose.edgesync 1.0
 import "../components"
 import "../components/Format.js" as Format
 
@@ -197,11 +198,45 @@ Page {
                 visible: d.track !== undefined && d.track.length > 1
                 text: qsTr("Route")
             }
-            RouteMap {
+            Item {
                 visible: d.track !== undefined && d.track.length > 1
                 x: Theme.horizontalPageMargin
                 width: parent.width - 2 * Theme.horizontalPageMargin
-                track: d.track ? d.track : []
+                height: visible ? width * 0.75 : 0
+
+                // The base map, when it is switched on. It draws the route itself,
+                // so the bare route below stands down rather than both drawing one.
+                MapCanvas {
+                    id: baseMap
+                    anchors.fill: parent
+                    visible: AppController.baseMapEnabled && d.mapTrack !== undefined && d.mapTrack.length > 1
+                    track: visible ? d.mapTrack : []
+                    tileUrl: AppController.mapTileUrl
+                    darkMode: Theme.colorScheme === Theme.LightOnDark
+                    routeColor: Theme.highlightColor
+
+                    BusyIndicator {
+                        anchors.centerIn: parent
+                        size: BusyIndicatorSize.Medium
+                        running: baseMap.loading
+                    }
+                }
+                RouteMap {
+                    anchors.fill: parent
+                    visible: !baseMap.visible
+                    track: d.track ? d.track : []
+                }
+            }
+            // Why the map is blank, when it is: a source that cannot be used is
+            // worth saying out loud, or the switch looks broken.
+            Label {
+                visible: baseMap.visible && baseMap.error.length > 0
+                x: Theme.horizontalPageMargin
+                width: parent.width - 2 * Theme.horizontalPageMargin
+                wrapMode: Text.Wrap
+                text: baseMap.error
+                color: Theme.secondaryHighlightColor
+                font.pixelSize: Theme.fontSizeExtraSmall
             }
 
             // ---- the charts ----

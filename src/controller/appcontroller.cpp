@@ -7,12 +7,19 @@
 #include <QFile>
 #include <QMetaObject>
 #include <QSaveFile>
+#include <QFileInfo>
 #include <QStandardPaths>
+#include <QUrl>
 
 #include <algorithm>
 #include <cmath>
 
 namespace {
+
+// OpenFreeMap's TileJSON. Not a tile template: the template carries a dated path
+// that changes when the planet is rebuilt, so MapTileSource reads the current one
+// from this. No account or key; attribution is drawn on the map. See docs/base-map.md.
+const QString kDefaultMapTileUrl = QStringLiteral("https://tiles.openfreemap.org/planet");
 
 QString key(const char *k) { return QString::fromLatin1(k); }
 
@@ -243,6 +250,8 @@ void AppController::loadSettings()
     m_syncClock = m_store.setting(key("sync_clock"), QStringLiteral("0")) == QLatin1String("1");
     m_disconnect = m_store.setting(key("disconnect"), QStringLiteral("1")) == QLatin1String("1");
     m_trace = m_store.setting(key("trace"), QStringLiteral("0")) == QLatin1String("1");
+    m_baseMapEnabled = m_store.setting(key("map_enabled"), QStringLiteral("0")) == QLatin1String("1");
+    m_mapTileUrl = m_store.setting(key("map_tile_url"), kDefaultMapTileUrl);
 }
 
 void AppController::saveSetting(const QString &name, const QString &value)
@@ -273,6 +282,31 @@ void AppController::setTraceFrames(bool on)
     m_trace = on;
     saveSetting(key("trace"), on ? QStringLiteral("1") : QStringLiteral("0"));
     emit settingsChanged();
+}
+
+void AppController::setBaseMapEnabled(bool on)
+{
+    if (m_baseMapEnabled == on)
+        return;
+    m_baseMapEnabled = on;
+    saveSetting(key("map_enabled"), on ? QStringLiteral("1") : QStringLiteral("0"));
+    emit baseMapChanged();
+}
+
+void AppController::setMapTileUrl(const QString &url)
+{
+    // An empty field means "the default", not "no map".
+    const QString value = url.trimmed().isEmpty() ? kDefaultMapTileUrl : url.trimmed();
+    if (value == m_mapTileUrl)
+        return;
+    m_mapTileUrl = value;
+    saveSetting(key("map_tile_url"), value);
+    emit baseMapChanged();
+}
+
+QString AppController::defaultMapTileUrl() const
+{
+    return kDefaultMapTileUrl;
 }
 
 // ---- the Edge ---------------------------------------------------------------
@@ -412,7 +446,9 @@ void AppController::onLinkReady()
         m_link.send(QByteArray(reinterpret_cast<const char *>(b.data()), static_cast<int>(b.size())));
     };
     events.wantFile = [this](const Gfdi::DirectoryEntry &e) {
-        return e.isActivity() && e.size > 0 && !m_store.has(m_deviceAddress, e.timestamp, e.size);
+        // Not already here, whether it came from this Edge or from an imported file.
+        return e.isActivity() && e.size > 0 && !m_store.has(m_deviceAddress, e.timestamp, e.size)
+                && !m_store.hasStart(e.timestamp);
     };
     events.fileReceived = [this](const Gfdi::DirectoryEntry &e, const Gfdi::Bytes &data) {
         QString error;
@@ -690,6 +726,19 @@ QVariantMap AppController::activityDetail(qint64 id)
         track.append(QVariant(QVariantList{ x.lat, x.lon }));
     out.insert(QStringLiteral("track"), track);
 
+    // For the base map, which projects the route itself: real degrees, as
+    // { latitude, longitude }. Only built when the map is on.
+    if (m_baseMapEnabled) {
+        QVariantList mapTrack;
+        for (const Fit::Sample &x : Fit::thin(positioned, 1500)) {
+            QVariantMap p;
+            p.insert(QStringLiteral("latitude"), x.lat);
+            p.insert(QStringLiteral("longitude"), x.lon);
+            mapTrack.append(p);
+        }
+        out.insert(QStringLiteral("mapTrack"), mapTrack);
+    }
+
     QVariantList laps;
     int n = 0;
     for (const Fit::Lap &l : a.laps) {
@@ -705,6 +754,61 @@ QVariantMap AppController::activityDetail(qint64 id)
     }
     out.insert(QStringLiteral("laps"), laps);
     return out;
+}
+
+// ---- import -----------------------------------------------------------------
+
+void AppController::importFitFile(const QString &path)
+{
+    if (!m_storeOpen)
+        return;
+    // A file picker hands back a file:// URL as often as a path.
+    const QString local = path.startsWith(QStringLiteral("file://")) ? QUrl(path).toLocalFile() : path;
+    const QString name = QFileInfo(local).fileName();
+
+    QFile file(local);
+    if (!file.open(QIODevice::ReadOnly)) {
+        setError(tr("Could not open %1: %2").arg(name, file.errorString()));
+        return;
+    }
+    const QByteArray bytes = file.readAll();
+    file.close();
+
+    Fit::Activity activity;
+    std::string parseError;
+    if (!Fit::parseActivity(std::vector<uint8_t>(bytes.begin(), bytes.end()), activity, parseError)) {
+        setError(tr("%1 is not a readable FIT activity: %2").arg(name, QString::fromStdString(parseError)));
+        return;
+    }
+    const qint64 start = activity.summary.startTime;
+    if (start == 0) {
+        // Without a start time there is nothing to tell this ride from another.
+        setError(tr("%1 has no start time, so it cannot be filed.").arg(name));
+        return;
+    }
+    if (m_store.hasStart(start)) {
+        setError(tr("%1 is already here (a ride with the same start time).").arg(name));
+        return;
+    }
+
+    // Filed like a ride fetched from an Edge: the same row, the same folder. The
+    // "directory entry" is made up from the file; its device is "import".
+    Gfdi::DirectoryEntry entry;
+    entry.dataType = 128;
+    entry.subType = 4;
+    entry.timestamp = start;
+    entry.size = static_cast<uint32_t>(bytes.size());
+    QString error;
+    const qint64 id = m_store.add(QStringLiteral("import"), entry, bytes, &error);
+    if (id <= 0) {
+        setError(tr("Could not save %1: %2").arg(name, error));
+        return;
+    }
+    log(QStringLiteral("imported %1 as activity %2 (%3 bytes, %4 records)")
+                .arg(name).arg(id).arg(bytes.size()).arg(activity.samples.size()));
+    setError(QString());
+    reloadActivities();
+    setStatus(tr("Imported %1").arg(name));
 }
 
 // ---- export -----------------------------------------------------------------

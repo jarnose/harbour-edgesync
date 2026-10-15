@@ -28,8 +28,11 @@ Page {
                 width: parent.width - 2 * Theme.horizontalPageMargin
                 wrapMode: Text.Wrap
                 color: Theme.secondaryColor
-                text: qsTr("The app has no network permission. Rides are kept as the original FIT files in "
-                           + "the app's own folder on this phone; exports go to Documents/EdgeSync.")
+                text: qsTr("Rides are kept as the original FIT files in the app's own folder on this phone and "
+                           + "are never sent anywhere; exports go to Documents/EdgeSync. The app's only "
+                           + "use of the network is the optional base map under the route, which is off "
+                           + "by default: when it is on, the tile server you choose in Settings sees "
+                           + "which area you look at, and nothing else.")
             }
             SectionHeader { text: qsTr("Credits") }
             Label {

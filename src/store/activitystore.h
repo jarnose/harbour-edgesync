@@ -63,6 +63,12 @@ public:
     // directory's timestamp and size, not by index: the Edge reuses indexes.
     bool has(const QString &device, qint64 fileTime, qint64 fileSize) const;
 
+    // Whether any activity starts at exactly this time. A ride is one thing
+    // whether it came from the Edge or from a file, and two rides cannot start in
+    // the same second, so this is what keeps an imported file and the same ride
+    // fetched from the Edge from both being kept.
+    bool hasStart(qint64 startTime) const;
+
     // Writes the file and its row. Returns the new id, or 0 with `error`.
     qint64 add(const QString &device, const Gfdi::DirectoryEntry &entry, const QByteArray &fitBytes, QString *error);
 

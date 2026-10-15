@@ -21,5 +21,7 @@ QtObject {
     readonly property color highlightColor: "#3da9ff"
     readonly property color secondaryHighlightColor: "#2f7fbf"
     readonly property color errorColor: "#ff4d4d"
+    enum Scheme { LightOnDark, DarkOnLight }
+    readonly property int colorScheme: Theme.LightOnDark
     function rgba(c, a) { return Qt.rgba(c.r, c.g, c.b, a) }
 }

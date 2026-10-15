@@ -109,6 +109,7 @@ def detail(indoor=False, bad=False):
              intensityFactor=0.8, device="Edge 1040", crcOk=True, truncated=False, records=5400)
     s = series()
     d["series"] = s
+    d["mapTrack"] = [] if indoor else [dict(latitude=t[0], longitude=t[1]) for t in [[60.17 + 0.01 * math.sin(i / 25.0), 24.94 + 0.02 * math.cos(i / 25.0)] for i in range(150)]]
     d["track"] = [] if indoor else [[60.17 + 0.01 * math.sin(i / 25.0), 24.94 + 0.02 * math.cos(i / 25.0)] for i in range(150)]
     d["laps"] = [dict(number=i + 1, timer=600.0, distance=7000.0, avgSpeed=7.5, avgHr=140, avgPower=None, ascent=40.0)
                  for i in range(4)]
@@ -134,7 +135,8 @@ class App(QObject):
         self.s = dict(busy=False, status="", progress=-1.0, lastError="", hasDevice=True, deviceName="Edge 1040",
                       deviceAddress="C0:FF:EE:00:11:22", lastSyncMs=1785740505000, scanning=False,
                       activityCount=len(ROWS), archiveOnEdge=False, onlyNewFiles=False, syncClock=False,
-                      disconnectAfterSync=True, traceFrames=False)
+                      disconnectAfterSync=True, traceFrames=False, baseMapEnabled=True,
+                      mapTileUrl="https://tiles.openfreemap.org/planet")
         self.s.update(state)
         self._acts = ListModel(ACTIVITY_ROLES, ROWS if self.s["activityCount"] else [])
         self._devs = ListModel(["address", "name", "paired", "connected", "rssi"], DEVICES)
@@ -158,12 +160,17 @@ class App(QObject):
     syncClock = Property(bool, lambda s: s.s["syncClock"], lambda s, v: None, notify=_never)
     disconnectAfterSync = Property(bool, lambda s: s.s["disconnectAfterSync"], lambda s, v: None, notify=_never)
     traceFrames = Property(bool, lambda s: s.s["traceFrames"], lambda s, v: None, notify=_never)
+    baseMapEnabled = Property(bool, lambda s: s.s["baseMapEnabled"], lambda s, v: None, notify=_never)
+    mapTileUrl = Property(str, lambda s: s.s["mapTileUrl"], lambda s, v: None, notify=_never)
+    defaultMapTileUrl = Property(str, lambda s: "https://tiles.openfreemap.org/planet", constant=True)
     activities = Property(QObject, lambda s: s._acts, constant=True)
     devices = Property(QObject, lambda s: s._devs, constant=True)
 
     activitiesChanged = Signal()
     logChanged = Signal()
 
+    @Slot(str)
+    def importFitFile(self, p): pass
     @Slot()
     def startScan(self): pass
     @Slot()
@@ -212,15 +219,52 @@ CASES = [
     ("activity", "pages/ActivityPage.qml", {}, {"activityId": 3}),
     ("activity_indoor", "pages/ActivityPage.qml", {}, {"activityId": 3, "_indoor": True}),
     ("activity_unreadable", "pages/ActivityPage.qml", {}, {"activityId": 3, "_bad": True}),
+    ("activity_nomap", "pages/ActivityPage.qml", {"baseMapEnabled": False}, {"activityId": 3}),
     ("settings", "pages/SettingsPage.qml", {"traceFrames": True}, {}),
+    ("settings_nomap", "pages/SettingsPage.qml", {"baseMapEnabled": False}, {}),
     ("log", "pages/DiagnosticsPage.qml", {}, {}),
     ("about", "pages/AboutPage.qml", {}, {}),
     ("cover", "cover/CoverPage.qml", {}, {}),
 ]
 
 
+def strip_attached(text):
+    """Removes `EnterKey.*` bindings: Silica's attached property has no stand-in here."""
+    import re
+    out, i = [], 0
+    lines = text.split("\n")
+    while i < len(lines):
+        line = lines[i]
+        if re.match(r"\s*EnterKey\.", line):
+            depth = line.count("{") - line.count("}")
+            while depth > 0:
+                i += 1
+                depth += lines[i].count("{") - lines[i].count("}")
+            i += 1
+            continue
+        out.append(line)
+        i += 1
+    return "\n".join(out)
+
+
+def prepared_qml():
+    """A copy of qml/ with the unstubbable bits stripped; the real files are untouched."""
+    import shutil
+    dst = os.path.join(OUT, "qml")
+    shutil.rmtree(dst, ignore_errors=True)
+    shutil.copytree(os.path.join(ROOT, "qml"), dst)
+    for base, _, names in os.walk(dst):
+        for n in names:
+            if n.endswith(".qml"):
+                p = os.path.join(base, n)
+                text = strip_attached(open(p).read())
+                open(p, "w").write(text)
+    return dst
+
+
 def main():
     app = QGuiApplication(sys.argv)
+    qml_root = prepared_qml()
     failures = 0
     keep = []
     for name, path, state, props in CASES:
@@ -234,7 +278,7 @@ def main():
         view = QQuickView()
         view.setColor(QColor('#1b2430'))  # the stand-in Theme draws light text
         view.engine().addImportPath(os.path.join(HERE, "stubs"))
-        view.engine().addImportPath(os.path.join(ROOT, "qml"))
+        view.engine().addImportPath(qml_root)
         view.rootContext().setContextProperty("AppController", controller)
         view.rootContext().setContextProperty("pageStack", PageStack())
         wide = path.startswith("cover")
@@ -248,7 +292,7 @@ def main():
         view.show()
         loader = view.rootObject().findChild(QObject, "") or view.rootObject().children()[0]
         # Loader with initial properties: set them through the page once created.
-        loader.setProperty("source", QUrl.fromLocalFile(os.path.join(ROOT, "qml", path)))
+        loader.setProperty("source", QUrl.fromLocalFile(os.path.join(qml_root, path)))
         for _ in range(8):
             app.processEvents()
             QTimer.singleShot(60, lambda: None)

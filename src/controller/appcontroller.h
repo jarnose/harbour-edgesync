@@ -39,6 +39,9 @@ class AppController : public QObject
     Q_PROPERTY(bool onlyNewFiles READ onlyNewFiles WRITE setOnlyNewFiles NOTIFY settingsChanged)
     Q_PROPERTY(bool syncClock READ syncClock WRITE setSyncClock NOTIFY settingsChanged)
     Q_PROPERTY(bool disconnectAfterSync READ disconnectAfterSync WRITE setDisconnectAfterSync NOTIFY settingsChanged)
+    Q_PROPERTY(bool baseMapEnabled READ baseMapEnabled WRITE setBaseMapEnabled NOTIFY baseMapChanged)
+    Q_PROPERTY(QString mapTileUrl READ mapTileUrl WRITE setMapTileUrl NOTIFY baseMapChanged)
+    Q_PROPERTY(QString defaultMapTileUrl READ defaultMapTileUrl CONSTANT)
     Q_PROPERTY(bool traceFrames READ traceFrames WRITE setTraceFrames NOTIFY settingsChanged)
 
 public:
@@ -71,6 +74,15 @@ public:
     void setDisconnectAfterSync(bool on);
     void setTraceFrames(bool on);
 
+    // The base map under the route. Off by default: its tiles come from someone
+    // else's servers, which learn the area of every ride that is drawn on it.
+    bool baseMapEnabled() const { return m_baseMapEnabled; }
+    void setBaseMapEnabled(bool on);
+    // Either a TileJSON address or a {z}/{x}/{y} template; see MapTileSource.
+    QString mapTileUrl() const { return m_mapTileUrl; }
+    void setMapTileUrl(const QString &url);
+    QString defaultMapTileUrl() const;
+
     // ---- the Edge ----
     Q_INVOKABLE void startScan();
     Q_INVOKABLE void stopScan();
@@ -92,6 +104,11 @@ public:
     Q_INVOKABLE QString exportGpx(qint64 id);
     Q_INVOKABLE QString exportFit(qint64 id);
 
+    // Reads a FIT file (a path, or the file:// URL a file picker hands back),
+    // keeps it as a ride, and says what happened in `status` or `lastError`.
+    // From any device: nothing in FIT is Edge-specific.
+    Q_INVOKABLE void importFitFile(const QString &path);
+
     // ---- diagnostics ----
     Q_INVOKABLE QString logText() const;
     Q_INVOKABLE void clearLog();
@@ -107,6 +124,7 @@ signals:
     void scanningChanged();
     void activitiesChanged();
     void settingsChanged();
+    void baseMapChanged();
     void logChanged();
     void syncFinished(int newActivities, bool ok);
 
@@ -162,5 +180,7 @@ private:
     bool m_syncClock = false;
     bool m_disconnect = true;
     bool m_trace = false;
+    bool m_baseMapEnabled = false;
+    QString m_mapTileUrl;
     bool m_storeOpen = false;
 };
