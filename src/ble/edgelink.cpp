@@ -237,6 +237,7 @@ QString EdgeLink::discoverCharacteristics()
 
     // uuid -> path, for every characteristic of this device.
     QMap<QString, QString> characteristics;
+    m_flagsByPath.clear();
     QStringList services;
     for (auto it = objects.constBegin(); it != objects.constEnd(); ++it) {
         const QString path = it.key().path();
@@ -245,8 +246,12 @@ QString EdgeLink::discoverCharacteristics()
         if (it.value().contains(kServiceInterface))
             services << it.value().value(kServiceInterface).value(QStringLiteral("UUID")).toString().toLower();
         if (it.value().contains(kCharInterface))
-            characteristics.insert(it.value().value(kCharInterface).value(QStringLiteral("UUID")).toString().toLower(),
-                                   path);
+        {
+            const QVariantMap c = it.value().value(kCharInterface);
+            const QString uuid = c.value(QStringLiteral("UUID")).toString().toLower();
+            characteristics.insert(uuid, path);
+            m_flagsByPath.insert(path, c.value(QStringLiteral("Flags")).toStringList());
+        }
     }
 
     m_writePath.clear();
@@ -296,6 +301,13 @@ void EdgeLink::subscribe()
         fail(problem);
         return;
     }
+
+    const QStringList writeFlags = m_flagsByPath.value(m_writePath);
+    m_canWriteCommand = writeFlags.contains(QLatin1String("write-without-response"));
+    emit trace(QStringLiteral("send characteristic flags: %1; writing %2")
+                       .arg(writeFlags.join(QLatin1Char(',')),
+                            (m_writeCommand && m_canWriteCommand) ? QStringLiteral("without response")
+                                                                  : QStringLiteral("with BlueZ's default type")));
 
     // The hook must exist exactly once: connect() adds another hook instead of
     // recognising the one already there, and a doubled hook delivers every
@@ -384,9 +396,16 @@ void EdgeLink::pumpWrites()
     if (m_tracing)
         emit trace(QStringLiteral("TX raw   ") + hex(data));
 
+    // "command" is a write without response: BlueZ returns as soon as the packet is
+    // queued, instead of after the Edge has confirmed it. Without the option BlueZ
+    // picks the type from the characteristic's flags.
+    QVariantMap options;
+    if (m_writeCommand && m_canWriteCommand)
+        options.insert(QStringLiteral("type"), QStringLiteral("command"));
+
     const quint64 generation = m_generation;
     auto *watcher = new QDBusPendingCallWatcher(
-            BluezCall::async(m_writePath, kCharInterface, QStringLiteral("WriteValue"), { data, QVariantMap() }), this);
+            BluezCall::async(m_writePath, kCharInterface, QStringLiteral("WriteValue"), { data, options }), this);
     connect(watcher, &QDBusPendingCallWatcher::finished, this, [this, generation](QDBusPendingCallWatcher *w) {
         const QDBusPendingReply<> reply = *w;
         w->deleteLater();

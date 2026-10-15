@@ -309,151 +309,151 @@
     </message>
     <message>
         <location filename="../src/controller/appcontroller.cpp" line="235"/>
-        <location filename="../src/controller/appcontroller.cpp" line="848"/>
-        <location filename="../src/controller/appcontroller.cpp" line="880"/>
+        <location filename="../src/controller/appcontroller.cpp" line="856"/>
+        <location filename="../src/controller/appcontroller.cpp" line="888"/>
         <source>Could not write %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="351"/>
+        <location filename="../src/controller/appcontroller.cpp" line="355"/>
         <source>Bluetooth does not know this device any more. Scan again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="357"/>
+        <location filename="../src/controller/appcontroller.cpp" line="361"/>
         <source>Pairing…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="377"/>
+        <location filename="../src/controller/appcontroller.cpp" line="381"/>
         <source>Paired with %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="385"/>
+        <location filename="../src/controller/appcontroller.cpp" line="389"/>
         <source>Another operation is still running.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="391"/>
+        <location filename="../src/controller/appcontroller.cpp" line="395"/>
         <source>Choose an Edge first.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="396"/>
+        <location filename="../src/controller/appcontroller.cpp" line="400"/>
         <source>Bluetooth does not know this Edge any more. Choose it again and pair it.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="405"/>
+        <location filename="../src/controller/appcontroller.cpp" line="409"/>
         <source>Connecting to the Edge…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="421"/>
+        <location filename="../src/controller/appcontroller.cpp" line="426"/>
         <source>Cancelled.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="435"/>
-        <location filename="../src/controller/appcontroller.cpp" line="530"/>
+        <location filename="../src/controller/appcontroller.cpp" line="440"/>
+        <location filename="../src/controller/appcontroller.cpp" line="538"/>
         <source>Talking to the Edge…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="460"/>
+        <location filename="../src/controller/appcontroller.cpp" line="468"/>
         <source>Could not save an activity: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="534"/>
+        <location filename="../src/controller/appcontroller.cpp" line="542"/>
         <source>Reading the Edge&apos;s file list…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="541"/>
+        <location filename="../src/controller/appcontroller.cpp" line="549"/>
         <source>Downloading activity %1 of %2…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="562"/>
+        <location filename="../src/controller/appcontroller.cpp" line="570"/>
         <source>The Bluetooth link to the Edge was lost.</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/controller/appcontroller.cpp" line="582"/>
+        <location filename="../src/controller/appcontroller.cpp" line="590"/>
         <source>%n new activities</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="582"/>
+        <location filename="../src/controller/appcontroller.cpp" line="590"/>
         <source>Nothing new</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="587"/>
+        <location filename="../src/controller/appcontroller.cpp" line="595"/>
         <source>The Edge lists no activity files over Bluetooth LE. Some older models (the Edge 520 Plus, for one) send their files only over classic Bluetooth, which this app does not support yet. The log has the Edge&apos;s file list.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="593"/>
+        <location filename="../src/controller/appcontroller.cpp" line="601"/>
         <source>The sync failed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="641"/>
+        <location filename="../src/controller/appcontroller.cpp" line="649"/>
         <source>Could not delete the activity.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="669"/>
+        <location filename="../src/controller/appcontroller.cpp" line="677"/>
         <source>The file is missing.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="771"/>
+        <location filename="../src/controller/appcontroller.cpp" line="779"/>
         <source>Could not open %1: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="780"/>
+        <location filename="../src/controller/appcontroller.cpp" line="788"/>
         <source>%1 is not a readable FIT activity: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="786"/>
+        <location filename="../src/controller/appcontroller.cpp" line="794"/>
         <source>%1 has no start time, so it cannot be filed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="790"/>
+        <location filename="../src/controller/appcontroller.cpp" line="798"/>
         <source>%1 is already here (a ride with the same start time).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="804"/>
+        <location filename="../src/controller/appcontroller.cpp" line="812"/>
         <source>Could not save %1: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="811"/>
+        <location filename="../src/controller/appcontroller.cpp" line="819"/>
         <source>Imported %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="822"/>
+        <location filename="../src/controller/appcontroller.cpp" line="830"/>
         <source>Could not create %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="863"/>
+        <location filename="../src/controller/appcontroller.cpp" line="871"/>
         <source>The activity file could not be read.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="868"/>
+        <location filename="../src/controller/appcontroller.cpp" line="876"/>
         <source>This activity has no GPS track to export.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -605,22 +605,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ble/edgelink.cpp" line="287"/>
+        <location filename="../src/ble/edgelink.cpp" line="292"/>
         <source>This device does not offer Garmin&apos;s sync service. Is it a Garmin Edge, and is it paired?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ble/edgelink.cpp" line="322"/>
+        <location filename="../src/ble/edgelink.cpp" line="334"/>
         <source>The Edge refused notifications because the link is not encrypted. Pair the Edge first.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ble/edgelink.cpp" line="324"/>
+        <location filename="../src/ble/edgelink.cpp" line="336"/>
         <source>Could not subscribe to the Edge: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ble/edgelink.cpp" line="397"/>
+        <location filename="../src/ble/edgelink.cpp" line="416"/>
         <source>Could not write to the Edge: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -842,51 +842,76 @@
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="50"/>
-        <source>Map</source>
+        <source>Experiments</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="53"/>
-        <source>Show a base map under the route</source>
+        <source>Write without waiting for confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="54"/>
+        <source>Sends each answer to the Edge without waiting for the Edge to confirm it, which may make downloads faster. Takes effect on the next sync.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="61"/>
+        <source>Tell the Edge only what a sync needs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="62"/>
+        <source>Announces a short list of abilities, so the Edge asks for fewer things this app cannot do (weather, notifications) while a file downloads. If syncing stops working, turn this off.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="70"/>
+        <source>Map</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="73"/>
+        <source>Show a base map under the route</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="74"/>
         <source>Off by default: the map tiles come from somebody else&apos;s servers, which learn the area of every ride you open. The ride itself is never sent.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="69"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="89"/>
         <source>Tile address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="87"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="107"/>
         <source>Either a TileJSON address or a {z}/{x}/{y} template. The default is OpenFreeMap, which needs no account and allows this use; its attribution is drawn on the map. Vector tiles only for now - an address serving images will say so.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="98"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="118"/>
         <source>Back to the default source</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="103"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="123"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="106"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="126"/>
         <source>Record Bluetooth traffic in the log</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="107"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="127"/>
         <source>Adds every byte sent to and received from the Edge to the log. Turn on to report a problem; the log can then be saved as a text file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="115"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="135"/>
         <source>Open the log</source>
         <translation type="unfinished"></translation>
     </message>

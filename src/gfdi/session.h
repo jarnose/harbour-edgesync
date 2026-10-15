@@ -25,6 +25,9 @@ struct SessionOptions
     // changes what the Edge itself shows as synced, so it is opt-in.
     bool archiveAfterDownload = false;
 
+    // Answer CONFIGURATION with a short capability list instead of Gadgetbridge's.
+    bool minimalCapabilities = false;
+
     // Tell the Edge the phone's clock changed, which makes it ask for the time.
     bool syncClock = false;
 

@@ -42,6 +42,8 @@ class AppController : public QObject
     Q_PROPERTY(bool baseMapEnabled READ baseMapEnabled WRITE setBaseMapEnabled NOTIFY baseMapChanged)
     Q_PROPERTY(QString mapTileUrl READ mapTileUrl WRITE setMapTileUrl NOTIFY baseMapChanged)
     Q_PROPERTY(QString defaultMapTileUrl READ defaultMapTileUrl CONSTANT)
+    Q_PROPERTY(bool fastWrites READ fastWrites WRITE setFastWrites NOTIFY settingsChanged)
+    Q_PROPERTY(bool minimalCapabilities READ minimalCapabilities WRITE setMinimalCapabilities NOTIFY settingsChanged)
     Q_PROPERTY(bool traceFrames READ traceFrames WRITE setTraceFrames NOTIFY settingsChanged)
 
 public:
@@ -73,6 +75,11 @@ public:
     void setSyncClock(bool on);
     void setDisconnectAfterSync(bool on);
     void setTraceFrames(bool on);
+    // Experiments with the speed of a download; see docs/protocol.md.
+    bool fastWrites() const { return m_fastWrites; }
+    bool minimalCapabilities() const { return m_minimalCaps; }
+    void setFastWrites(bool on);
+    void setMinimalCapabilities(bool on);
 
     // The base map under the route. Off by default: its tiles come from someone
     // else's servers, which learn the area of every ride that is drawn on it.
@@ -180,6 +187,8 @@ private:
     bool m_syncClock = false;
     bool m_disconnect = true;
     bool m_trace = false;
+    bool m_fastWrites = false;
+    bool m_minimalCaps = false;
     bool m_baseMapEnabled = false;
     QString m_mapTileUrl;
     bool m_storeOpen = false;
