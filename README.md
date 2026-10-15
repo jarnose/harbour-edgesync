@@ -1,42 +1,52 @@
 # Edge Sync
 
-A Sailfish OS app that downloads the activities recorded by a **Garmin Edge** bike
-computer, over Bluetooth LE, straight to the phone. No Garmin account, no cloud,
-no cloud of its own. The Internet permission is for Garmin Connect (only after you sign in, and only when you press a button) and the optional base map.
+A Sailfish OS app for the rides of a **Garmin Edge** bike computer: it downloads
+them over Bluetooth LE straight to the phone, keeps them as the original FIT files,
+shows them, and can exchange them with Garmin Connect. Nothing runs by itself and
+nothing is sent anywhere unless you press a button. The Internet permission is for
+Garmin Connect (only after you sign in) and the optional base map.
 
 * Pairs with an Edge and syncs on request (pull down, *Sync now*).
 * Keeps each ride as the original **FIT** file, and shows it: distance, moving
   time, speed, climb, heart rate, power, cadence, temperature, energy, laps, the
   route, and a chart for each thing the Edge recorded.
-* Optionally draws a **base map** under the route, from vector tiles (OpenFreeMap
-  by default, any other source in Settings). Off by default, because the tile
-  server learns the area of every ride you open; it is the only use of the network.
+* **Garmin Connect**: downloads the rides that are on your account and not on the
+  phone, and sends the rides that are on the phone and not on your account (one
+  ride, or all of them). Garmin has no public API for this, so it signs in the way
+  Garmin's own mobile app does and may stop working without notice; see
+  `docs/garmin-connect.md`.
+* **Where a ride came from** shows in the list as a symbol: downloaded from the
+  Edge, downloaded from Garmin Connect, or imported from a file; and for the first
+  and last, whether Garmin Connect has it (a lit cloud) or not yet (a struck-through one).
 * **Imports a FIT file** from any device (*Import a FIT file* in the pull-down
   menu); a ride already here, by its start time, is not added twice.
+* Optionally draws a **base map** under the route, from vector tiles (OpenFreeMap
+  by default, any other source in Settings). Off by default, because the tile
+  server learns the area of every ride you open.
 * Exports a ride as **GPX** (with heart rate, cadence, temperature and power) or
   as the FIT file itself, to `~/Documents/EdgeSync`.
 * Leaves the Edge's own flags alone by default, so Garmin Connect keeps working.
-* **Garmin Connect**: downloads the rides that are on your account and not on the
-  phone, and sends the rides that are on the phone and not on your account (one
-  ride, or all of them). Marks every ride in the list with where it came from
-  (Edge, Garmin Connect, imported file) and whether Garmin Connect has it. Garmin
-  has no public API for this; see `docs/garmin-connect.md`, including why it may
-  stop working.
-* Keeps a log of the conversation with the Edge, because the protocol is
-  reverse-engineered and differs between models.
+* Keeps a log of what the app and the Edge (and Garmin) said to each other, because
+  the protocols are reverse-engineered and change.
 
-> **Status:** works on a real **Garmin Edge Explore 2**: pairing, the file list,
-> downloading activities (including a long ride with GPS, heart rate and power) and
-> storing and showing them. Other models are untested. The Bluetooth protocol is a
-> port of what the Gadgetbridge project found; `docs/protocol.md` lists what is
-> still assumed. If a sync fails, the log (*Settings > Open the log*, with *Record
-> Bluetooth traffic* on, also kept in `sync.log` in the app's data folder) is what to
-> send.
+> **Status:** works on a real **Garmin Edge Explore 2** (pairing, the file list,
+> downloading activities including a long ride with GPS, heart rate and power) and
+> against a real Garmin Connect account: sign-in, downloading 30 days of rides, and
+> sending a ride recorded by an Edge and one recorded by a Suunto Race. Other Edge
+> models are untested. The Bluetooth protocol is a port of what the Gadgetbridge
+> project found (`docs/protocol.md` lists what is still assumed), and the Garmin
+> Connect side follows three open-source clients (`docs/garmin-connect.md`). If
+> something fails, the log (*Settings > Open the log*, with *Record Bluetooth
+> traffic* on; also kept in `sync.log` in the app's data folder) is what to send.
 >
 > **Known limits.** The Edge lists only activities that no app has marked as synced,
-> so a ride already synced with the Android app cannot be fetched here: sync with
-> this app first, or use it alone. Models that serve their files only over Classic
-> Bluetooth (the Edge 520 Plus, for one) are not supported.
+> so a ride already synced with the Android app cannot be fetched from the Edge
+> (Garmin Connect has it, and downloading from there brings it in). Models that serve
+> their files only over Classic Bluetooth (the Edge 520 Plus, for one) are not
+> supported. A download from the Edge runs at about 1 kB/s, which is the Edge's pace
+> (`docs/protocol.md`, "Download speed"). Garmin Connect can rate-limit or block this
+> client, and a ride sent from another device is "accepted" first and linked once
+> Garmin lists it.
 
 ## Where it comes from
 
@@ -60,7 +70,12 @@ the protocol layer follows Gadgetbridge's.
 ```
 
 The RPM lands in `RPMS/`. Install on the phone with `devel-su pkcon install-local`.
-Tests need only `g++`: `tests/run.sh`. `tests/README.md` has the rest.
+Tests need only `g++`: `tests/run.sh`. `tools/ci.sh` runs everything the CI runs
+before it builds the RPMs (tests, the QML check, and that the translation files are
+current: any edit above a `qsTr()` or `tr()` makes them stale, and CI fails on that),
+so run it before pushing. `tests/README.md` has the rest. Build each architecture
+from a clean tree: an in-source build leaves a CMake cache that the next
+architecture then reuses.
 
 Translations: English is the source; Finnish is in `translations/`. After adding a
 `qsTr()` or `tr()`:

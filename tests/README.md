@@ -19,6 +19,7 @@ Sailfish build uses, where `unix` is a macro).
 | `session` | the sync state machine against a scripted Edge (`scripted_edge.h`): both ways a sync starts, ordering, acknowledgements, archive on and off, "not ready" retries, refused files, empty files, every chunk size, a corrupt chunk, a stall, a handshake that never comes, unsupported messages |
 | `fit` | the FIT reader on files built byte by byte: byte order, compressed timestamps, developer fields, invalid values, chained files, damaged and truncated files, summaries derived from records, laps, several sessions |
 | `mercator`, `vectortile` | the base map's projection and tile arithmetic, and the vector-tile decoder against a synthetic tile and every prefix of it (copied from harbour-suuntosync; use `assert`, and skip the real-tile check when its fixture is absent) |
+| `garmin` | the Garmin Connect client against a scripted Garmin: sign-in with and without a verification code, every refusal (429, 403, a bot-challenge page, a captcha, no network), the token exchange across client ids, refresh and 401 retry, the activity list, a download from a zip, and uploads including duplicates and Garmin's "accepted" (HTTP 202) |
 | `gpx` | the GPX writer: dates (leap days, the FIT epoch), escaping, segments across a lost fix, power and heart rate extensions, an indoor ride |
 
 ## What is *not* proven here
