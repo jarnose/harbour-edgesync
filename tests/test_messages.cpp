@@ -67,26 +67,6 @@ static void capabilities()
     CHECK(!hasCapability(ours, 119));
     CHECK(!hasCapability(ours, 5000));
 
-    // The short list: every bit of it is one of ours, and the ones a sync hangs on are there.
-    const Bytes small = minimalCapabilities();
-    CHECK_EQ(small.size(), ours.size());
-    for (unsigned bit = 0; bit < small.size() * 8; ++bit)
-        if (hasCapability(small, bit))
-            CHECK(hasCapability(ours, bit));
-    CHECK(hasCapability(small, CapSync));
-    CHECK(hasCapability(small, CapDeviceInitiatesSync));
-    CHECK(hasCapability(small, CapHostInitiatedSyncRequests));
-    CHECK(hasCapability(small, CapExplicitArchive));
-    CHECK(hasCapability(small, CapMultiLinkService));
-    CHECK(hasCapability(small, 44)); // SPORT_CYCLING
-    CHECK(!hasCapability(small, 8)); // FIND_MY_PHONE
-    CHECK(!hasCapability(small, 26)); // WEATHER_CONDITIONS
-    CHECK(!hasCapability(small, 6)); // GNCS, notifications
-    int count = 0;
-    for (unsigned bit = 0; bit < small.size() * 8; ++bit)
-        count += hasCapability(small, bit) ? 1 : 0;
-    CHECK_EQ(count, 16);
-
     const Bytes frame = buildConfiguration(ours);
     Frame f;
     std::string err;

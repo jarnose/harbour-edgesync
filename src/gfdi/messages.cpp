@@ -68,27 +68,6 @@ Bytes ourCapabilities()
     return Bytes(kOurCapabilities, kOurCapabilities + sizeof(kOurCapabilities));
 }
 
-Bytes minimalCapabilities()
-{
-    // Bit numbers from GarminCapability.java's enum order.
-    static const unsigned bits[] = {
-        0,  // CONNECT_MOBILE_FIT_LINK
-        3,  // SYNC
-        4,  // DEVICE_INITIATES_SYNC
-        5,  // HOST_INITIATED_SYNC_REQUESTS
-        29, // EXPLICIT_ARCHIVE
-        42, 43, 44, 45, 46, 47, // SPORT_GENERIC, RUNNING, CYCLING, TRANSITION, FITNESS_EQUIPMENT, SWIMMING
-        55, // GARMIN_DEVICE_INFO_FILE_TYPE
-        58, 59, // SPORT_STRENGTH, SPORT_CARDIO
-        71, // CURRENT_TIME_REQUEST_SUPPORT
-        76, // MULTI_LINK_SERVICE
-    };
-    Bytes out(15, 0);
-    for (unsigned b : bits)
-        out[b / 8] |= static_cast<uint8_t>(1u << (b % 8));
-    return out;
-}
-
 bool parseConfiguration(const Bytes &payload, Bytes &capabilities)
 {
     Reader r(payload);

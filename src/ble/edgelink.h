@@ -4,9 +4,7 @@
 
 #include <QByteArray>
 #include <QList>
-#include <QMap>
 #include <QObject>
-#include <QStringList>
 #include <QString>
 #include <QTimer>
 
@@ -45,11 +43,6 @@ public:
 
     // Queues one GFDI frame for the Edge. Frames are written one at a time, in order.
     void send(const QByteArray &gfdiFrame);
-
-    // Write with "command" (write without response) when the characteristic allows
-    // it, instead of waiting for the Edge to confirm each write. Takes effect on
-    // the next open().
-    void setWriteWithoutResponse(bool on) { m_writeCommand = on; }
 
     // Reports every byte written and read through trace().
     void setTracing(bool on) { m_tracing = on; }
@@ -96,9 +89,6 @@ private:
     bool m_connected = false;
     bool m_servicesResolved = false;
     bool m_tracing = false;
-    bool m_writeCommand = false;
-    bool m_canWriteCommand = false;
-    QMap<QString, QStringList> m_flagsByPath; // GATT characteristic flags, by object path
 
     Gfdi::Transport::Kind m_kind = Gfdi::Transport::Kind::MultiLink;
     QString m_transportName;

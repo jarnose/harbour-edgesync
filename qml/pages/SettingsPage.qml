@@ -47,26 +47,6 @@ Page {
                 onClicked: AppController.disconnectAfterSync = !AppController.disconnectAfterSync
             }
 
-            SectionHeader { text: qsTr("Experiments") }
-
-            TextSwitch {
-                text: qsTr("Write without waiting for confirmation")
-                description: qsTr("Sends each answer to the Edge without waiting for the Edge to confirm "
-                                  + "it, which may make downloads faster. Takes effect on the next sync.")
-                checked: AppController.fastWrites
-                automaticCheck: false
-                onClicked: AppController.fastWrites = !AppController.fastWrites
-            }
-            TextSwitch {
-                text: qsTr("Tell the Edge only what a sync needs")
-                description: qsTr("Announces a short list of abilities, so the Edge asks for fewer things "
-                                  + "this app cannot do (weather, notifications) while a file downloads. "
-                                  + "If syncing stops working, turn this off.")
-                checked: AppController.minimalCapabilities
-                automaticCheck: false
-                onClicked: AppController.minimalCapabilities = !AppController.minimalCapabilities
-            }
-
             SectionHeader { text: qsTr("Map") }
 
             TextSwitch {

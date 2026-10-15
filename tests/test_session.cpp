@@ -95,27 +95,6 @@ static void edgeInitiatedSync()
     CHECK_EQ(h.edge.countSent(MsgDownloadRequest), 3); // the directory, and two files
 }
 
-static void minimalCapabilitiesWhenAsked()
-{
-    for (bool minimal : {false, true}) {
-        Harness h;
-        h.options.minimalCapabilities = minimal;
-        addTypicalFiles(h.edge);
-        h.begin();
-        h.pump();
-        h.advanceMs(4000);
-        CHECK(h.ok);
-        CHECK_EQ(h.received.size(), 2u);
-        for (const Frame &f : h.edge.hostSent) {
-            if (f.type != MsgConfiguration)
-                continue;
-            Bytes caps;
-            CHECK(parseConfiguration(f.payload, caps));
-            CHECK(caps == (minimal ? minimalCapabilities() : ourCapabilities()));
-        }
-    }
-}
-
 static void archiveWhenAsked()
 {
     Harness h;
@@ -377,7 +356,6 @@ int main()
 {
     selfStartedSync();
     edgeInitiatedSync();
-    minimalCapabilitiesWhenAsked();
     archiveWhenAsked();
     notStoredIsNotArchived();
     notReadyIsRetried();

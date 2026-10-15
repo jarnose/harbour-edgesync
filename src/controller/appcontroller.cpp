@@ -250,8 +250,6 @@ void AppController::loadSettings()
     m_syncClock = m_store.setting(key("sync_clock"), QStringLiteral("0")) == QLatin1String("1");
     m_disconnect = m_store.setting(key("disconnect"), QStringLiteral("1")) == QLatin1String("1");
     m_trace = m_store.setting(key("trace"), QStringLiteral("0")) == QLatin1String("1");
-    m_fastWrites = m_store.setting(key("fast_writes"), QStringLiteral("0")) == QLatin1String("1");
-    m_minimalCaps = m_store.setting(key("minimal_caps"), QStringLiteral("0")) == QLatin1String("1");
     m_baseMapEnabled = m_store.setting(key("map_enabled"), QStringLiteral("0")) == QLatin1String("1");
     m_mapTileUrl = m_store.setting(key("map_tile_url"), kDefaultMapTileUrl);
 }
@@ -275,8 +273,6 @@ EDGE_BOOL_SETTING(setArchiveOnEdge, m_archive, "archive")
 EDGE_BOOL_SETTING(setOnlyNewFiles, m_onlyNew, "only_new")
 EDGE_BOOL_SETTING(setSyncClock, m_syncClock, "sync_clock")
 EDGE_BOOL_SETTING(setDisconnectAfterSync, m_disconnect, "disconnect")
-EDGE_BOOL_SETTING(setFastWrites, m_fastWrites, "fast_writes")
-EDGE_BOOL_SETTING(setMinimalCapabilities, m_minimalCaps, "minimal_caps")
 #undef EDGE_BOOL_SETTING
 
 void AppController::setTraceFrames(bool on)
@@ -409,7 +405,6 @@ void AppController::syncNow()
     setStatus(tr("Connecting to the Edge…"));
     log(QStringLiteral("--- sync with %1 (%2)").arg(m_deviceName, m_deviceAddress));
     m_link.setTracing(m_trace);
-    m_link.setWriteWithoutResponse(m_fastWrites);
     m_link.open(path);
 }
 
@@ -445,9 +440,6 @@ void AppController::onLinkReady()
     options.filterOnlyNew = m_onlyNew;
     options.archiveAfterDownload = m_archive;
     options.syncClock = m_syncClock;
-    options.minimalCapabilities = m_minimalCaps;
-    log(QStringLiteral("options: fastWrites=%1 minimalCapabilities=%2 archive=%3 onlyNew=%4")
-                .arg(m_fastWrites).arg(m_minimalCaps).arg(m_archive).arg(m_onlyNew));
 
     Gfdi::SessionEvents events;
     events.send = [this](const Gfdi::Bytes &b) {

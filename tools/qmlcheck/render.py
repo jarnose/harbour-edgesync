@@ -135,7 +135,7 @@ class App(QObject):
         self.s = dict(busy=False, status="", progress=-1.0, lastError="", hasDevice=True, deviceName="Edge 1040",
                       deviceAddress="C0:FF:EE:00:11:22", lastSyncMs=1785740505000, scanning=False,
                       activityCount=len(ROWS), archiveOnEdge=False, onlyNewFiles=False, syncClock=False,
-                      disconnectAfterSync=True, traceFrames=False, baseMapEnabled=True, fastWrites=False, minimalCapabilities=False,
+                      disconnectAfterSync=True, traceFrames=False, baseMapEnabled=True,
                       mapTileUrl="https://tiles.openfreemap.org/planet")
         self.s.update(state)
         self._acts = ListModel(ACTIVITY_ROLES, ROWS if self.s["activityCount"] else [])
@@ -163,8 +163,6 @@ class App(QObject):
     baseMapEnabled = Property(bool, lambda s: s.s["baseMapEnabled"], lambda s, v: None, notify=_never)
     mapTileUrl = Property(str, lambda s: s.s["mapTileUrl"], lambda s, v: None, notify=_never)
     defaultMapTileUrl = Property(str, lambda s: "https://tiles.openfreemap.org/planet", constant=True)
-    fastWrites = Property(bool, lambda s: s.s["fastWrites"], lambda s, v: None, notify=_never)
-    minimalCapabilities = Property(bool, lambda s: s.s["minimalCapabilities"], lambda s, v: None, notify=_never)
     activities = Property(QObject, lambda s: s._acts, constant=True)
     devices = Property(QObject, lambda s: s._devs, constant=True)
 

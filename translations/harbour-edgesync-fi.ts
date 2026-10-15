@@ -309,149 +309,149 @@
     </message>
     <message>
         <location filename="../src/controller/appcontroller.cpp" line="235"/>
-        <location filename="../src/controller/appcontroller.cpp" line="856"/>
-        <location filename="../src/controller/appcontroller.cpp" line="888"/>
+        <location filename="../src/controller/appcontroller.cpp" line="848"/>
+        <location filename="../src/controller/appcontroller.cpp" line="880"/>
         <source>Could not write %1</source>
         <translation>Kirjoitus epäonnistui: %1</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="355"/>
+        <location filename="../src/controller/appcontroller.cpp" line="351"/>
         <source>Bluetooth does not know this device any more. Scan again.</source>
         <translation>Bluetooth ei enää tunne tätä laitetta. Hae uudelleen.</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="361"/>
+        <location filename="../src/controller/appcontroller.cpp" line="357"/>
         <source>Pairing…</source>
         <translation>Pariutetaan…</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="381"/>
+        <location filename="../src/controller/appcontroller.cpp" line="377"/>
         <source>Paired with %1</source>
         <translation>Pariutettu: %1</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="389"/>
+        <location filename="../src/controller/appcontroller.cpp" line="385"/>
         <source>Another operation is still running.</source>
         <translation>Toinen toiminto on vielä käynnissä.</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="395"/>
+        <location filename="../src/controller/appcontroller.cpp" line="391"/>
         <source>Choose an Edge first.</source>
         <translation>Valitse ensin Edge.</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="400"/>
+        <location filename="../src/controller/appcontroller.cpp" line="396"/>
         <source>Bluetooth does not know this Edge any more. Choose it again and pair it.</source>
         <translation>Bluetooth ei enää tunne tätä Edgeä. Valitse se uudelleen ja pariuta se.</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="409"/>
+        <location filename="../src/controller/appcontroller.cpp" line="405"/>
         <source>Connecting to the Edge…</source>
         <translation>Yhdistetään Edgeen…</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="426"/>
+        <location filename="../src/controller/appcontroller.cpp" line="421"/>
         <source>Cancelled.</source>
         <translation>Peruttu.</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="440"/>
-        <location filename="../src/controller/appcontroller.cpp" line="538"/>
+        <location filename="../src/controller/appcontroller.cpp" line="435"/>
+        <location filename="../src/controller/appcontroller.cpp" line="530"/>
         <source>Talking to the Edge…</source>
         <translation>Keskustellaan Edgen kanssa…</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="468"/>
+        <location filename="../src/controller/appcontroller.cpp" line="460"/>
         <source>Could not save an activity: %1</source>
         <translation>Harjoitusta ei voitu tallentaa: %1</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="542"/>
+        <location filename="../src/controller/appcontroller.cpp" line="534"/>
         <source>Reading the Edge&apos;s file list…</source>
         <translation>Luetaan Edgen tiedostolistaa…</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="549"/>
+        <location filename="../src/controller/appcontroller.cpp" line="541"/>
         <source>Downloading activity %1 of %2…</source>
         <translation>Ladataan harjoitusta %1/%2…</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="570"/>
+        <location filename="../src/controller/appcontroller.cpp" line="562"/>
         <source>The Bluetooth link to the Edge was lost.</source>
         <translation>Bluetooth-yhteys Edgeen katkesi.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/controller/appcontroller.cpp" line="590"/>
+        <location filename="../src/controller/appcontroller.cpp" line="582"/>
         <source>%n new activities</source>
         <translation><numerusform>%n uusi harjoitus</numerusform><numerusform>%n uutta harjoitusta</numerusform></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="590"/>
+        <location filename="../src/controller/appcontroller.cpp" line="582"/>
         <source>Nothing new</source>
         <translation>Ei uutta</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="595"/>
+        <location filename="../src/controller/appcontroller.cpp" line="587"/>
         <source>The Edge lists no activity files over Bluetooth LE. Some older models (the Edge 520 Plus, for one) send their files only over classic Bluetooth, which this app does not support yet. The log has the Edge&apos;s file list.</source>
         <translation>Edge ei listaa yhtään harjoitustiedostoa Bluetooth LE:n yli. Jotkin vanhemmat mallit (esimerkiksi Edge 520 Plus) lähettävät tiedostonsa vain perinteisellä Bluetoothilla, jota tämä sovellus ei vielä tue. Lokissa on Edgen tiedostolista.</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="601"/>
+        <location filename="../src/controller/appcontroller.cpp" line="593"/>
         <source>The sync failed.</source>
         <translation>Synkronointi epäonnistui.</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="649"/>
+        <location filename="../src/controller/appcontroller.cpp" line="641"/>
         <source>Could not delete the activity.</source>
         <translation>Harjoitusta ei voitu poistaa.</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="677"/>
+        <location filename="../src/controller/appcontroller.cpp" line="669"/>
         <source>The file is missing.</source>
         <translation>Tiedosto puuttuu.</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="779"/>
+        <location filename="../src/controller/appcontroller.cpp" line="771"/>
         <source>Could not open %1: %2</source>
         <translation>Tiedostoa %1 ei voitu avata: %2</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="788"/>
+        <location filename="../src/controller/appcontroller.cpp" line="780"/>
         <source>%1 is not a readable FIT activity: %2</source>
         <translation>%1 ei ole luettava FIT-harjoitus: %2</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="794"/>
+        <location filename="../src/controller/appcontroller.cpp" line="786"/>
         <source>%1 has no start time, so it cannot be filed.</source>
         <translation>Tiedostolla %1 ei ole alkuaikaa, joten sitä ei voi tallentaa.</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="798"/>
+        <location filename="../src/controller/appcontroller.cpp" line="790"/>
         <source>%1 is already here (a ride with the same start time).</source>
         <translation>%1 on jo täällä (harjoitus samalla alkuajalla).</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="812"/>
+        <location filename="../src/controller/appcontroller.cpp" line="804"/>
         <source>Could not save %1: %2</source>
         <translation>Tiedostoa %1 ei voitu tallentaa: %2</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="819"/>
+        <location filename="../src/controller/appcontroller.cpp" line="811"/>
         <source>Imported %1</source>
         <translation>Tuotu: %1</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="830"/>
+        <location filename="../src/controller/appcontroller.cpp" line="822"/>
         <source>Could not create %1</source>
         <translation>Kansiota ei voitu luoda: %1</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="871"/>
+        <location filename="../src/controller/appcontroller.cpp" line="863"/>
         <source>The activity file could not be read.</source>
         <translation>Harjoituksen tiedostoa ei voitu lukea.</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="876"/>
+        <location filename="../src/controller/appcontroller.cpp" line="868"/>
         <source>This activity has no GPS track to export.</source>
         <translation>Tässä harjoituksessa ei ole vietävää GPS-jälkeä.</translation>
     </message>
@@ -603,22 +603,22 @@
         <translation>Bluetooth-palveluita ei voitu listata: %1</translation>
     </message>
     <message>
-        <location filename="../src/ble/edgelink.cpp" line="292"/>
+        <location filename="../src/ble/edgelink.cpp" line="287"/>
         <source>This device does not offer Garmin&apos;s sync service. Is it a Garmin Edge, and is it paired?</source>
         <translation>Tämä laite ei tarjoa Garminin synkronointipalvelua. Onko se Garmin Edge, ja onko se pariutettu?</translation>
     </message>
     <message>
-        <location filename="../src/ble/edgelink.cpp" line="334"/>
+        <location filename="../src/ble/edgelink.cpp" line="322"/>
         <source>The Edge refused notifications because the link is not encrypted. Pair the Edge first.</source>
         <translation>Edge kieltäytyi ilmoituksista, koska yhteys ei ole salattu. Pariuta Edge ensin.</translation>
     </message>
     <message>
-        <location filename="../src/ble/edgelink.cpp" line="336"/>
+        <location filename="../src/ble/edgelink.cpp" line="324"/>
         <source>Could not subscribe to the Edge: %1</source>
         <translation>Edgen ilmoituksia ei voitu tilata: %1</translation>
     </message>
     <message>
-        <location filename="../src/ble/edgelink.cpp" line="416"/>
+        <location filename="../src/ble/edgelink.cpp" line="397"/>
         <source>Could not write to the Edge: %1</source>
         <translation>Edgeen ei voitu kirjoittaa: %1</translation>
     </message>
@@ -840,76 +840,51 @@
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="50"/>
-        <source>Experiments</source>
-        <translation>Kokeilut</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="53"/>
-        <source>Write without waiting for confirmation</source>
-        <translation>Kirjoita odottamatta vahvistusta</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="54"/>
-        <source>Sends each answer to the Edge without waiting for the Edge to confirm it, which may make downloads faster. Takes effect on the next sync.</source>
-        <translation>Lähettää jokaisen vastauksen Edgelle odottamatta Edgen vahvistusta, mikä voi nopeuttaa latauksia. Tulee voimaan seuraavassa synkronoinnissa.</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="61"/>
-        <source>Tell the Edge only what a sync needs</source>
-        <translation>Kerro Edgelle vain synkronoinnin tarvitsema</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="62"/>
-        <source>Announces a short list of abilities, so the Edge asks for fewer things this app cannot do (weather, notifications) while a file downloads. If syncing stops working, turn this off.</source>
-        <translation>Ilmoittaa lyhyen listan kyvyistä, jolloin Edge pyytää tiedoston latauksen aikana vähemmän asioita, joita tämä sovellus ei osaa (sää, ilmoitukset). Jos synkronointi lakkaa toimimasta, kytke pois.</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="70"/>
         <source>Map</source>
         <translation>Kartta</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="73"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="53"/>
         <source>Show a base map under the route</source>
         <translation>Näytä pohjakartta reitin alla</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="74"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="54"/>
         <source>Off by default: the map tiles come from somebody else&apos;s servers, which learn the area of every ride you open. The ride itself is never sent.</source>
         <translation>Oletuksena pois: karttalaatat tulevat jonkun toisen palvelimilta, jotka näkevät jokaisen avaamasi harjoituksen alueen. Itse harjoitusta ei lähetetä koskaan.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="89"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="69"/>
         <source>Tile address</source>
         <translation>Laattojen osoite</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="107"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="87"/>
         <source>Either a TileJSON address or a {z}/{x}/{y} template. The default is OpenFreeMap, which needs no account and allows this use; its attribution is drawn on the map. Vector tiles only for now - an address serving images will say so.</source>
         <translation>Joko TileJSON-osoite tai {z}/{x}/{y}-malli. Oletus on OpenFreeMap, joka ei vaadi tiliä ja sallii tämän käytön; sen lähdemerkintä piirretään kartalle. Toistaiseksi vain vektorilaatat — kuvia tarjoava osoite kertoo siitä.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="118"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="98"/>
         <source>Back to the default source</source>
         <translation>Takaisin oletuslähteeseen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="123"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="103"/>
         <source>Help</source>
         <translation>Ohje</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="126"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="106"/>
         <source>Record Bluetooth traffic in the log</source>
         <translation>Tallenna Bluetooth-liikenne lokiin</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="127"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="107"/>
         <source>Adds every byte sent to and received from the Edge to the log. Turn on to report a problem; the log can then be saved as a text file.</source>
         <translation>Lisää lokiin jokaisen Edgelle lähetetyn ja siltä vastaanotetun tavun. Kytke päälle ongelmaa ilmoittaessa; loki voidaan sitten tallentaa tekstitiedostoksi.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="135"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="115"/>
         <source>Open the log</source>
         <translation>Avaa loki</translation>
     </message>

@@ -177,7 +177,7 @@ void Session::handleConfiguration(const Frame &f)
         return;
     }
     ack(f.type);
-    sendRaw(buildConfiguration(m_opt.minimalCapabilities ? Gfdi::minimalCapabilities() : ourCapabilities()));
+    sendRaw(buildConfiguration(ourCapabilities()));
 
     if (m_gotConfig)
         return; // a repeat: answered, but the initialisation below runs once

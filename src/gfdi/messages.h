@@ -51,11 +51,6 @@ Bytes buildDeviceInformationReply(const DeviceInfo &theirs, const HostInfo &host
 // Gadgetbridge declares (everything it knows minus what it does not implement),
 // because that is the one set known to make Garmin firmware offer its files.
 Bytes ourCapabilities();
-// Only what a file sync needs: the sync bits, explicit archive, time requests,
-// multi-link, the device-info file type and the sports. An Edge told this much asks
-// for far fewer things we answer "unsupported" to (weather, calendar, notifications).
-// An experiment: whether an Edge still offers its files on it is unverified.
-Bytes minimalCapabilities();
 bool parseConfiguration(const Bytes &payload, Bytes &capabilities);
 Bytes buildConfiguration(const Bytes &capabilities);
 bool hasCapability(const Bytes &capabilities, unsigned bit);

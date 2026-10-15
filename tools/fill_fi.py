@@ -167,11 +167,6 @@ FI = {
 "Lets go of the Edge when done, so Garmin Connect or another phone can use it.":
     "Päästää Edgestä irti valmistuttua, jotta Garmin Connect tai toinen puhelin voi käyttää sitä.",
 "Help": "Ohje",
-"Experiments": "Kokeilut",
-"Write without waiting for confirmation": "Kirjoita odottamatta vahvistusta",
-"Sends each answer to the Edge without waiting for the Edge to confirm it, which may make downloads faster. Takes effect on the next sync.": "Lähettää jokaisen vastauksen Edgelle odottamatta Edgen vahvistusta, mikä voi nopeuttaa latauksia. Tulee voimaan seuraavassa synkronoinnissa.",
-"Tell the Edge only what a sync needs": "Kerro Edgelle vain synkronoinnin tarvitsema",
-"Announces a short list of abilities, so the Edge asks for fewer things this app cannot do (weather, notifications) while a file downloads. If syncing stops working, turn this off.": "Ilmoittaa lyhyen listan kyvyistä, jolloin Edge pyytää tiedoston latauksen aikana vähemmän asioita, joita tämä sovellus ei osaa (sää, ilmoitukset). Jos synkronointi lakkaa toimimasta, kytke pois.",
 "Rides are kept as the original FIT files in the app's own folder on this phone and are never sent anywhere; exports go to Documents/EdgeSync. The app's only use of the network is the optional base map under the route, which is off by default: when it is on, the tile server you choose in Settings sees which area you look at, and nothing else.":
     "Harjoitukset säilytetään alkuperäisinä FIT-tiedostoina sovelluksen omassa kansiossa tässä puhelimessa, eikä niitä lähetetä minnekään; viennit menevät kansioon Documents/EdgeSync. Sovellus käyttää verkkoa vain valinnaiseen pohjakarttaan reitin alla, joka on oletuksena pois päältä: kun se on päällä, Asetuksissa valitsemasi karttapalvelin näkee, minkä alueen katsot, eikä mitään muuta.",
 "Edge Sync downloads the activities from a Garmin Edge bike computer over Bluetooth. There is no account and no cloud: the files stay on this phone, and you can export them as GPX or FIT, or import a FIT file from another device.":
