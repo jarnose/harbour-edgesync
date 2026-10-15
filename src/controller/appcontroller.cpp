@@ -186,6 +186,19 @@ void AppController::log(const QString &line)
     m_log.append(stamped);
     while (m_log.size() > 3000)
         m_log.removeFirst();
+    // Also on disk, so a log survives the app being closed. Two files of at most
+    // 512 kB each: the current one and the one before.
+    if (!m_store.dataDir().isEmpty()) {
+        const QString path = m_store.dataDir() + QStringLiteral("/sync.log");
+        QFile f(path);
+        if (f.size() > 512 * 1024) {
+            QFile::remove(path + QStringLiteral(".1"));
+            f.rename(path + QStringLiteral(".1"));
+        }
+        QFile out(path);
+        if (out.open(QIODevice::Append | QIODevice::Text))
+            out.write((stamped + QLatin1Char('\n')).toUtf8());
+    }
     emit logChanged();
 }
 

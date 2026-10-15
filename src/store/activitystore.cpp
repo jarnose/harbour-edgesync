@@ -135,6 +135,7 @@ void ActivityStore::fillFromSummary(Row &r, const Fit::Summary &s) const
 
 bool ActivityStore::insert(Row &r)
 {
+    m_lastError.clear();
     QSqlQuery q(m_db);
     q.prepare(QStringLiteral(
             "INSERT INTO activities (device, file_index, file_time, file_size, start_time, sport,"
@@ -164,12 +165,16 @@ bool ActivityStore::insert(Row &r)
     q.addBindValue(r.tss);
     q.addBindValue(r.hasStart ? QVariant(r.startLat) : QVariant());
     q.addBindValue(r.hasStart ? QVariant(r.startLon) : QVariant());
-    q.addBindValue(r.name);
+    // A default QString is *null*, which QtSql binds as SQL NULL: that breaks the
+    // NOT NULL column. An empty name must be bound as an empty string.
+    q.addBindValue(r.name.isNull() ? QString(QLatin1String("")) : r.name);
     q.addBindValue(r.fitPath);
     q.addBindValue(r.importedAt);
     q.addBindValue(r.parsed ? 1 : 0);
-    if (!q.exec())
+    if (!q.exec()) {
+        m_lastError = q.lastError().text();
         return false;
+    }
     r.id = q.lastInsertId().toLongLong();
     return true;
 }
@@ -212,7 +217,7 @@ qint64 ActivityStore::add(const QString &device, const Gfdi::DirectoryEntry &ent
 
     if (!insert(r)) {
         if (error)
-            *error = m_db.lastError().text();
+            *error = m_lastError.isEmpty() ? QStringLiteral("database insert failed") : m_lastError;
         QFile::remove(absolute);
         return 0;
     }
@@ -300,7 +305,8 @@ bool ActivityStore::setName(qint64 id, const QString &name)
 {
     QSqlQuery q(m_db);
     q.prepare(QStringLiteral("UPDATE activities SET name=? WHERE id=?"));
-    q.addBindValue(name.trimmed());
+    const QString trimmed = name.trimmed();
+    q.addBindValue(trimmed.isNull() ? QString(QLatin1String("")) : trimmed);
     q.addBindValue(id);
     return q.exec();
 }

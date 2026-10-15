@@ -127,7 +127,8 @@ void EdgeLink::pair(const QString &devicePath, int timeoutMs)
             return;
         }
         const QString name = reply.error().name();
-        const QString message = reply.error().message();
+        // BlueZ sometimes sends an error with no text; the name still says what happened.
+        const QString message = reply.error().message().isEmpty() ? name : reply.error().message();
         if (name.endsWith(QLatin1String("AuthenticationFailed")) || name.endsWith(QLatin1String("AuthenticationRejected"))
             || name.endsWith(QLatin1String("AuthenticationCanceled")))
             emit pairFinished(tr("The Edge refused to pair (%1). Open the pairing screen on the Edge "

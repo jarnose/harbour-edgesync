@@ -88,6 +88,7 @@ private:
     Row rowFromQuery(class QSqlQuery &q) const;
 
     QString m_dataDir;
+    QString m_lastError;
     QString m_connection;
     mutable QSqlDatabase m_db;
 };
