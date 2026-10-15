@@ -43,6 +43,10 @@ struct UploadResult
 {
     bool uploaded = false;  // Garmin took it as a new activity
     bool duplicate = false; // Garmin already has it
+    // Garmin took the file and is processing it (HTTP 202, an empty report). It is not yet known
+    // whether it will be kept: the activity shows up in the list, or does not, a few seconds later.
+    bool accepted = false;
+    int64_t uploadId = 0;
     int64_t activityId = 0; // when known
     std::string message;
 };
@@ -59,10 +63,15 @@ public:
     const Tokens &tokens() const { return m_tokens; }
     // Called whenever a refresh produced new tokens, so they can be saved.
     void setTokensChanged(std::function<void(const Tokens &)> cb) { m_onTokens = std::move(cb); }
+    // Told what an upload was answered with (status and the start of the body, which holds
+    // no secret). The answer is the one part of the upload this client could only guess at.
+    void setDebug(std::function<void(const std::string &)> cb) { m_debug = std::move(cb); }
 
-    // Most recent first. `limit` at most 100 per call.
+    // Most recent first. `limit` at most 100 per call. With `startDate` and `endDate`
+    // ("2026-10-15") only activities between those days; either may be empty.
     void listActivities(int start, int limit,
-                        const std::function<void(const ApiError &, const std::vector<RemoteActivity> &)> &done);
+                        const std::function<void(const ApiError &, const std::vector<RemoteActivity> &)> &done,
+                        const std::string &startDate = std::string(), const std::string &endDate = std::string());
 
     // The original FIT file of an activity (Garmin serves it zipped).
     void downloadFit(int64_t activityId, const std::function<void(const ApiError &, const std::string &)> &done);
@@ -89,9 +98,12 @@ private:
     std::function<int64_t()> m_clock;
     Tokens m_tokens;
     std::function<void(const Tokens &)> m_onTokens;
+    std::function<void(const std::string &)> m_debug;
 };
 
 // "2026-10-15 12:21:21" (GMT) to Unix seconds; 0 if it is not that.
 int64_t parseGarminTime(const std::string &text);
+// Unix seconds to "2026-10-15" (UTC).
+std::string garminDate(int64_t unixSeconds);
 
 } // namespace Garmin

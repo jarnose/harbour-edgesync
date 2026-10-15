@@ -5,6 +5,7 @@
 #include <QTimer>
 
 #include <algorithm>
+#include <cstdlib>
 
 namespace {
 
@@ -24,6 +25,9 @@ GarminConnect::GarminConnect(ActivityStore *store, QObject *parent)
     , m_api(m_http.transport(), m_auth, []() { return static_cast<int64_t>(QDateTime::currentMSecsSinceEpoch() / 1000); })
 {
     connect(&m_http, &QtHttp::trace, this, [this](const QString &line) { log(line); });
+    // What Garmin answers an upload with goes in the log: it is the one answer this code could
+    // only guess at, and it holds no secret.
+    m_api.setDebug([this](const std::string &line) { log(QString::fromStdString(line)); });
     // A refresh made while a request was under way gives new tokens: keep them.
     m_api.setTokensChanged([this](const Garmin::Tokens &t) {
         m_tokens = t;
@@ -303,7 +307,9 @@ void GarminConnect::listPage(quint64 generation, int start, std::shared_ptr<std:
             const qint64 id = m_store->idForStart(a.start, 2);
             if (id > 0) {
                 ActivityStore::Row row;
-                if (m_store->row(id, row) && row.garminId == 0) {
+                // 0: not known to be on Garmin; -1: on Garmin, its id not known. Either way the
+                // list has the id now.
+                if (m_store->row(id, row) && row.garminId <= 0) {
                     m_store->setGarminId(id, a.id);
                     ++linked;
                 }
@@ -397,6 +403,7 @@ void GarminConnect::uploadUnsent()
 {
     if (!begin(tr("Checking what Garmin Connect has…")))
         return;
+    m_acceptedRows.clear();
     const quint64 generation = m_generation;
     listAndMatch(generation, [this, generation](std::vector<Garmin::RemoteActivity>) {
         if (!current(generation))
@@ -414,15 +421,7 @@ void GarminConnect::uploadStep(quint64 generation, std::shared_ptr<QList<Activit
                                int sent, int already, int refused)
 {
     if (static_cast<int>(index) >= todo->size()) {
-        m_lastSyncMs = QDateTime::currentMSecsSinceEpoch();
-        m_store->setSetting(QStringLiteral("garmin_last_sync"), QString::number(m_lastSyncMs));
-        QString summary = tr("%n activities sent to Garmin Connect", "", sent);
-        if (already > 0)
-            summary += QStringLiteral(" · ") + tr("%n already there", "", already);
-        if (refused > 0)
-            summary += QStringLiteral(" · ") + tr("%n refused", "", refused);
-        end(summary);
-        emit activitiesChanged();
+        finishUploads(generation, sent, already, refused);
         return;
     }
     const ActivityStore::Row row = todo->at(static_cast<int>(index));
@@ -456,11 +455,16 @@ void GarminConnect::uploadStep(quint64 generation, std::shared_ptr<QList<Activit
                 return;
             }
         } else {
-            m_store->setGarminId(row.id, result.activityId > 0 ? result.activityId : -1);
-            if (result.uploaded)
-                ++s;
-            else
-                ++a;
+            if (result.accepted) {
+                // Not linked yet: that waits for the list to show it.
+                m_acceptedRows.append(row);
+            } else {
+                m_store->setGarminId(row.id, result.activityId > 0 ? result.activityId : -1);
+                if (result.uploaded)
+                    ++s;
+                else
+                    ++a;
+            }
             log(QStringLiteral("activity %1: %2").arg(row.id).arg(QString::fromStdString(result.message)));
             emit activitiesChanged();
         }
@@ -468,6 +472,88 @@ void GarminConnect::uploadStep(quint64 generation, std::shared_ptr<QList<Activit
             uploadStep(generation, todo, index + 1, s, a, r);
         });
     });
+}
+
+struct GarminConnect::Confirm
+{
+    QList<ActivityStore::Row> pending;
+    std::vector<bool> found;
+    int attempt = 0;
+};
+
+void GarminConnect::finishUploads(quint64 generation, int sent, int already, int refused)
+{
+    auto summarise = [this, sent, already, refused](int confirmed, int unlisted) {
+        m_lastSyncMs = QDateTime::currentMSecsSinceEpoch();
+        m_store->setSetting(QStringLiteral("garmin_last_sync"), QString::number(m_lastSyncMs));
+        QString summary = tr("%n activities sent to Garmin Connect", "", sent + confirmed);
+        if (already > 0)
+            summary += QStringLiteral(" · ") + tr("%n already there", "", already);
+        if (refused > 0)
+            summary += QStringLiteral(" · ") + tr("%n refused", "", refused);
+        if (unlisted > 0)
+            summary += QStringLiteral(" · ") + tr("%n not listed yet", "", unlisted);
+        end(summary);
+        emit activitiesChanged();
+    };
+    if (m_acceptedRows.isEmpty()) {
+        summarise(0, 0);
+        return;
+    }
+    const int total = m_acceptedRows.size();
+    setStatus(tr("Waiting for Garmin Connect to process %n files…", "", total));
+    auto state = std::make_shared<Confirm>();
+    state->pending = m_acceptedRows;
+    state->found.assign(static_cast<size_t>(total), false);
+    m_acceptedRows.clear();
+    confirmAccepted(generation, state, [this, summarise, total](int confirmed) { summarise(confirmed, total - confirmed); });
+}
+
+void GarminConnect::confirmAccepted(quint64 generation, std::shared_ptr<Confirm> state,
+                                    const std::function<void(int)> &then)
+{
+    // Garmin takes a few seconds to process a file; look, and look again twice.
+    later(6000, generation, [this, generation, state, then]() { confirmNext(generation, state, 0, then); });
+}
+
+void GarminConnect::confirmNext(quint64 generation, std::shared_ptr<Confirm> state, int index,
+                                const std::function<void(int)> &then)
+{
+    if (index >= state->pending.size()) {
+        int confirmed = 0;
+        for (bool f : state->found)
+            confirmed += f ? 1 : 0;
+        if (confirmed < state->pending.size() && ++state->attempt < 3) {
+            confirmAccepted(generation, state, then);
+            return;
+        }
+        then(confirmed);
+        return;
+    }
+    if (state->found[static_cast<size_t>(index)]) {
+        confirmNext(generation, state, index + 1, then);
+        return;
+    }
+    const ActivityStore::Row row = state->pending.at(index);
+    // Garmin's day is not necessarily this phone's: ask for the days around the ride.
+    m_api.listActivities(0, 20, [this, generation, state, index, then, row](const Garmin::ApiError &error,
+                                                                           const std::vector<Garmin::RemoteActivity> &list) {
+        if (!current(generation))
+            return;
+        if (!error.ok()) {
+            handleError(error);
+            return;
+        }
+        for (const Garmin::RemoteActivity &a : list) {
+            if (std::llabs(a.start - row.startTime) <= 2) {
+                m_store->setGarminId(row.id, a.id);
+                state->found[static_cast<size_t>(index)] = true;
+                log(QStringLiteral("activity %1 is on Garmin Connect as %2").arg(row.id).arg(a.id));
+                break;
+            }
+        }
+        later(kPauseListMs, generation, [this, generation, state, index, then]() { confirmNext(generation, state, index + 1, then); });
+    }, Garmin::garminDate(row.startTime - 86400), Garmin::garminDate(row.startTime + 86400));
 }
 
 void GarminConnect::uploadActivity(qint64 id)
@@ -486,11 +572,25 @@ void GarminConnect::uploadActivity(qint64 id)
     const std::string fit(bytes.constData(), static_cast<size_t>(bytes.size()));
     const std::string name = QFileInfo(row.fitPath).fileName().toStdString();
     const bool asImport = row.origin == QLatin1String("import");
-    m_api.upload(fit, name, asImport, [this, generation, id](const Garmin::ApiError &error, const Garmin::UploadResult &result) {
+    m_acceptedRows.clear();
+    m_api.upload(fit, name, asImport, [this, generation, id, row](const Garmin::ApiError &error, const Garmin::UploadResult &result) {
         if (!current(generation))
             return;
         if (!error.ok()) {
             handleError(error);
+            return;
+        }
+        if (result.accepted) {
+            // Look for it in the list before saying it is there.
+            setStatus(tr("Waiting for Garmin Connect to process the file…"));
+            auto state = std::make_shared<Confirm>();
+            state->pending.append(row);
+            state->found.assign(1, false);
+            confirmAccepted(generation, state, [this](int confirmed) {
+                emit activitiesChanged();
+                end(confirmed > 0 ? tr("Sent to Garmin Connect")
+                                  : tr("Garmin Connect accepted the file but does not list it yet. Check again in a moment."));
+            });
             return;
         }
         m_store->setGarminId(id, result.activityId > 0 ? result.activityId : -1);

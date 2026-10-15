@@ -45,6 +45,19 @@ import uses and which keeps the activity from being passed on to services linked
 account (Strava and the like): the device that recorded it has done that already. A
 ride *from an Edge* goes up as a plain upload, which is what a device sync is.
 
+## "Accepted" is not "done"
+
+An upload of a file from another device is answered **HTTP 202** with a report whose
+`successes` and `failures` are both empty: Garmin has the file and is processing it. The
+first version of this client read that as a refusal, though the ride was in the account
+(found when a later upload of the same file came back 409 with the activity's id).
+Now a 202 is "accepted": the ride is not linked yet, and after a few seconds the client
+lists the days around its start (`startDate`/`endDate`), looks for an activity that
+started within two seconds, and links it (three looks, six seconds apart). If it is not
+there, the app says that Garmin has accepted the file but does not list it yet; it does
+not say it was sent. The answer of every upload (status and the first 700 bytes, which
+hold file name and ids and no secret) is in the log.
+
 ## Where it can fail, and what the app says
 
 * **Blocked.** Garmin protects the sign-in with Cloudflare, which can refuse a client by

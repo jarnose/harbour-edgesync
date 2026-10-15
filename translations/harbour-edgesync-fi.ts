@@ -680,114 +680,135 @@
 <context>
     <name>GarminConnect</name>
     <message>
-        <location filename="../src/controller/garminconnect.cpp" line="107"/>
-        <location filename="../src/controller/garminconnect.cpp" line="168"/>
+        <location filename="../src/controller/garminconnect.cpp" line="111"/>
+        <location filename="../src/controller/garminconnect.cpp" line="172"/>
         <source>Another operation is still running.</source>
         <translation>Toinen toiminto on vielä käynnissä.</translation>
     </message>
     <message>
-        <location filename="../src/controller/garminconnect.cpp" line="111"/>
+        <location filename="../src/controller/garminconnect.cpp" line="115"/>
         <source>Sign in to Garmin Connect first.</source>
         <translation>Kirjaudu ensin Garmin Connectiin.</translation>
     </message>
     <message>
-        <location filename="../src/controller/garminconnect.cpp" line="150"/>
+        <location filename="../src/controller/garminconnect.cpp" line="154"/>
         <source>Cancelled.</source>
         <translation>Peruttu.</translation>
     </message>
     <message>
-        <location filename="../src/controller/garminconnect.cpp" line="173"/>
+        <location filename="../src/controller/garminconnect.cpp" line="177"/>
         <source>Give the email address and the password of your Garmin account.</source>
         <translation>Anna Garmin-tilisi sähköpostiosoite ja salasana.</translation>
     </message>
     <message>
-        <location filename="../src/controller/garminconnect.cpp" line="183"/>
+        <location filename="../src/controller/garminconnect.cpp" line="187"/>
         <source>Signing in to Garmin Connect…</source>
         <translation>Kirjaudutaan Garmin Connectiin…</translation>
     </message>
     <message>
-        <location filename="../src/controller/garminconnect.cpp" line="201"/>
+        <location filename="../src/controller/garminconnect.cpp" line="205"/>
         <source>Checking the code…</source>
         <translation>Tarkistetaan koodia…</translation>
     </message>
     <message>
-        <location filename="../src/controller/garminconnect.cpp" line="219"/>
+        <location filename="../src/controller/garminconnect.cpp" line="223"/>
         <source>Signed in to Garmin Connect</source>
         <translation>Kirjauduttu Garmin Connectiin</translation>
     </message>
     <message>
-        <location filename="../src/controller/garminconnect.cpp" line="223"/>
+        <location filename="../src/controller/garminconnect.cpp" line="227"/>
         <source>Garmin sent a verification code (%1). Enter it below.</source>
         <translation>Garmin lähetti vahvistuskoodin (%1). Anna se alla.</translation>
     </message>
     <message>
-        <location filename="../src/controller/garminconnect.cpp" line="272"/>
-        <location filename="../src/controller/garminconnect.cpp" line="326"/>
+        <location filename="../src/controller/garminconnect.cpp" line="276"/>
+        <location filename="../src/controller/garminconnect.cpp" line="332"/>
         <source>Reading the activity list from Garmin Connect…</source>
         <translation>Luetaan harjoituslistaa Garmin Connectista…</translation>
     </message>
     <message>
-        <location filename="../src/controller/garminconnect.cpp" line="335"/>
+        <location filename="../src/controller/garminconnect.cpp" line="341"/>
         <source>Nothing new on Garmin Connect</source>
         <translation>Garmin Connectissa ei ole mitään uutta</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/controller/garminconnect.cpp" line="350"/>
+        <location filename="../src/controller/garminconnect.cpp" line="356"/>
         <source>%n new activities from Garmin Connect</source>
         <translation><numerusform>%n uusi harjoitus Garmin Connectista</numerusform><numerusform>%n uutta harjoitusta Garmin Connectista</numerusform></translation>
     </message>
     <message>
-        <location filename="../src/controller/garminconnect.cpp" line="355"/>
+        <location filename="../src/controller/garminconnect.cpp" line="361"/>
         <source>Downloading activity %1 of %2…</source>
         <translation>Ladataan harjoitusta %1/%2…</translation>
     </message>
     <message>
-        <location filename="../src/controller/garminconnect.cpp" line="398"/>
+        <location filename="../src/controller/garminconnect.cpp" line="404"/>
         <source>Checking what Garmin Connect has…</source>
         <translation>Tarkistetaan, mitä Garmin Connectissa on…</translation>
     </message>
     <message>
-        <location filename="../src/controller/garminconnect.cpp" line="406"/>
+        <location filename="../src/controller/garminconnect.cpp" line="413"/>
         <source>Everything here is already on Garmin Connect</source>
         <translation>Kaikki täällä oleva on jo Garmin Connectissa</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/controller/garminconnect.cpp" line="419"/>
+        <location filename="../src/controller/garminconnect.cpp" line="489"/>
         <source>%n activities sent to Garmin Connect</source>
         <translation><numerusform>%n harjoitus lähetetty Garmin Connectiin</numerusform><numerusform>%n harjoitusta lähetetty Garmin Connectiin</numerusform></translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/controller/garminconnect.cpp" line="421"/>
+        <location filename="../src/controller/garminconnect.cpp" line="491"/>
         <source>%n already there</source>
         <translation><numerusform>%n jo siellä</numerusform><numerusform>%n jo siellä</numerusform></translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/controller/garminconnect.cpp" line="423"/>
+        <location filename="../src/controller/garminconnect.cpp" line="493"/>
         <source>%n refused</source>
         <translation><numerusform>%n hylätty</numerusform><numerusform>%n hylättyä</numerusform></translation>
     </message>
     <message>
-        <location filename="../src/controller/garminconnect.cpp" line="429"/>
+        <location filename="../src/controller/garminconnect.cpp" line="428"/>
         <source>Sending activity %1 of %2…</source>
         <translation>Lähetetään harjoitusta %1/%2…</translation>
     </message>
+    <message numerus="yes">
+        <location filename="../src/controller/garminconnect.cpp" line="495"/>
+        <source>%n not listed yet</source>
+        <translation><numerusform>%n ei vielä listalla</numerusform><numerusform>%n ei vielä listalla</numerusform></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../src/controller/garminconnect.cpp" line="504"/>
+        <source>Waiting for Garmin Connect to process %n files…</source>
+        <translation><numerusform>Odotetaan, että Garmin Connect käsittelee %n tiedoston…</numerusform><numerusform>Odotetaan, että Garmin Connect käsittelee %n tiedostoa…</numerusform></translation>
+    </message>
     <message>
-        <location filename="../src/controller/garminconnect.cpp" line="478"/>
+        <location filename="../src/controller/garminconnect.cpp" line="564"/>
         <source>Sending to Garmin Connect…</source>
         <translation>Lähetetään Garmin Connectiin…</translation>
     </message>
     <message>
-        <location filename="../src/controller/garminconnect.cpp" line="483"/>
+        <location filename="../src/controller/garminconnect.cpp" line="569"/>
         <source>The activity&apos;s file is missing.</source>
         <translation>Harjoituksen tiedosto puuttuu.</translation>
     </message>
     <message>
-        <location filename="../src/controller/garminconnect.cpp" line="498"/>
+        <location filename="../src/controller/garminconnect.cpp" line="585"/>
+        <source>Waiting for Garmin Connect to process the file…</source>
+        <translation>Odotetaan, että Garmin Connect käsittelee tiedoston…</translation>
+    </message>
+    <message>
+        <location filename="../src/controller/garminconnect.cpp" line="591"/>
+        <location filename="../src/controller/garminconnect.cpp" line="598"/>
         <source>Sent to Garmin Connect</source>
         <translation>Lähetetty Garmin Connectiin</translation>
     </message>
     <message>
-        <location filename="../src/controller/garminconnect.cpp" line="498"/>
+        <location filename="../src/controller/garminconnect.cpp" line="592"/>
+        <source>Garmin Connect accepted the file but does not list it yet. Check again in a moment.</source>
+        <translation>Garmin Connect otti tiedoston vastaan, mutta ei vielä listaa sitä. Tarkista hetken kuluttua uudelleen.</translation>
+    </message>
+    <message>
+        <location filename="../src/controller/garminconnect.cpp" line="598"/>
         <source>Garmin Connect already has this activity</source>
         <translation>Garmin Connectissa on jo tämä harjoitus</translation>
     </message>

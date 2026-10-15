@@ -208,6 +208,8 @@ FI = {
 "To Garmin Connect": "Garmin Connectiin",
 "Every activity here is on Garmin Connect.": "Kaikki täällä olevat harjoitukset ovat Garmin Connectissa.",
 "Send them": "Lähetä ne",
+"Waiting for Garmin Connect to process the file…": "Odotetaan, että Garmin Connect käsittelee tiedoston…",
+"Garmin Connect accepted the file but does not list it yet. Check again in a moment.": "Garmin Connect otti tiedoston vastaan, mutta ei vielä listaa sitä. Tarkista hetken kuluttua uudelleen.",
 "Garmin Connect says no to a ride it already has, and that is noted. A ride you imported from a file is sent as an import, so it is not passed on to services linked to your Garmin account. Signing out removes the sign-in from this phone; it does not revoke it at Garmin.": "Garmin Connect kieltäytyy harjoituksesta, joka sillä jo on, ja se merkitään muistiin. Tiedostosta tuotu harjoitus lähetetään tuontina, jolloin sitä ei välitetä Garmin-tiliisi liitetyille palveluille. Uloskirjautuminen poistaa kirjautumisen tästä puhelimesta; se ei mitätöi sitä Garminilla.",
 "The symbols in the list": "Listan symbolit",
 "Downloaded from the Edge; on Garmin Connect": "Ladattu Edgeltä; Garmin Connectissa",
@@ -243,6 +245,8 @@ FI = {
 
 # Plural messages: source -> [singular, plural]. Finnish has two forms.
 FI_PLURAL = {
+"%n not listed yet": ["%n ei vielä listalla", "%n ei vielä listalla"],
+"Waiting for Garmin Connect to process %n files…": ["Odotetaan, että Garmin Connect käsittelee %n tiedoston…", "Odotetaan, että Garmin Connect käsittelee %n tiedostoa…"],
 "%n new activities from Garmin Connect": ["%n uusi harjoitus Garmin Connectista", "%n uutta harjoitusta Garmin Connectista"],
 "%n activities sent to Garmin Connect": ["%n harjoitus lähetetty Garmin Connectiin", "%n harjoitusta lähetetty Garmin Connectiin"],
 "%n already there": ["%n jo siellä", "%n jo siellä"],

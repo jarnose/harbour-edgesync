@@ -175,12 +175,37 @@ void Api::send(const HttpRequest &request, bool mayRetry, const Raw &done)
     });
 }
 
+std::string garminDate(int64_t t)
+{
+    // Civil date from days since 1970-01-01 (Howard Hinnant's algorithm).
+    int64_t z = t / 86400;
+    if (t % 86400 < 0)
+        --z;
+    z += 719468;
+    const int64_t era = (z >= 0 ? z : z - 146096) / 146097;
+    const unsigned doe = static_cast<unsigned>(z - era * 146097);
+    const unsigned yoe = (doe - doe / 1460 + doe / 36524 - doe / 146096) / 365;
+    const int64_t y = static_cast<int64_t>(yoe) + era * 400;
+    const unsigned doy = doe - (365 * yoe + yoe / 4 - yoe / 100);
+    const unsigned mp = (5 * doy + 2) / 153;
+    const unsigned d = doy - (153 * mp + 2) / 5 + 1;
+    const unsigned m = mp < 10 ? mp + 3 : mp - 9;
+    char buf[40];
+    std::snprintf(buf, sizeof buf, "%04d-%02u-%02u", static_cast<int>(y + (m <= 2)), m, d);
+    return buf;
+}
+
 void Api::listActivities(int start, int limit,
-                         const std::function<void(const ApiError &, const std::vector<RemoteActivity> &)> &done)
+                         const std::function<void(const ApiError &, const std::vector<RemoteActivity> &)> &done,
+                         const std::string &startDate, const std::string &endDate)
 {
     HttpRequest req;
     req.url = std::string(kApi) + "/activitylist-service/activities/search/activities?start=" + std::to_string(start)
             + "&limit=" + std::to_string(std::min(limit, 100));
+    if (!startDate.empty())
+        req.url += "&startDate=" + startDate;
+    if (!endDate.empty())
+        req.url += "&endDate=" + endDate;
     req.headers = { { "Accept", "application/json" } };
     call(req, [done](const ApiError &e, const HttpResponse &r) {
         if (!e.ok()) {
@@ -295,12 +320,14 @@ void Api::upload(const std::string &fit, const std::string &filename, bool asImp
     req.body = multipartFile(boundary, "file", filename, "application/octet-stream", fit);
     req.timeoutMs = 120000;
 
-    call(req, [done](const ApiError &e, const HttpResponse &r) {
+    call(req, [this, done](const ApiError &e, const HttpResponse &r) {
         UploadResult out;
         if (!e.ok()) {
             done(e, out);
             return;
         }
+        if (m_debug)
+            m_debug("upload answered HTTP " + std::to_string(r.status) + ": " + r.body.substr(0, 700));
         // 409 is "already there", and carries the same report as a success does.
         if (!r.ok() && r.status != 409) {
             done(errorFor(r), out);
@@ -321,6 +348,7 @@ void Api::upload(const std::string &fit, const std::string &filename, bool asImp
             done(pe, out);
             return;
         }
+        out.uploadId = static_cast<int64_t>(result->num("uploadId", 0));
         std::string problem;
         if (const Json *successes = result->get("successes")) {
             for (const Json &s : successes->items()) {
@@ -351,6 +379,11 @@ void Api::upload(const std::string &fit, const std::string &filename, bool asImp
             out.message = "Uploaded.";
         } else if (out.duplicate) {
             out.message = "Garmin already has this activity.";
+        } else if (problem.empty()) {
+            // Nothing succeeded and nothing was refused: Garmin has the file and is working on
+            // it. (HTTP 202, as seen with a file from another device.)
+            out.accepted = true;
+            out.message = "Garmin accepted the file and is processing it.";
         } else {
             ApiError pe;
             pe.status = ApiStatus::Protocol;

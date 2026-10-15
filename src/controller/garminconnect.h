@@ -101,6 +101,16 @@ private:
                     int already, int refused);
     qint64 cutoff() const;
 
+    // Garmin answers an upload of a file from another device "accepted" (HTTP 202): it is
+    // processing it, and whether it keeps it shows only in the list a few seconds later.
+    // These look for the rides in the list, by their start time, and link the ones found.
+    struct Confirm;
+    void confirmAccepted(quint64 generation, std::shared_ptr<Confirm> state,
+                         const std::function<void(int confirmed)> &then);
+    void confirmNext(quint64 generation, std::shared_ptr<Confirm> state, int index,
+                     const std::function<void(int confirmed)> &then);
+    void finishUploads(quint64 generation, int sent, int already, int refused);
+
     ActivityStore *m_store;
     QtHttp m_http;
     KeyVault m_vault;
@@ -118,4 +128,5 @@ private:
     int m_rangeDays = 30;
     quint64 m_generation = 1;
     bool m_vaultReady = false;
+    QList<ActivityStore::Row> m_acceptedRows; // uploads Garmin accepted and has not yet listed
 };

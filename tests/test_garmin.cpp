@@ -464,6 +464,20 @@ static void listing()
     CHECK(err.status == ApiStatus::Protocol);
 }
 
+static void listingBetween()
+{
+    ApiRig rig;
+    rig.s.handler = [](const HttpRequest &) { return reply(200, kList); };
+    ApiError err;
+    rig.api->listActivities(0, 20, [&](const ApiError &e, const std::vector<RemoteActivity> &) { err = e; }, "2026-10-14", "2026-10-16");
+    CHECK(err.ok());
+    CHECK(has(rig.s.log[0].url, "&startDate=2026-10-14&endDate=2026-10-16"));
+    CHECK_EQ(garminDate(1792066881), std::string("2026-10-15"));
+    CHECK_EQ(garminDate(0), std::string("1970-01-01"));
+    CHECK_EQ(garminDate(951782400), std::string("2000-02-29"));
+    CHECK_EQ(garminDate(-1), std::string("1969-12-31"));
+}
+
 static void tokenHandling()
 {
     // About to expire: renewed first, and the new tokens are handed on to be saved.
@@ -741,6 +755,23 @@ static void uploading()
         CHECK(err.ok() && res.duplicate && !res.uploaded);
     }
     {
+        ApiRig rig; // 202: taken, being processed; neither a success nor a refusal
+        rig.s.handler = [&](const HttpRequest &) {
+            return reply(202, "{\"detailedImportResult\":{\"uploadId\":777,\"fileName\":\"a.fit\",\"report\":null,\"successes\":[],\"failures\":[]}}");
+        };
+        ApiError err;
+        UploadResult res;
+        std::string logged;
+        rig.api->setDebug([&](const std::string &s) { logged = s; });
+        rig.api->upload(fit, "a.fit", true, [&](const ApiError &e, const UploadResult &r) { err = e; res = r; });
+        CHECK(err.ok());
+        CHECK(res.accepted);
+        CHECK(!res.uploaded && !res.duplicate);
+        CHECK_EQ(res.uploadId, 777LL);
+        CHECK(has(logged, "HTTP 202"));
+        CHECK(has(logged, "uploadId"));
+    }
+    {
         ApiRig rig;
         rig.s.handler = [&](const HttpRequest &) { return reply(201, bad); };
         ApiError err;
@@ -788,6 +819,7 @@ int main()
     loginWithMfa();
     refreshing();
     listing();
+    listingBetween();
     tokenHandling();
     downloading();
     uploading();
