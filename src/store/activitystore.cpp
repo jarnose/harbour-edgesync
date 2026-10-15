@@ -93,9 +93,34 @@ bool ActivityStore::open(QString *error)
             " UNIQUE(device, file_time, file_size))"))
             && exec(QStringLiteral("CREATE INDEX IF NOT EXISTS activities_start ON activities(start_time DESC)"))
             && exec(QStringLiteral("CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT)"));
-    if (!ok && error)
-        *error = m_db.lastError().text();
-    return ok;
+    if (!ok) {
+        if (error)
+            *error = m_db.lastError().text();
+        return false;
+    }
+
+    // Columns added after the first release. An older database gets them here, and its
+    // rows are given the origin they must have had: a file put in by import was
+    // filed under the device "import", everything else came from an Edge.
+    bool hasOrigin = false;
+    QSqlQuery info(m_db);
+    if (info.exec(QStringLiteral("PRAGMA table_info(activities)"))) {
+        while (info.next())
+            if (info.value(1).toString() == QLatin1String("origin"))
+                hasOrigin = true;
+    }
+    if (!hasOrigin) {
+        const bool migrated =
+                exec(QStringLiteral("ALTER TABLE activities ADD COLUMN origin TEXT NOT NULL DEFAULT ''"))
+                && exec(QStringLiteral("ALTER TABLE activities ADD COLUMN garmin_id INTEGER NOT NULL DEFAULT 0"))
+                && exec(QStringLiteral("UPDATE activities SET origin = CASE WHEN device = 'import' THEN 'import' ELSE 'edge' END"));
+        if (!migrated) {
+            if (error)
+                *error = m_db.lastError().text();
+            return false;
+        }
+    }
+    return true;
 }
 
 bool ActivityStore::has(const QString &device, qint64 fileTime, qint64 fileSize) const
@@ -150,8 +175,9 @@ bool ActivityStore::insert(Row &r)
     q.prepare(QStringLiteral(
             "INSERT INTO activities (device, file_index, file_time, file_size, start_time, sport,"
             " elapsed, timer, distance, avg_speed, max_speed, avg_hr, max_hr, avg_power, max_power, norm_power,"
-            " avg_cadence, ascent, descent, calories, tss, start_lat, start_lon, name, fit_path, imported_at, parsed)"
-            " VALUES (?,?,?,?,?,?, ?,?,?,?,?,?,?,?,?,?, ?,?,?,?,?,?,?,?,?,?,?)"));
+            " avg_cadence, ascent, descent, calories, tss, start_lat, start_lon, name, fit_path, imported_at, parsed,"
+            " origin, garmin_id)"
+            " VALUES (?,?,?,?,?,?, ?,?,?,?,?,?,?,?,?,?, ?,?,?,?,?,?,?,?,?,?,?, ?,?)"));
     q.addBindValue(r.device);
     q.addBindValue(r.fileIndex);
     q.addBindValue(r.fileTime);
@@ -181,6 +207,8 @@ bool ActivityStore::insert(Row &r)
     q.addBindValue(r.fitPath);
     q.addBindValue(r.importedAt);
     q.addBindValue(r.parsed ? 1 : 0);
+    q.addBindValue(r.origin);
+    q.addBindValue(r.garminId);
     if (!q.exec()) {
         m_lastError = q.lastError().text();
         return false;
@@ -190,10 +218,13 @@ bool ActivityStore::insert(Row &r)
 }
 
 qint64 ActivityStore::add(const QString &device, const Gfdi::DirectoryEntry &entry, const QByteArray &fitBytes,
-                          QString *error)
+                          QString *error, const QString &origin, qint64 garminId)
 {
     Row r;
     r.device = device;
+    r.origin = !origin.isEmpty() ? origin : (device == QLatin1String("import") ? QStringLiteral("import")
+                                                                               : QStringLiteral("edge"));
+    r.garminId = garminId;
     r.fileIndex = entry.index;
     r.fileTime = entry.timestamp;
     r.fileSize = entry.size;
@@ -269,13 +300,15 @@ ActivityStore::Row ActivityStore::rowFromQuery(QSqlQuery &q) const
     r.fitPath = q.value(i++).toString();
     r.importedAt = q.value(i++).toLongLong();
     r.parsed = q.value(i++).toInt() != 0;
+    r.origin = q.value(i++).toString();
+    r.garminId = q.value(i++).toLongLong();
     return r;
 }
 
 static const char *kColumns =
         "id, device, file_index, file_time, file_size, start_time, sport, elapsed, timer, distance, avg_speed,"
         " max_speed, avg_hr, max_hr, avg_power, max_power, norm_power, avg_cadence, ascent, descent, calories,"
-        " tss, start_lat, start_lon, name, fit_path, imported_at, parsed";
+        " tss, start_lat, start_lon, name, fit_path, imported_at, parsed, origin, garmin_id";
 
 QList<ActivityStore::Row> ActivityStore::rows() const
 {
@@ -309,6 +342,40 @@ QByteArray ActivityStore::readFit(const Row &row) const
 {
     QFile f(absolutePath(row));
     return f.open(QIODevice::ReadOnly) ? f.readAll() : QByteArray();
+}
+
+qint64 ActivityStore::idForStart(qint64 startTime, int toleranceSeconds) const
+{
+    if (startTime <= 0)
+        return 0;
+    QSqlQuery q(m_db);
+    q.prepare(QStringLiteral("SELECT id FROM activities WHERE start_time BETWEEN ? AND ? "
+                             "ORDER BY ABS(start_time - ?) LIMIT 1"));
+    q.addBindValue(startTime - toleranceSeconds);
+    q.addBindValue(startTime + toleranceSeconds);
+    q.addBindValue(startTime);
+    return q.exec() && q.next() ? q.value(0).toLongLong() : 0;
+}
+
+bool ActivityStore::setGarminId(qint64 id, qint64 garminId)
+{
+    QSqlQuery q(m_db);
+    q.prepare(QStringLiteral("UPDATE activities SET garmin_id=? WHERE id=?"));
+    q.addBindValue(garminId);
+    q.addBindValue(id);
+    return q.exec();
+}
+
+QList<ActivityStore::Row> ActivityStore::notOnGarmin() const
+{
+    QList<Row> out;
+    QSqlQuery q(m_db);
+    if (!q.exec(QStringLiteral("SELECT %1 FROM activities WHERE garmin_id=0 AND parsed=1 ORDER BY start_time ASC")
+                        .arg(QLatin1String(kColumns))))
+        return out;
+    while (q.next())
+        out.append(rowFromQuery(q));
+    return out;
 }
 
 bool ActivityStore::setName(qint64 id, const QString &name)

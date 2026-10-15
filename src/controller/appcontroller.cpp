@@ -127,6 +127,9 @@ AppController::AppController(QObject *parent)
             [this](const EdgeScanner::Device &d) { m_devices.upsert(d); });
     connect(&m_scanner, &EdgeScanner::errorOccurred, this, [this](const QString &e) { setError(e); });
 
+    connect(&m_garmin, &GarminConnect::activitiesChanged, this, [this]() { reloadActivities(); });
+    connect(&m_garmin, &GarminConnect::logLine, this, [this](const QString &line) { log(line); });
+
     QString error;
     m_storeOpen = m_store.open(&error);
     if (!m_storeOpen) {
@@ -134,6 +137,7 @@ AppController::AppController(QObject *parent)
     } else {
         loadSettings();
         reloadActivities();
+        m_garmin.start();
     }
     setStatus(QString());
 }
@@ -660,6 +664,9 @@ QVariantMap AppController::activityDetail(qint64 id)
     out.insert(QStringLiteral("sportLabel"), ActivityModel::sportLabel(row.sport));
     out.insert(QStringLiteral("startMs"), row.startTime * 1000);
     out.insert(QStringLiteral("parsed"), row.parsed);
+    out.insert(QStringLiteral("origin"), row.origin);
+    out.insert(QStringLiteral("garminId"), row.garminId);
+    out.insert(QStringLiteral("onGarmin"), row.garminId != 0);
     out.insert(QStringLiteral("fitPath"), m_store.absolutePath(row));
     out.insert(QStringLiteral("fileSize"), row.fileSize);
 

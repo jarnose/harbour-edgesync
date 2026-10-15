@@ -41,6 +41,12 @@ Page {
                 })
             }
             MenuItem {
+                visible: d.onGarmin === false && AppController.garmin.signedIn
+                enabled: !AppController.garmin.busy
+                text: qsTr("Send to Garmin Connect")
+                onClicked: AppController.garmin.uploadActivity(page.activityId)
+            }
+            MenuItem {
                 text: qsTr("Save the FIT file")
                 onClicked: page.exported = AppController.exportFit(page.activityId)
             }
@@ -70,6 +76,33 @@ Page {
                 description: d.startMs ? Format.longDate(d.startMs) : ""
             }
 
+            Row {
+                visible: d.origin !== undefined
+                x: Theme.horizontalPageMargin
+                spacing: Theme.paddingMedium
+                OriginIcons {
+                    anchors.verticalCenter: parent.verticalCenter
+                    origin: d.origin ? d.origin : ""
+                    onGarmin: d.onGarmin === true
+                }
+                Label {
+                    anchors.verticalCenter: parent.verticalCenter
+                    color: Theme.secondaryColor
+                    font.pixelSize: Theme.fontSizeExtraSmall
+                    text: (d.origin === "garmin" ? qsTr("Downloaded from Garmin Connect")
+                           : d.origin === "import" ? qsTr("Imported from a file")
+                           : qsTr("Downloaded from the Edge"))
+                          + (d.origin !== "garmin" ? " · " + (d.onGarmin ? qsTr("on Garmin Connect")
+                                                                         : qsTr("not on Garmin Connect")) : "")
+                }
+            }
+            Label {
+                visible: AppController.garmin.status.length > 0 && AppController.garmin.busy
+                x: Theme.horizontalPageMargin
+                width: parent.width - 2 * Theme.horizontalPageMargin
+                color: Theme.secondaryHighlightColor
+                text: AppController.garmin.status
+            }
             Label {
                 visible: page.exported.length > 0
                 x: Theme.horizontalPageMargin

@@ -20,21 +20,21 @@
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="31"/>
-        <source>Rides are kept as the original FIT files in the app&apos;s own folder on this phone and are never sent anywhere; exports go to Documents/EdgeSync. The app&apos;s only use of the network is the optional base map under the route, which is off by default: when it is on, the tile server you choose in Settings sees which area you look at, and nothing else.</source>
-        <translation>Harjoitukset säilytetään alkuperäisinä FIT-tiedostoina sovelluksen omassa kansiossa tässä puhelimessa, eikä niitä lähetetä minnekään; viennit menevät kansioon Documents/EdgeSync. Sovellus käyttää verkkoa vain valinnaiseen pohjakarttaan reitin alla, joka on oletuksena pois päältä: kun se on päällä, Asetuksissa valitsemasi karttapalvelin näkee, minkä alueen katsot, eikä mitään muuta.</translation>
+        <source>Rides are kept as the original FIT files in the app&apos;s own folder on this phone; exports go to Documents/EdgeSync. The app uses the network for two things, both of which you start yourself. Garmin Connect: after you sign in, it downloads rides from your account and sends rides to it when you press the buttons; nothing goes to Garmin otherwise. The base map under the route, off by default: the tile server you choose in Settings sees which area you look at, and nothing else.</source>
+        <translation>Harjoitukset säilytetään alkuperäisinä FIT-tiedostoina sovelluksen omassa kansiossa tässä puhelimessa; viennit menevät kansioon Documents/EdgeSync. Sovellus käyttää verkkoa kahteen asiaan, jotka molemmat käynnistät itse. Garmin Connect: kirjautumisen jälkeen se lataa harjoituksia tililtäsi ja lähettää harjoituksia sinne, kun painat painikkeita; muuten Garminille ei mene mitään. Pohjakartta reitin alla, oletuksena pois: Asetuksissa valitsemasi karttapalvelin näkee, minkä alueen katsot, eikä mitään muuta.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AboutPage.qml" line="37"/>
+        <location filename="../qml/pages/AboutPage.qml" line="39"/>
         <source>Credits</source>
         <translation>Tekijät ja kiitokset</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AboutPage.qml" line="43"/>
+        <location filename="../qml/pages/AboutPage.qml" line="45"/>
         <source>Garmin&apos;s Bluetooth protocol was reverse engineered by the Gadgetbridge project (AGPL-3.0). garmin-ble, garmin-bridge and GarminBLE showed how to speak it from Linux. This app is free software under the same licence.</source>
         <translation>Garminin Bluetooth-protokollan on selvittänyt Gadgetbridge-projekti (AGPL-3.0). garmin-ble, garmin-bridge ja GarminBLE näyttivät, miten sitä puhutaan Linuxista. Tämä sovellus on vapaa ohjelmisto samalla lisenssillä.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AboutPage.qml" line="47"/>
+        <location filename="../qml/pages/AboutPage.qml" line="49"/>
         <source>Data folder</source>
         <translation>Datakansio</translation>
     </message>
@@ -155,147 +155,177 @@
         <translation>Poistetaan</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="44"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="46"/>
+        <source>Send to Garmin Connect</source>
+        <translation>Lähetä Garmin Connectiin</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ActivityPage.qml" line="50"/>
         <source>Save the FIT file</source>
         <translation>Tallenna FIT-tiedosto</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="49"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="55"/>
         <source>Save as GPX</source>
         <translation>Tallenna GPX-tiedostona</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="53"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="59"/>
         <source>Rename</source>
         <translation>Nimeä uudelleen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="80"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="92"/>
+        <source>Downloaded from Garmin Connect</source>
+        <translation>Ladattu Garmin Connectista</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ActivityPage.qml" line="93"/>
+        <source>Imported from a file</source>
+        <translation>Tuotu tiedostosta</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ActivityPage.qml" line="94"/>
+        <source>Downloaded from the Edge</source>
+        <translation>Ladattu Edgeltä</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ActivityPage.qml" line="95"/>
+        <source>on Garmin Connect</source>
+        <translation>Garmin Connectissa</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ActivityPage.qml" line="96"/>
+        <source>not on Garmin Connect</source>
+        <translation>ei Garmin Connectissa</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ActivityPage.qml" line="113"/>
         <source>Saved to %1</source>
         <translation>Tallennettu: %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="101"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="134"/>
         <source>This file could not be read: %1. It is kept on the phone, and a later version of the app may read it.</source>
         <translation>Tätä tiedostoa ei voitu lukea: %1. Se säilytetään puhelimessa, ja sovelluksen myöhempi versio voi osata lukea sen.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="120"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="153"/>
         <source>Distance</source>
         <translation>Matka</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="125"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="158"/>
         <source>Moving time</source>
         <translation>Liikkumisaika</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="131"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="164"/>
         <source>Average speed</source>
         <translation>Keskinopeus</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="137"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="170"/>
         <source>Top speed</source>
         <translation>Huippunopeus</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="144"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="177"/>
         <source>Climbed</source>
         <translation>Nousu</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="151"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="184"/>
         <source>Average heart rate</source>
         <translation>Keskisyke</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="158"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="191"/>
         <source>Max heart rate</source>
         <translation>Maksimisyke</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="165"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="198"/>
         <source>Average power</source>
         <translation>Keskiteho</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="172"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="205"/>
         <source>Normalized power</source>
         <translation>Normalisoitu teho</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="179"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="212"/>
         <source>Average cadence</source>
         <translation>Keskitrampitus</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="186"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="219"/>
         <source>Energy</source>
         <translation>Energia</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="192"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="225"/>
         <source>Elapsed time</source>
         <translation>Kulunut aika</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="199"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="232"/>
         <source>Route</source>
         <translation>Reitti</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="245"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="278"/>
         <source>Speed (km/h)</source>
         <translation>Nopeus (km/h)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="260"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="293"/>
         <source>Elevation (m)</source>
         <translation>Korkeus (m)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="274"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="307"/>
         <source>Heart rate (bpm)</source>
         <translation>Syke (bpm)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="288"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="321"/>
         <source>Power (W)</source>
         <translation>Teho (W)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="302"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="335"/>
         <source>Cadence (rpm)</source>
         <translation>Trampitus (rpm)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="316"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="349"/>
         <source>Temperature (°C)</source>
         <translation>Lämpötila (°C)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="332"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="365"/>
         <source>Laps</source>
         <translation>Kierrokset</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="370"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="403"/>
         <source>File</source>
         <translation>Tiedosto</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="379"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="412"/>
         <source>records</source>
         <translation>tietuetta</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="382"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="415"/>
         <source>The file&apos;s checksum does not match: it may be damaged.</source>
         <translation>Tiedoston tarkistussumma ei täsmää: se voi olla vioittunut.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ActivityPage.qml" line="383"/>
+        <location filename="../qml/pages/ActivityPage.qml" line="416"/>
         <source>The file ends early.</source>
         <translation>Tiedosto päättyy ennenaikaisesti.</translation>
     </message>
@@ -303,155 +333,155 @@
 <context>
     <name>AppController</name>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="133"/>
+        <location filename="../src/controller/appcontroller.cpp" line="136"/>
         <source>Could not open the local database: %1</source>
         <translation>Paikallista tietokantaa ei voitu avata: %1</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="235"/>
-        <location filename="../src/controller/appcontroller.cpp" line="848"/>
-        <location filename="../src/controller/appcontroller.cpp" line="880"/>
+        <location filename="../src/controller/appcontroller.cpp" line="240"/>
+        <location filename="../src/controller/appcontroller.cpp" line="856"/>
+        <location filename="../src/controller/appcontroller.cpp" line="888"/>
         <source>Could not write %1</source>
         <translation>Kirjoitus epäonnistui: %1</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="351"/>
+        <location filename="../src/controller/appcontroller.cpp" line="356"/>
         <source>Bluetooth does not know this device any more. Scan again.</source>
         <translation>Bluetooth ei enää tunne tätä laitetta. Hae uudelleen.</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="357"/>
+        <location filename="../src/controller/appcontroller.cpp" line="362"/>
         <source>Pairing…</source>
         <translation>Pariutetaan…</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="377"/>
+        <location filename="../src/controller/appcontroller.cpp" line="382"/>
         <source>Paired with %1</source>
         <translation>Pariutettu: %1</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="385"/>
+        <location filename="../src/controller/appcontroller.cpp" line="390"/>
         <source>Another operation is still running.</source>
         <translation>Toinen toiminto on vielä käynnissä.</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="391"/>
+        <location filename="../src/controller/appcontroller.cpp" line="396"/>
         <source>Choose an Edge first.</source>
         <translation>Valitse ensin Edge.</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="396"/>
+        <location filename="../src/controller/appcontroller.cpp" line="401"/>
         <source>Bluetooth does not know this Edge any more. Choose it again and pair it.</source>
         <translation>Bluetooth ei enää tunne tätä Edgeä. Valitse se uudelleen ja pariuta se.</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="405"/>
+        <location filename="../src/controller/appcontroller.cpp" line="410"/>
         <source>Connecting to the Edge…</source>
         <translation>Yhdistetään Edgeen…</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="421"/>
+        <location filename="../src/controller/appcontroller.cpp" line="426"/>
         <source>Cancelled.</source>
         <translation>Peruttu.</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="435"/>
-        <location filename="../src/controller/appcontroller.cpp" line="530"/>
+        <location filename="../src/controller/appcontroller.cpp" line="440"/>
+        <location filename="../src/controller/appcontroller.cpp" line="535"/>
         <source>Talking to the Edge…</source>
         <translation>Keskustellaan Edgen kanssa…</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="460"/>
+        <location filename="../src/controller/appcontroller.cpp" line="465"/>
         <source>Could not save an activity: %1</source>
         <translation>Harjoitusta ei voitu tallentaa: %1</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="534"/>
+        <location filename="../src/controller/appcontroller.cpp" line="539"/>
         <source>Reading the Edge&apos;s file list…</source>
         <translation>Luetaan Edgen tiedostolistaa…</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="541"/>
+        <location filename="../src/controller/appcontroller.cpp" line="546"/>
         <source>Downloading activity %1 of %2…</source>
         <translation>Ladataan harjoitusta %1/%2…</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="562"/>
+        <location filename="../src/controller/appcontroller.cpp" line="567"/>
         <source>The Bluetooth link to the Edge was lost.</source>
         <translation>Bluetooth-yhteys Edgeen katkesi.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/controller/appcontroller.cpp" line="582"/>
+        <location filename="../src/controller/appcontroller.cpp" line="587"/>
         <source>%n new activities</source>
         <translation><numerusform>%n uusi harjoitus</numerusform><numerusform>%n uutta harjoitusta</numerusform></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="582"/>
+        <location filename="../src/controller/appcontroller.cpp" line="587"/>
         <source>Nothing new</source>
         <translation>Ei uutta</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="587"/>
+        <location filename="../src/controller/appcontroller.cpp" line="592"/>
         <source>The Edge lists no activity files over Bluetooth LE. Some older models (the Edge 520 Plus, for one) send their files only over classic Bluetooth, which this app does not support yet. The log has the Edge&apos;s file list.</source>
         <translation>Edge ei listaa yhtään harjoitustiedostoa Bluetooth LE:n yli. Jotkin vanhemmat mallit (esimerkiksi Edge 520 Plus) lähettävät tiedostonsa vain perinteisellä Bluetoothilla, jota tämä sovellus ei vielä tue. Lokissa on Edgen tiedostolista.</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="593"/>
+        <location filename="../src/controller/appcontroller.cpp" line="598"/>
         <source>The sync failed.</source>
         <translation>Synkronointi epäonnistui.</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="641"/>
+        <location filename="../src/controller/appcontroller.cpp" line="646"/>
         <source>Could not delete the activity.</source>
         <translation>Harjoitusta ei voitu poistaa.</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="669"/>
+        <location filename="../src/controller/appcontroller.cpp" line="677"/>
         <source>The file is missing.</source>
         <translation>Tiedosto puuttuu.</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="771"/>
+        <location filename="../src/controller/appcontroller.cpp" line="779"/>
         <source>Could not open %1: %2</source>
         <translation>Tiedostoa %1 ei voitu avata: %2</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="780"/>
+        <location filename="../src/controller/appcontroller.cpp" line="788"/>
         <source>%1 is not a readable FIT activity: %2</source>
         <translation>%1 ei ole luettava FIT-harjoitus: %2</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="786"/>
+        <location filename="../src/controller/appcontroller.cpp" line="794"/>
         <source>%1 has no start time, so it cannot be filed.</source>
         <translation>Tiedostolla %1 ei ole alkuaikaa, joten sitä ei voi tallentaa.</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="790"/>
+        <location filename="../src/controller/appcontroller.cpp" line="798"/>
         <source>%1 is already here (a ride with the same start time).</source>
         <translation>%1 on jo täällä (harjoitus samalla alkuajalla).</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="804"/>
+        <location filename="../src/controller/appcontroller.cpp" line="812"/>
         <source>Could not save %1: %2</source>
         <translation>Tiedostoa %1 ei voitu tallentaa: %2</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="811"/>
+        <location filename="../src/controller/appcontroller.cpp" line="819"/>
         <source>Imported %1</source>
         <translation>Tuotu: %1</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="822"/>
+        <location filename="../src/controller/appcontroller.cpp" line="830"/>
         <source>Could not create %1</source>
         <translation>Kansiota ei voitu luoda: %1</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="863"/>
+        <location filename="../src/controller/appcontroller.cpp" line="871"/>
         <source>The activity file could not be read.</source>
         <translation>Harjoituksen tiedostoa ei voitu lukea.</translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="868"/>
+        <location filename="../src/controller/appcontroller.cpp" line="876"/>
         <source>This activity has no GPS track to export.</source>
         <translation>Tässä harjoituksessa ei ole vietävää GPS-jälkeä.</translation>
     </message>
@@ -648,6 +678,265 @@
     </message>
 </context>
 <context>
+    <name>GarminConnect</name>
+    <message>
+        <location filename="../src/controller/garminconnect.cpp" line="107"/>
+        <location filename="../src/controller/garminconnect.cpp" line="168"/>
+        <source>Another operation is still running.</source>
+        <translation>Toinen toiminto on vielä käynnissä.</translation>
+    </message>
+    <message>
+        <location filename="../src/controller/garminconnect.cpp" line="111"/>
+        <source>Sign in to Garmin Connect first.</source>
+        <translation>Kirjaudu ensin Garmin Connectiin.</translation>
+    </message>
+    <message>
+        <location filename="../src/controller/garminconnect.cpp" line="150"/>
+        <source>Cancelled.</source>
+        <translation>Peruttu.</translation>
+    </message>
+    <message>
+        <location filename="../src/controller/garminconnect.cpp" line="173"/>
+        <source>Give the email address and the password of your Garmin account.</source>
+        <translation>Anna Garmin-tilisi sähköpostiosoite ja salasana.</translation>
+    </message>
+    <message>
+        <location filename="../src/controller/garminconnect.cpp" line="183"/>
+        <source>Signing in to Garmin Connect…</source>
+        <translation>Kirjaudutaan Garmin Connectiin…</translation>
+    </message>
+    <message>
+        <location filename="../src/controller/garminconnect.cpp" line="201"/>
+        <source>Checking the code…</source>
+        <translation>Tarkistetaan koodia…</translation>
+    </message>
+    <message>
+        <location filename="../src/controller/garminconnect.cpp" line="219"/>
+        <source>Signed in to Garmin Connect</source>
+        <translation>Kirjauduttu Garmin Connectiin</translation>
+    </message>
+    <message>
+        <location filename="../src/controller/garminconnect.cpp" line="223"/>
+        <source>Garmin sent a verification code (%1). Enter it below.</source>
+        <translation>Garmin lähetti vahvistuskoodin (%1). Anna se alla.</translation>
+    </message>
+    <message>
+        <location filename="../src/controller/garminconnect.cpp" line="272"/>
+        <location filename="../src/controller/garminconnect.cpp" line="326"/>
+        <source>Reading the activity list from Garmin Connect…</source>
+        <translation>Luetaan harjoituslistaa Garmin Connectista…</translation>
+    </message>
+    <message>
+        <location filename="../src/controller/garminconnect.cpp" line="335"/>
+        <source>Nothing new on Garmin Connect</source>
+        <translation>Garmin Connectissa ei ole mitään uutta</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../src/controller/garminconnect.cpp" line="350"/>
+        <source>%n new activities from Garmin Connect</source>
+        <translation><numerusform>%n uusi harjoitus Garmin Connectista</numerusform><numerusform>%n uutta harjoitusta Garmin Connectista</numerusform></translation>
+    </message>
+    <message>
+        <location filename="../src/controller/garminconnect.cpp" line="355"/>
+        <source>Downloading activity %1 of %2…</source>
+        <translation>Ladataan harjoitusta %1/%2…</translation>
+    </message>
+    <message>
+        <location filename="../src/controller/garminconnect.cpp" line="398"/>
+        <source>Checking what Garmin Connect has…</source>
+        <translation>Tarkistetaan, mitä Garmin Connectissa on…</translation>
+    </message>
+    <message>
+        <location filename="../src/controller/garminconnect.cpp" line="406"/>
+        <source>Everything here is already on Garmin Connect</source>
+        <translation>Kaikki täällä oleva on jo Garmin Connectissa</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../src/controller/garminconnect.cpp" line="419"/>
+        <source>%n activities sent to Garmin Connect</source>
+        <translation><numerusform>%n harjoitus lähetetty Garmin Connectiin</numerusform><numerusform>%n harjoitusta lähetetty Garmin Connectiin</numerusform></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../src/controller/garminconnect.cpp" line="421"/>
+        <source>%n already there</source>
+        <translation><numerusform>%n jo siellä</numerusform><numerusform>%n jo siellä</numerusform></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../src/controller/garminconnect.cpp" line="423"/>
+        <source>%n refused</source>
+        <translation><numerusform>%n hylätty</numerusform><numerusform>%n hylättyä</numerusform></translation>
+    </message>
+    <message>
+        <location filename="../src/controller/garminconnect.cpp" line="429"/>
+        <source>Sending activity %1 of %2…</source>
+        <translation>Lähetetään harjoitusta %1/%2…</translation>
+    </message>
+    <message>
+        <location filename="../src/controller/garminconnect.cpp" line="478"/>
+        <source>Sending to Garmin Connect…</source>
+        <translation>Lähetetään Garmin Connectiin…</translation>
+    </message>
+    <message>
+        <location filename="../src/controller/garminconnect.cpp" line="483"/>
+        <source>The activity&apos;s file is missing.</source>
+        <translation>Harjoituksen tiedosto puuttuu.</translation>
+    </message>
+    <message>
+        <location filename="../src/controller/garminconnect.cpp" line="498"/>
+        <source>Sent to Garmin Connect</source>
+        <translation>Lähetetty Garmin Connectiin</translation>
+    </message>
+    <message>
+        <location filename="../src/controller/garminconnect.cpp" line="498"/>
+        <source>Garmin Connect already has this activity</source>
+        <translation>Garmin Connectissa on jo tämä harjoitus</translation>
+    </message>
+</context>
+<context>
+    <name>GarminPage</name>
+    <message>
+        <location filename="../qml/pages/GarminPage.qml" line="29"/>
+        <source>Sign out</source>
+        <translation>Kirjaudu ulos</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/GarminPage.qml" line="40"/>
+        <source>Garmin Connect</source>
+        <translation>Garmin Connect</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/GarminPage.qml" line="71"/>
+        <location filename="../qml/pages/GarminPage.qml" line="178"/>
+        <source>Cancel</source>
+        <translation>Peruuta</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/GarminPage.qml" line="110"/>
+        <source>Garmin has no public way for an app like this to reach your rides, so Edge Sync signs in the way Garmin&apos;s own mobile app does. Garmin does not officially allow that for other apps: it may stop working without notice, and Garmin may slow it down or block it. Your password goes to Garmin and nowhere else and is not saved; what is kept is the sign-in token, in the Sailfish secrets vault.</source>
+        <translation>Garminilla ei ole julkista tapaa, jolla tällainen sovellus pääsisi käsiksi harjoituksiisi, joten Edge Sync kirjautuu samalla tavalla kuin Garminin oma mobiilisovellus. Garmin ei virallisesti salli sitä muille sovelluksille: se voi lakata toimimasta ilman ennakkovaroitusta, ja Garmin voi hidastaa tai estää sen. Salasanasi menee vain Garminille eikä sitä tallenneta; tallennetaan vain kirjautumistunniste Sailfishin salaisuusholviin.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/GarminPage.qml" line="120"/>
+        <source>Email address</source>
+        <translation>Sähköpostiosoite</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/GarminPage.qml" line="130"/>
+        <source>Password</source>
+        <translation>Salasana</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/GarminPage.qml" line="141"/>
+        <source>Sign in</source>
+        <translation>Kirjaudu</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/GarminPage.qml" line="158"/>
+        <source>Verification code</source>
+        <translation>Vahvistuskoodi</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/GarminPage.qml" line="170"/>
+        <source>Verify</source>
+        <translation>Vahvista</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/GarminPage.qml" line="195"/>
+        <source>Last used %1</source>
+        <translation>Viimeksi käytetty %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/GarminPage.qml" line="196"/>
+        <source>Not used yet</source>
+        <translation>Ei vielä käytetty</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/GarminPage.qml" line="199"/>
+        <source>From Garmin Connect</source>
+        <translation>Garmin Connectista</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/GarminPage.qml" line="202"/>
+        <source>Look back</source>
+        <translation>Katso taaksepäin</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/GarminPage.qml" line="205"/>
+        <source>30 days</source>
+        <translation>30 päivää</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/GarminPage.qml" line="206"/>
+        <source>90 days</source>
+        <translation>90 päivää</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/GarminPage.qml" line="207"/>
+        <source>A year</source>
+        <translation>Vuosi</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/GarminPage.qml" line="208"/>
+        <source>Everything</source>
+        <translation>Kaikki</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/GarminPage.qml" line="214"/>
+        <source>Download new activities</source>
+        <translation>Lataa uudet harjoitukset</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/GarminPage.qml" line="218"/>
+        <source>To Garmin Connect</source>
+        <translation>Garmin Connectiin</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/pages/GarminPage.qml" line="226"/>
+        <source>%n activities here are not on Garmin Connect.</source>
+        <translation><numerusform>%n täällä oleva harjoitus ei ole Garmin Connectissa.</numerusform><numerusform>%n täällä olevaa harjoitusta ei ole Garmin Connectissa.</numerusform></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/GarminPage.qml" line="227"/>
+        <source>Every activity here is on Garmin Connect.</source>
+        <translation>Kaikki täällä olevat harjoitukset ovat Garmin Connectissa.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/GarminPage.qml" line="232"/>
+        <source>Send them</source>
+        <translation>Lähetä ne</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/GarminPage.qml" line="241"/>
+        <source>Garmin Connect says no to a ride it already has, and that is noted. A ride you imported from a file is sent as an import, so it is not passed on to services linked to your Garmin account. Signing out removes the sign-in from this phone; it does not revoke it at Garmin.</source>
+        <translation>Garmin Connect kieltäytyy harjoituksesta, joka sillä jo on, ja se merkitään muistiin. Tiedostosta tuotu harjoitus lähetetään tuontina, jolloin sitä ei välitetä Garmin-tiliisi liitetyille palveluille. Uloskirjautuminen poistaa kirjautumisen tästä puhelimesta; se ei mitätöi sitä Garminilla.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/GarminPage.qml" line="247"/>
+        <source>The symbols in the list</source>
+        <translation>Listan symbolit</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/GarminPage.qml" line="250"/>
+        <source>Downloaded from the Edge; on Garmin Connect</source>
+        <translation>Ladattu Edgeltä; Garmin Connectissa</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/GarminPage.qml" line="251"/>
+        <source>Downloaded from the Edge; not on Garmin Connect</source>
+        <translation>Ladattu Edgeltä; ei Garmin Connectissa</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/GarminPage.qml" line="252"/>
+        <source>Downloaded from Garmin Connect</source>
+        <translation>Ladattu Garmin Connectista</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/GarminPage.qml" line="253"/>
+        <source>Imported from a file; not on Garmin Connect</source>
+        <translation>Tuotu tiedostosta; ei Garmin Connectissa</translation>
+    </message>
+</context>
+<context>
     <name>LineChart</name>
     <message>
         <location filename="../qml/components/LineChart.qml" line="83"/>
@@ -658,84 +947,89 @@
 <context>
     <name>MainPage</name>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="18"/>
+        <location filename="../qml/pages/MainPage.qml" line="19"/>
         <source>synced just now</source>
         <translation>synkronoitu juuri nyt</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="18"/>
+        <location filename="../qml/pages/MainPage.qml" line="19"/>
         <source>synced %1 ago</source>
         <translation>synkronoitu %1 sitten</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="26"/>
+        <location filename="../qml/pages/MainPage.qml" line="27"/>
         <source>Choose a FIT file</source>
         <translation>Valitse FIT-tiedosto</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="42"/>
+        <location filename="../qml/pages/MainPage.qml" line="43"/>
         <source>About</source>
         <translation>Tietoja</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="46"/>
+        <location filename="../qml/pages/MainPage.qml" line="47"/>
         <source>Settings</source>
         <translation>Asetukset</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="50"/>
+        <location filename="../qml/pages/MainPage.qml" line="51"/>
+        <source>Garmin Connect</source>
+        <translation>Garmin Connect</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MainPage.qml" line="55"/>
         <source>Import a FIT file</source>
         <translation>Tuo FIT-tiedosto</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="54"/>
+        <location filename="../qml/pages/MainPage.qml" line="59"/>
         <source>Change Edge</source>
         <translation>Vaihda Edge</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="54"/>
-        <location filename="../qml/pages/MainPage.qml" line="153"/>
+        <location filename="../qml/pages/MainPage.qml" line="59"/>
+        <location filename="../qml/pages/MainPage.qml" line="158"/>
         <source>Set up your Edge</source>
         <translation>Ota Edge käyttöön</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="60"/>
-        <location filename="../qml/pages/MainPage.qml" line="161"/>
+        <location filename="../qml/pages/MainPage.qml" line="65"/>
+        <location filename="../qml/pages/MainPage.qml" line="166"/>
         <source>Sync now</source>
         <translation>Synkronoi nyt</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="70"/>
+        <location filename="../qml/pages/MainPage.qml" line="75"/>
         <source>Edge Sync</source>
         <translation>Edge Sync</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="100"/>
+        <location filename="../qml/pages/MainPage.qml" line="105"/>
         <source>Cancel</source>
         <translation>Peruuta</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="139"/>
+        <location filename="../qml/pages/MainPage.qml" line="144"/>
         <source>Your rides, on your phone</source>
         <translation>Harjoituksesi puhelimessasi</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="146"/>
+        <location filename="../qml/pages/MainPage.qml" line="151"/>
         <source>Edge Sync downloads the activities from a Garmin Edge bike computer over Bluetooth. There is no account and no cloud: the files stay on this phone, and you can export them as GPX or FIT, or import a FIT file from another device.</source>
         <translation>Edge Sync lataa harjoitukset Garmin Edge -pyörätietokoneelta Bluetoothilla. Ei tiliä eikä pilveä: tiedostot pysyvät tässä puhelimessa, ja voit viedä ne GPX- tai FIT-muodossa tai tuoda FIT-tiedoston toiselta laitteelta.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="219"/>
+        <location filename="../qml/pages/MainPage.qml" line="236"/>
         <source>unreadable file</source>
         <translation>tiedostoa ei voi lukea</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="227"/>
+        <location filename="../qml/pages/MainPage.qml" line="244"/>
         <source>No rides yet</source>
         <translation>Ei vielä harjoituksia</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="228"/>
+        <location filename="../qml/pages/MainPage.qml" line="245"/>
         <source>Pull down and choose Sync now</source>
         <translation>Vedä alas ja valitse Synkronoi nyt</translation>
     </message>

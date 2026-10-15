@@ -18,8 +18,8 @@ os.environ.setdefault("QT_QPA_PLATFORM", "offscreen")
 
 from PySide6.QtCore import (QAbstractListModel, QModelIndex, QObject, QTimer, QUrl, Property, Qt, Signal, Slot,
                             qInstallMessageHandler)
-from PySide6.QtGui import QColor, QGuiApplication
-from PySide6.QtQuick import QQuickView
+from PySide6.QtGui import QColor, QGuiApplication, QImage, QPainter, QFont
+from PySide6.QtQuick import QQuickImageProvider, QQuickView
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", ".."))
@@ -35,6 +35,32 @@ def handler(mode, ctx, msg):
 
 
 qInstallMessageHandler(handler)
+
+
+class ThemeIcons(QQuickImageProvider):
+    """Stands in for image://theme/: a coloured tile with the icon's first letter after "icon-s-"."""
+
+    def __init__(self):
+        super().__init__(QQuickImageProvider.Image)
+
+    def requestImage(self, ident, size, requested):
+        name, _, color = ident.partition("?")
+        img = QImage(32, 32, QImage.Format_ARGB32)
+        img.fill(QColor(0, 0, 0, 0))
+        p = QPainter(img)
+        p.setPen(QColor(color or "#ffffff"))
+        f = QFont()
+        f.setPixelSize(26)
+        f.setBold(True)
+        p.setFont(f)
+        letter = name.replace("icon-s-", "")[:1].upper() or "?"
+        if "cloud-upload" in name:
+            letter = "↑"
+        elif "cloud-download" in name:
+            letter = "☁"
+        p.drawText(img.rect(), Qt.AlignCenter, letter)
+        p.end()
+        return img
 
 
 class ListModel(QAbstractListModel):
@@ -57,19 +83,22 @@ class ListModel(QAbstractListModel):
 
 
 ACTIVITY_ROLES = ["activityId", "startMs", "sport", "sportLabel", "name", "title", "month", "distance", "timer",
-                  "elapsed", "avgSpeed", "avgHr", "avgPower", "ascent", "calories", "parsed"]
+                  "elapsed", "avgSpeed", "avgHr", "avgPower", "ascent", "calories", "parsed", "origin", "garminId", "onGarmin"]
 
 
-def activity(i, month, title, km, secs, kmh, parsed=True):
+def activity(i, month, title, km, secs, kmh, parsed=True, origin="edge", garmin=0):
     return dict(activityId=i, startMs=1785740505000 - i * 86400000, sport="cycling", sportLabel="Cycling",
                 name="", title=title, month=month, distance=km * 1000, timer=secs, elapsed=secs + 300,
-                avgSpeed=kmh / 3.6, avgHr=130 + i, avgPower=-1, ascent=120, calories=700, parsed=parsed)
+                avgSpeed=kmh / 3.6, avgHr=130 + i, avgPower=-1, ascent=120, calories=700, parsed=parsed,
+                origin=origin, garminId=garmin, onGarmin=garmin != 0)
 
 
 ROWS = [
-    activity(3, "2026-08", "Cycling", 42.3, 5400, 28.2),
-    activity(2, "2026-08", "Mountain biking", 18.04, 4000, 16.2),
-    activity(1, "2026-07", "Cycling", 5.4, 2300, 8.5, parsed=False),
+    activity(5, "2026-08", "Cycling", 42.3, 5400, 28.2, origin="edge", garmin=22000000001),
+    activity(4, "2026-08", "Mountain biking", 18.04, 4000, 16.2, origin="edge", garmin=0),
+    activity(3, "2026-08", "Running", 10.1, 3000, 12.0, origin="garmin", garmin=22000000003),
+    activity(2, "2026-07", "Walking", 3.2, 2300, 5.0, origin="import", garmin=0),
+    activity(1, "2026-07", "Cycling", 5.4, 2300, 8.5, parsed=False, origin="import", garmin=-1),
 ]
 DEVICES = [
     dict(address="C0:FF:EE:00:11:22", name="Edge 1040", paired=True, connected=False, rssi=-60),
@@ -99,7 +128,7 @@ def series(n=300):
 def detail(indoor=False, bad=False):
     import math
     d = dict(id=3, name="", title="Cycling", sport="cycling", sportLabel="Cycling", startMs=1785740505000, parsed=True,
-             fitPath="/home/user/.local/share/io.github.jarnose/edgesync/fit/2026/x.fit", fileSize=53896)
+             origin="edge", onGarmin=False, garminId=0, fitPath="/home/user/.local/share/io.github.jarnose/edgesync/fit/2026/x.fit", fileSize=53896)
     if bad:
         d["error"] = "the file holds neither a session nor any records"
         return d
@@ -126,12 +155,51 @@ class PageStack(QObject):
         pass
 
 
+class MockGarmin(QObject):
+    never = Signal()
+
+    def __init__(self, **state):
+        super().__init__()
+        self.s = dict(signedIn=True, email="me@example.com", needsMfa=False, busy=False, status="", progress=-1.0,
+                      lastError="", lastSyncMs=1785740505000, rangeDays=30, unsentCount=2)
+        self.s.update(state)
+
+    signedIn = Property(bool, lambda s: s.s["signedIn"], notify=never)
+    email = Property(str, lambda s: s.s["email"], notify=never)
+    needsMfa = Property(bool, lambda s: s.s["needsMfa"], notify=never)
+    busy = Property(bool, lambda s: s.s["busy"], notify=never)
+    status = Property(str, lambda s: s.s["status"], notify=never)
+    progress = Property(float, lambda s: s.s["progress"], notify=never)
+    lastError = Property(str, lambda s: s.s["lastError"], notify=never)
+    lastSyncMs = Property("qlonglong", lambda s: s.s["lastSyncMs"], notify=never)
+    rangeDays = Property(int, lambda s: s.s["rangeDays"], lambda s, v: None, notify=never)
+    unsentCount = Property(int, lambda s: s.s["unsentCount"], notify=never)
+
+    @Slot(str, str)
+    def signIn(self, a, b): pass
+    @Slot(str)
+    def submitMfa(self, c): pass
+    @Slot()
+    def signOut(self): pass
+    @Slot()
+    def cancel(self): pass
+    @Slot()
+    def clearError(self): pass
+    @Slot()
+    def downloadNew(self): pass
+    @Slot()
+    def uploadUnsent(self): pass
+    @Slot(int)
+    def uploadActivity(self, i): pass
+
+
 class App(QObject):
     changed = Signal()
     _never = Signal()
 
-    def __init__(self, **state):
+    def __init__(self, garmin=None, **state):
         super().__init__()
+        garmin = garmin or {}
         self.s = dict(busy=False, status="", progress=-1.0, lastError="", hasDevice=True, deviceName="Edge 1040",
                       deviceAddress="C0:FF:EE:00:11:22", lastSyncMs=1785740505000, scanning=False,
                       activityCount=len(ROWS), archiveOnEdge=False, onlyNewFiles=False, syncClock=False,
@@ -141,6 +209,7 @@ class App(QObject):
         self._acts = ListModel(ACTIVITY_ROLES, ROWS if self.s["activityCount"] else [])
         self._devs = ListModel(["address", "name", "paired", "connected", "rssi"], DEVICES)
         self.detail = detail()
+        self._garmin = MockGarmin(**garmin)
 
     def _p(name, typ):
         return Property(typ, lambda self: self.s[name], notify=lambda: None)
@@ -163,6 +232,7 @@ class App(QObject):
     baseMapEnabled = Property(bool, lambda s: s.s["baseMapEnabled"], lambda s, v: None, notify=_never)
     mapTileUrl = Property(str, lambda s: s.s["mapTileUrl"], lambda s, v: None, notify=_never)
     defaultMapTileUrl = Property(str, lambda s: "https://tiles.openfreemap.org/planet", constant=True)
+    garmin = Property(QObject, lambda s: s._garmin, constant=True)
     activities = Property(QObject, lambda s: s._acts, constant=True)
     devices = Property(QObject, lambda s: s._devs, constant=True)
 
@@ -223,6 +293,12 @@ CASES = [
     ("settings", "pages/SettingsPage.qml", {"traceFrames": True}, {}),
     ("settings_nomap", "pages/SettingsPage.qml", {"baseMapEnabled": False}, {}),
     ("log", "pages/DiagnosticsPage.qml", {}, {}),
+    ("garmin_signedout", "pages/GarminPage.qml", {"garmin": {"signedIn": False, "email": ""}}, {}),
+    ("garmin_mfa", "pages/GarminPage.qml", {"garmin": {"signedIn": False, "needsMfa": True, "status": "Garmin sent a verification code (sms). Enter it below."}}, {}),
+    ("garmin_in", "pages/GarminPage.qml", {}, {}),
+    ("garmin_busy", "pages/GarminPage.qml", {"garmin": {"busy": True, "status": "Downloading activity 2 of 5…", "progress": 0.4}}, {}),
+    ("garmin_error", "pages/GarminPage.qml", {"garmin": {"signedIn": False, "lastError": "Garmin answered 429: it is rate-limiting or blocking this client. Try again later."}}, {}),
+    ("garmin_allsent", "pages/GarminPage.qml", {"garmin": {"unsentCount": 0}}, {}),
     ("about", "pages/AboutPage.qml", {}, {}),
     ("cover", "cover/CoverPage.qml", {}, {}),
 ]
@@ -279,6 +355,7 @@ def main():
         view.setColor(QColor('#1b2430'))  # the stand-in Theme draws light text
         view.engine().addImportPath(os.path.join(HERE, "stubs"))
         view.engine().addImportPath(qml_root)
+        view.engine().addImageProvider("theme", ThemeIcons())
         view.rootContext().setContextProperty("AppController", controller)
         view.rootContext().setContextProperty("pageStack", PageStack())
         wide = path.startswith("cover")

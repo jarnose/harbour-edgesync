@@ -50,6 +50,12 @@ public:
         QString fitPath;      // relative to the data directory
         qint64 importedAt = 0;
         bool parsed = true;
+        // Where the ride came from: "edge" (downloaded from an Edge over Bluetooth),
+        // "garmin" (downloaded from Garmin Connect) or "import" (a FIT file).
+        QString origin;
+        // Whether Garmin Connect has it: 0 not known to, an activity id when it does,
+        // and -1 when it does but its id is not known (an upload it called a duplicate).
+        qint64 garminId = 0;
     };
 
     ActivityStore() = default;
@@ -70,7 +76,16 @@ public:
     bool hasStart(qint64 startTime) const;
 
     // Writes the file and its row. Returns the new id, or 0 with `error`.
-    qint64 add(const QString &device, const Gfdi::DirectoryEntry &entry, const QByteArray &fitBytes, QString *error);
+    // `origin` is "edge", "garmin" or "import"; empty means "import" for the device
+    // "import" and "edge" for any other.
+    qint64 add(const QString &device, const Gfdi::DirectoryEntry &entry, const QByteArray &fitBytes, QString *error,
+               const QString &origin = QString(), qint64 garminId = 0);
+
+    // The activity that started within `toleranceSeconds` of this time, or 0.
+    qint64 idForStart(qint64 startTime, int toleranceSeconds) const;
+    bool setGarminId(qint64 id, qint64 garminId);
+    // Rides Garmin Connect is not known to have, oldest first. Files this build cannot read are left out.
+    QList<Row> notOnGarmin() const;
 
     QList<Row> rows() const;
     bool row(qint64 id, Row &out) const;

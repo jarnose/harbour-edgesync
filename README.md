@@ -2,7 +2,7 @@
 
 A Sailfish OS app that downloads the activities recorded by a **Garmin Edge** bike
 computer, over Bluetooth LE, straight to the phone. No Garmin account, no cloud,
-no cloud. The Internet permission is there only for the optional base map.
+no cloud of its own. The Internet permission is for Garmin Connect (only after you sign in, and only when you press a button) and the optional base map.
 
 * Pairs with an Edge and syncs on request (pull down, *Sync now*).
 * Keeps each ride as the original **FIT** file, and shows it: distance, moving
@@ -16,6 +16,12 @@ no cloud. The Internet permission is there only for the optional base map.
 * Exports a ride as **GPX** (with heart rate, cadence, temperature and power) or
   as the FIT file itself, to `~/Documents/EdgeSync`.
 * Leaves the Edge's own flags alone by default, so Garmin Connect keeps working.
+* **Garmin Connect**: downloads the rides that are on your account and not on the
+  phone, and sends the rides that are on the phone and not on your account (one
+  ride, or all of them). Marks every ride in the list with where it came from
+  (Edge, Garmin Connect, imported file) and whether Garmin Connect has it. Garmin
+  has no public API for this; see `docs/garmin-connect.md`, including why it may
+  stop working.
 * Keeps a log of the conversation with the Edge, because the protocol is
   reverse-engineered and differs between models.
 

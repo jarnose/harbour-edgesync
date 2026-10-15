@@ -14,6 +14,8 @@ BuildRequires:  pkgconfig(Qt5Quick)
 BuildRequires:  pkgconfig(Qt5Sql)
 BuildRequires:  pkgconfig(Qt5DBus)
 BuildRequires:  pkgconfig(Qt5Network)
+BuildRequires:  pkgconfig(sailfishsecrets)
+BuildRequires:  pkgconfig(zlib)
 # No pkgconfig(Qt5Bluetooth): Sailfish OS's Qt5 has no QtConnectivity. The Edge
 # is reached through BlueZ's D-Bus API with Qt5DBus instead.
 # No pkgconfig(Qt5LinguistTools) virtual exists; CMake finds lrelease through

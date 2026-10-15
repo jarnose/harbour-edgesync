@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import Sailfish.Pickers 1.0
+import "../components"
 import "../components/Format.js" as Format
 
 // The rides on the phone, and the way to fetch more. Nothing here talks to the
@@ -45,6 +46,10 @@ Page {
             MenuItem {
                 text: qsTr("Settings")
                 onClicked: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"))
+            }
+            MenuItem {
+                text: qsTr("Garmin Connect")
+                onClicked: pageStack.push(Qt.resolvedUrl("GarminPage.qml"))
             }
             MenuItem {
                 text: qsTr("Import a FIT file")
@@ -198,12 +203,24 @@ Page {
                 text: model.distance >= 0 ? Format.km(model.distance) + " km" : ""
                 color: item.highlighted ? Theme.highlightColor : Theme.primaryColor
             }
+            OriginIcons {
+                id: originIcons
+                anchors {
+                    right: parent.right
+                    rightMargin: Theme.horizontalPageMargin
+                    top: titleLabel.bottom
+                    topMargin: Theme.paddingSmall / 2
+                }
+                origin: model.origin
+                onGarmin: model.onGarmin
+                highlighted: item.highlighted
+            }
             Label {
                 anchors {
                     left: parent.left
                     leftMargin: Theme.horizontalPageMargin
-                    right: parent.right
-                    rightMargin: Theme.horizontalPageMargin
+                    right: originIcons.left
+                    rightMargin: Theme.paddingMedium
                     top: titleLabel.bottom
                 }
                 font.pixelSize: Theme.fontSizeExtraSmall

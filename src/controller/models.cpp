@@ -62,6 +62,9 @@ QVariant ActivityModel::data(const QModelIndex &index, int role) const
     case AscentRole: return r.ascent;
     case CaloriesRole: return r.calories;
     case ParsedRole: return r.parsed;
+    case OriginRole: return r.origin;
+    case GarminIdRole: return r.garminId;
+    case OnGarminRole: return r.garminId != 0;
     }
     return QVariant();
 }
@@ -85,6 +88,9 @@ QHash<int, QByteArray> ActivityModel::roleNames() const
         { AscentRole, "ascent" },
         { CaloriesRole, "calories" },
         { ParsedRole, "parsed" },
+        { OriginRole, "origin" },
+        { GarminIdRole, "garminId" },
+        { OnGarminRole, "onGarmin" },
     };
 }
 

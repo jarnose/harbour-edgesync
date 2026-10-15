@@ -12,7 +12,11 @@ ApplicationName=edgesync
 # Documents: where "Save as GPX", "Save the FIT file" and the saved log go
 # (~/Documents/EdgeSync). Nothing else outside the app's own data folder is touched.
 # Downloads: where a FIT file to import is often saved.
-# Internet: only the optional base map under the route (off by default), which
-# fetches map tiles for the area of a ride from the tile server in Settings.
-# Rides, and everything else, are never sent anywhere.
-Permissions=Bluetooth;Documents;Downloads;Internet
+# Internet: (1) the optional base map under the route (off by default), which
+# fetches map tiles for the area of a ride from the tile server in Settings, and
+# (2) Garmin Connect, only after the user signs in there: downloading rides from it
+# and sending rides to it. Nothing is sent anywhere else, and nothing to Garmin
+# unless the user asks.
+# Secrets: the Garmin Connect sign-in tokens (never the password) in the
+# Sailfish Secrets vault.
+Permissions=Bluetooth;Documents;Downloads;Internet;Secrets

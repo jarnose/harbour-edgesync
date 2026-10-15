@@ -27,6 +27,9 @@ public:
         AscentRole,
         CaloriesRole,
         ParsedRole,
+        OriginRole,     // "edge", "garmin" or "import"
+        GarminIdRole,   // 0 not on Garmin Connect, else on it
+        OnGarminRole,
     };
 
     explicit ActivityModel(QObject *parent = nullptr) : QAbstractListModel(parent) {}

@@ -11,6 +11,7 @@ that is tested with plain `g++`.
 src/gfdi/      Qt-free   the protocol: crc, cobs, frames, messages, multi-link transport, sync session
 src/fit/       Qt-free   FIT container reader, and what an activity file means
 src/export/    Qt-free   GPX writer
+src/garmin/    both      Garmin Connect: sign-in, token refresh, activity list, download, upload (Qt-free, tested against a scripted Garmin) and the QNetworkAccessManager transport (Qt)
 src/map/       both      base map: Web Mercator and the vector-tile decoder (Qt-free), tile source and MapCanvas (Qt)
 src/ble/       Qt        BlueZ: scanner, and EdgeLink (connect, GATT, writes, notifications)
 src/store/     Qt        SQLite summary rows + the FIT files themselves
@@ -42,10 +43,10 @@ is (device, directory timestamp, size). Indexes are reused by the Edge.
 Connect also sets, and what "new" means to the Edge. Setting it from here would
 hide rides from another sync. It is a setting, off.
 
-**The network is for the base map and nothing else.** The rides never leave the
-phone, and the app says so. The Internet permission exists for the optional base
-map (off by default), whose tile server sees the area of a ride that is drawn on
-it. Exports go to `~/Documents/EdgeSync` (Sailjail permission *Documents*), and
+**The network is for two things, both started by the user.** Garmin Connect (after
+signing in; every request follows a button) and the optional base map (off by
+default), whose tile server sees the area of a ride that is drawn on it. Nothing
+else is sent anywhere, and the app says so. Exports go to `~/Documents/EdgeSync` (Sailjail permission *Documents*), and
 FIT files to import are read from Documents or Downloads.
 
 **Unverified protocol, so a log.** The protocol is reverse engineered and has
@@ -59,5 +60,7 @@ attached to a report. It is the main debugging tool, and the first place to look
 * The protobuf `FileSyncService` (newer watches; no Edge needs it per Gadgetbridge).
 * Raster map tiles, and labels on the map (see `docs/base-map.md`).
 * Background or automatic sync. A sync runs when asked.
-* Uploading to Strava, Garmin Connect and the like. That needs Internet and OAuth.
+* Strava and the like. Garmin Connect is built (docs/garmin-connect.md); a ride sent
+  there reaches Strava through the user's own account links.
+* Sending new Edge rides to Garmin Connect automatically after each sync.
 * Laps beyond a table; zones; segments; developer fields.

@@ -2,6 +2,7 @@
 
 #include "ble/edgelink.h"
 #include "ble/edgescanner.h"
+#include "controller/garminconnect.h"
 #include "controller/models.h"
 #include "gfdi/session.h"
 #include "store/activitystore.h"
@@ -31,6 +32,7 @@ class AppController : public QObject
     Q_PROPERTY(qint64 lastSyncMs READ lastSyncMs NOTIFY deviceChanged)
     Q_PROPERTY(bool scanning READ scanning NOTIFY scanningChanged)
 
+    Q_PROPERTY(QObject *garmin READ garmin CONSTANT)
     Q_PROPERTY(QObject *activities READ activities CONSTANT)
     Q_PROPERTY(QObject *devices READ devices CONSTANT)
     Q_PROPERTY(int activityCount READ activityCount NOTIFY activitiesChanged)
@@ -59,6 +61,7 @@ public:
     qint64 lastSyncMs() const { return m_lastSyncMs; }
     bool scanning() const { return m_scanner.discovering(); }
 
+    QObject *garmin() { return &m_garmin; }
     QObject *activities() { return &m_activities; }
     QObject *devices() { return &m_devices; }
     int activityCount() const { return m_activities.rowCount(); }
@@ -152,6 +155,7 @@ private:
     QString baseNameFor(const ActivityStore::Row &row) const;
 
     ActivityStore m_store;
+    GarminConnect m_garmin{ &m_store };
     EdgeScanner m_scanner;
     EdgeLink m_link;
     ActivityModel m_activities;

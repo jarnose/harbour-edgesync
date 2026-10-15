@@ -26,5 +26,6 @@ run messages $GFDI ../src/gfdi/multilink.cpp
 run session $GFDI ../src/gfdi/session.cpp
 run fit $FIT
 run gpx ../src/export/gpx.cpp
+run garmin ../src/garmin/json.cpp ../src/garmin/zip.cpp ../src/garmin/http.cpp ../src/garmin/auth.cpp ../src/garmin/api.cpp -lz
 run mercator ../src/map/mercator.cpp
 run vectortile ../src/map/vectortile.cpp
