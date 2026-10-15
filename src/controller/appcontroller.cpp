@@ -194,11 +194,12 @@ void AppController::log(const QString &line)
     while (m_log.size() > 3000)
         m_log.removeFirst();
     // Also on disk, so a log survives the app being closed. Two files of at most
-    // 512 kB each: the current one and the one before.
+    // 4 MB each: the current one and the one before. A traced sync of a 100 kB
+    // ride is about 500 kB of it.
     if (!m_store.dataDir().isEmpty()) {
         const QString path = m_store.dataDir() + QStringLiteral("/sync.log");
         QFile f(path);
-        if (f.size() > 512 * 1024) {
+        if (f.size() > 4 * 1024 * 1024) {
             QFile::remove(path + QStringLiteral(".1"));
             f.rename(path + QStringLiteral(".1"));
         }

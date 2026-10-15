@@ -161,6 +161,28 @@ no FIT file, says so; it does not open the link. On BlueZ it would mean
 registering a `Profile1` server for that UUID and speaking GFDI over the file
 descriptor it hands over, which Sailjail may or may not permit.
 
+## Download speed
+
+A 100 kB activity takes 95-120 s: about 1 kB/s. Measured from the traced log of a
+real ride on an Edge Explore 2 (multi-link, ATT MTU giving 147-byte
+notifications, `maxPacketSize` 512): 204 chunks of ~490 bytes, each acknowledged
+by us 1 ms after its last notification arrived; the next chunk starts a median
+0.19 s after our acknowledgement and the whole chunk period is a median 0.42 s.
+Nothing on our side is in the way. Two things were tried and did not help:
+
+| run | chunk period (median) | "unsupported" answers |
+|---|---|---|
+| default | 0.42 s | 67 |
+| writes without response (`type=command`; the characteristic allows both) | 0.48 s (partial log) | 21 |
+| a 16-bit capability list instead of Gadgetbridge's | 0.58 s | 3 |
+
+The short capability list (CONFIGURATION with only the sync, explicit-archive,
+time, multi-link, device-info and sport bits) did not stop the Edge offering its
+files, so the long list is not needed for a sync; it also did not make anything
+faster, and it was removed again. The pace is the Edge's: stop-and-wait per chunk
+at its own connection parameters, which an app cannot change. The one lever left
+would be the connection interval itself (not exposed by BlueZ's D-Bus API).
+
 ## Open assumptions (nothing here has been run against an Edge)
 
 1. **The whole conversation.** It is a port of Gadgetbridge's behaviour for
