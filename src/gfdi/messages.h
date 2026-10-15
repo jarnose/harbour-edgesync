@@ -29,6 +29,10 @@ struct DeviceInfo
     std::string bluetoothName;
     std::string deviceName;
     std::string deviceModel;
+    // The Edge's Classic Bluetooth address ("AA:BB:CC:DD:EE:FF"), when it says
+    // one. Some models serve their files only over a Classic RFCOMM link, which
+    // is opened to this address; it is only logged here.
+    std::string classicAddress;
 };
 
 bool parseDeviceInformation(const Bytes &payload, DeviceInfo &out);

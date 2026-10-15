@@ -25,8 +25,25 @@ bool parseDeviceInformation(const Bytes &payload, DeviceInfo &out)
     out.bluetoothName = r.str();
     out.deviceName = r.str();
     out.deviceModel = r.str();
-    // What follows (a flag, two MAC addresses, another flag) is read by nobody here.
-    return r.ok();
+    out.classicAddress.clear();
+    const bool core = r.ok();
+    // What follows is a flag, and with it set the BLE and Classic MAC addresses
+    // (little-endian), then one more flag.
+    if (core && r.remaining() > 0 && r.u8() == 1) {
+        const Bytes ble = r.raw(6);
+        const Bytes classic = r.raw(6);
+        if (r.ok()) {
+            static const char *digits = "0123456789ABCDEF";
+            for (int i = 5; i >= 0; --i) {
+                out.classicAddress += digits[classic[i] >> 4];
+                out.classicAddress += digits[classic[i] & 15];
+                if (i)
+                    out.classicAddress += ':';
+            }
+        }
+        (void)ble;
+    }
+    return core;
 }
 
 Bytes buildDeviceInformationReply(const DeviceInfo &theirs, const HostInfo &host)

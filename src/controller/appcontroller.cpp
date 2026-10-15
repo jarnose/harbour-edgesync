@@ -353,6 +353,7 @@ void AppController::syncNow()
     setError(QString());
     setBusy(true);
     m_newActivities = 0;
+    m_noFitFiles = false;
     setProgress(-1);
     setStatus(tr("Connecting to the Edge…"));
     log(QStringLiteral("--- sync with %1 (%2)").arg(m_deviceName, m_deviceAddress));
@@ -420,9 +421,15 @@ void AppController::onLinkReady()
                     .arg(d.productNumber).arg(d.softwareVersion).arg(d.maxPacketSize)
                     .arg(QString::fromStdString(d.bluetoothName), QString::fromStdString(d.deviceName),
                          QString::fromStdString(d.deviceModel)));
+        if (!d.classicAddress.empty())
+            log(QStringLiteral("Edge classic address: ") + QString::fromStdString(d.classicAddress));
     };
     events.directory = [this](const std::vector<Gfdi::DirectoryEntry> &entries) {
         log(QStringLiteral("directory: %1 entries").arg(entries.size()));
+        m_noFitFiles = true;
+        for (const Gfdi::DirectoryEntry &e : entries)
+            if (e.isFit())
+                m_noFitFiles = false;
         int shown = 0;
         for (const Gfdi::DirectoryEntry &e : entries) {
             if (++shown > 80) {
@@ -525,6 +532,13 @@ void AppController::finishSync(bool ok, const QString &message)
         emit deviceChanged();
         setStatus(m_newActivities > 0 ? tr("%n new activities", "", m_newActivities) : tr("Nothing new"));
         log(QStringLiteral("--- sync done, %1 new").arg(m_newActivities));
+        if (m_noFitFiles && m_newActivities == 0) {
+            // Gadgetbridge's experience with the Edge 520 Plus: no FIT files in the BLE
+            // directory means the files are served over Classic Bluetooth instead.
+            setError(tr("The Edge lists no activity files over Bluetooth LE. Some older models "
+                        "(the Edge 520 Plus, for one) send their files only over classic Bluetooth, which "
+                        "this app does not support yet. The log has the Edge's file list."));
+        }
     } else {
         setStatus(QString());
         setError(message.isEmpty() ? tr("The sync failed.") : message);

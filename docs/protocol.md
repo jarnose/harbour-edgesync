@@ -149,6 +149,18 @@ it is the one set known to make Garmin firmware offer its files. A narrower set
 may well work and would stop the Edge asking for things that get "unsupported"
 back, but that is an experiment for a real Edge.
 
+## Not supported: files over Classic Bluetooth
+
+Gadgetbridge found that some Edge models (it names the **520 Plus**) list no files
+over BLE at all and serve them only over a Classic Bluetooth RFCOMM link, which
+the Edge opens *to the phone* (service UUID `DEAB91E4-670F-11E1-9ACE-30BC4824019B`,
+COBS-framed GFDI, the same as the direct V1 transport), within seconds of the
+phone doing an SDP query to the Edge's Classic address. The address is in
+DEVICE_INFORMATION. This app logs that address and, when a sync's directory holds
+no FIT file, says so; it does not open the link. On BlueZ it would mean
+registering a `Profile1` server for that UUID and speaking GFDI over the file
+descriptor it hands over, which Sailjail may or may not permit.
+
 ## Open assumptions (nothing here has been run against an Edge)
 
 1. **The whole conversation.** It is a port of Gadgetbridge's behaviour for

@@ -143,6 +143,7 @@ private:
     QTimer m_tick;
     QElapsedTimer m_clock;
     int m_newActivities = 0;
+    bool m_noFitFiles = false; // the last directory listed no FIT file at all
     bool m_pairing = false;
     QString m_pairingAddress;
     QString m_pairingName;

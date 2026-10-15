@@ -12,7 +12,8 @@ static void deviceInformation()
     Writer w;
     w.u16(150).u16(4062).u32(3951234567u).u16(1530).u16(375).str("Edge 1040").str("Garmin").str("Edge 1040");
     w.u8(1);
-    w.raw(Bytes(12, 0xAA)).u8(1); // the MAC addresses and a flag some firmware adds
+    w.raw(Bytes{1, 2, 3, 4, 5, 6});                         // the BLE address
+    w.raw(Bytes{0x66, 0x55, 0x44, 0x33, 0x22, 0x11}).u8(1); // the Classic address, little-endian, and a flag
     DeviceInfo d;
     CHECK(parseDeviceInformation(w.bytes(), d));
     CHECK_EQ(d.protocolVersion, 150);
@@ -21,6 +22,14 @@ static void deviceInformation()
     CHECK_EQ(d.softwareVersion, 1530);
     CHECK_EQ(d.maxPacketSize, 375);
     CHECK_EQ(d.deviceName, std::string("Garmin"));
+    CHECK_EQ(d.classicAddress, std::string("11:22:33:44:55:66"));
+
+    // The same without the address block.
+    Writer bare;
+    bare.u16(150).u16(4062).u32(1).u16(1530).u16(375).str("a").str("b").str("c");
+    DeviceInfo plain;
+    CHECK(parseDeviceInformation(bare.bytes(), plain));
+    CHECK(plain.classicAddress.empty());
 
     // The answer: a Response to 5024, ACK, then the 1xx protocol flag set.
     const Bytes reply = buildDeviceInformationReply(d, HostInfo());

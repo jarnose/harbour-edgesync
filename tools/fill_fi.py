@@ -93,6 +93,8 @@ FI = {
 "The Bluetooth link to the Edge was lost.": "Bluetooth-yhteys Edgeen katkesi.",
 "Nothing new": "Ei uutta",
 "The sync failed.": "Synkronointi epäonnistui.",
+"The Edge lists no activity files over Bluetooth LE. Some older models (the Edge 520 Plus, for one) send their files only over classic Bluetooth, which this app does not support yet. The log has the Edge's file list.":
+    "Edge ei listaa yhtään harjoitustiedostoa Bluetooth LE:n yli. Jotkin vanhemmat mallit (esimerkiksi Edge 520 Plus) lähettävät tiedostonsa vain perinteisellä Bluetoothilla, jota tämä sovellus ei vielä tue. Lokissa on Edgen tiedostolista.",
 "Could not delete the activity.": "Harjoitusta ei voitu poistaa.",
 "The file is missing.": "Tiedosto puuttuu.",
 "Could not create %1": "Kansiota ei voitu luoda: %1",

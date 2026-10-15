@@ -309,8 +309,8 @@
     </message>
     <message>
         <location filename="../src/controller/appcontroller.cpp" line="215"/>
-        <location filename="../src/controller/appcontroller.cpp" line="717"/>
-        <location filename="../src/controller/appcontroller.cpp" line="749"/>
+        <location filename="../src/controller/appcontroller.cpp" line="731"/>
+        <location filename="../src/controller/appcontroller.cpp" line="763"/>
         <source>Could not write %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -345,80 +345,85 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="357"/>
+        <location filename="../src/controller/appcontroller.cpp" line="358"/>
         <source>Connecting to the Edge…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="373"/>
+        <location filename="../src/controller/appcontroller.cpp" line="374"/>
         <source>Cancelled.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="387"/>
-        <location filename="../src/controller/appcontroller.cpp" line="474"/>
+        <location filename="../src/controller/appcontroller.cpp" line="388"/>
+        <location filename="../src/controller/appcontroller.cpp" line="481"/>
         <source>Talking to the Edge…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="410"/>
+        <location filename="../src/controller/appcontroller.cpp" line="411"/>
         <source>Could not save an activity: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="478"/>
+        <location filename="../src/controller/appcontroller.cpp" line="485"/>
         <source>Reading the Edge&apos;s file list…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="485"/>
+        <location filename="../src/controller/appcontroller.cpp" line="492"/>
         <source>Downloading activity %1 of %2…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="506"/>
+        <location filename="../src/controller/appcontroller.cpp" line="513"/>
         <source>The Bluetooth link to the Edge was lost.</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/controller/appcontroller.cpp" line="526"/>
+        <location filename="../src/controller/appcontroller.cpp" line="533"/>
         <source>%n new activities</source>
         <translation type="unfinished">
             <numerusform></numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="526"/>
+        <location filename="../src/controller/appcontroller.cpp" line="533"/>
         <source>Nothing new</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="530"/>
+        <location filename="../src/controller/appcontroller.cpp" line="538"/>
+        <source>The Edge lists no activity files over Bluetooth LE. Some older models (the Edge 520 Plus, for one) send their files only over classic Bluetooth, which this app does not support yet. The log has the Edge&apos;s file list.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/controller/appcontroller.cpp" line="544"/>
         <source>The sync failed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="578"/>
+        <location filename="../src/controller/appcontroller.cpp" line="592"/>
         <source>Could not delete the activity.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="606"/>
+        <location filename="../src/controller/appcontroller.cpp" line="620"/>
         <source>The file is missing.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="691"/>
+        <location filename="../src/controller/appcontroller.cpp" line="705"/>
         <source>Could not create %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="732"/>
+        <location filename="../src/controller/appcontroller.cpp" line="746"/>
         <source>The activity file could not be read.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/controller/appcontroller.cpp" line="737"/>
+        <location filename="../src/controller/appcontroller.cpp" line="751"/>
         <source>This activity has no GPS track to export.</source>
         <translation type="unfinished"></translation>
     </message>
