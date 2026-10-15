@@ -1,0 +1,15 @@
+[Desktop Entry]
+Type=Application
+X-Nemo-Application-Type=silica-qt5
+Icon=harbour-edgesync
+Exec=harbour-edgesync
+Name=Edge Sync
+
+[X-Sailjail]
+OrganizationName=io.github.jarnose
+ApplicationName=edgesync
+# Bluetooth: the Edge, through BlueZ over the system bus.
+# Documents: where "Save as GPX", "Save the FIT file" and the saved log go
+# (~/Documents/EdgeSync). Nothing else outside the app's own data folder is touched.
+# There is deliberately no Internet permission: the rides never leave the phone.
+Permissions=Bluetooth;Documents

@@ -1,0 +1,27 @@
+build/
+*.user
+.qmake.stash
+.directory
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+bin/
+
+# Real rides carry GPS tracks, heart rate and the Edge's serial number: personal
+# data. They stay on the machine that downloaded them. The tests carry only
+# synthetic bytes.
+tests/fixtures/
+captures/
+*.fit
+*.qm
+
+__pycache__/
+
+# An in-source sfdk build leaves these behind.
+RPMS/
+QtCreatorDeployment.txt
+documentation.list
+install_manifest.txt
+/harbour-edgesync
+*_autogen/
