@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.1
+
+- A new app icon in the style of Sailfish OS's own: the leaf shape, a teal-to-green gradient and a bike
+  computer showing a route.
+
 ## 1.0.0
 
 First release.

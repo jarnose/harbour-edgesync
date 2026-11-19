@@ -1,7 +1,7 @@
 Name:       harbour-edgesync
 
 Summary:    Edge Sync
-Version:    1.0.0
+Version:    1.0.1
 Release:    1
 License:    AGPLv3+
 URL:        https://github.com/jarnose/harbour-edgesync
